@@ -1,0 +1,279 @@
+// ========================================
+// CAIXA Design Tokens - SCSS Variables
+// ========================================
+
+// ---- Core Colors (Caixa)
+$azul-caixa: #005CA9;
+$laranja-caixa: #F39200;
+$turquesa-caixa: #54BBAB;
+$branco: #FFFFFF;
+
+// ---- Extensão (paleta de apoio)
+$light-azul-caixa: #E5F1FC;
+$laranja-button: #D87B00;
+$uva: #B26F9B;
+$limao: #AFCA0B;
+$tangerina: #F9B000;
+$goiaba: #EF765E;
+$light-blue: #F7FBFF;
+$light-green: #F6FFFC;
+
+// ---- Gradientes
+$oceano-start: #005CA9;
+$oceano-end: #54BBAB;
+$gelo-start: #FFFFFF;
+$gelo-end: #D0E0E3;
+
+$light-blue-highlight: #E5F2FC;
+$border: #D0E0E3;
+
+// ---- Neutros
+$cinza-100: #F5F5F5;
+$cinza-200: #E0E0E0;
+$cinza-300: #C4C4C4;
+$cinza-600: #757575;
+$cinza-900: #212121;
+$newgray: #F0F2F2;
+
+// ---- Neutros escuros (custom)
+$charcoal: #22292E;
+$slate: #64747A;
+$gunmetal: #404B52;
+$gray: #525F66;
+
+// ---- Feedback (oficial Caixa)
+$success-90: #127527;
+$success-70: #179231;
+
+$attention-90: #CA9804;
+$attention-70: #FCBE05;
+
+$negative-90: #B22C2C;
+$negative-70: #D93636;
+
+$info-90: #038299;
+$info-70: #04A2BF;
+
+// ========================================
+// Spacing (in pixels and rem)
+// ========================================
+$spacing-none: 0;
+$spacing-quark: 0.25rem; // 4px
+$spacing-nano: 0.5rem; // 8px
+$spacing-micro: 0.75rem; // 12px
+$spacing-tiny: 1rem; // 16px
+$spacing-smaller: 1.5rem; // 24px
+$spacing-small: 2rem; // 32px
+$spacing-medium: 2.5rem; // 40px
+$spacing-large: 3rem; // 48px
+$spacing-xlarge: 4rem; // 64px
+$spacing-xxlarge: 5rem; // 80px
+
+// ========================================
+// Shadows (Material 3 elevation)
+// ========================================
+$shadow-elevation-0: none;
+$shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-elevation-2: 0 1px 3px rgba(0, 0, 0, 0.08);
+$shadow-elevation-3: 0 2px 6px rgba(0, 0, 0, 0.12);
+$shadow-elevation-4: 0 4px 8px rgba(0, 0, 0, 0.15);
+$shadow-elevation-5: 0 6px 12px rgba(0, 0, 0, 0.18);
+
+// ========================================
+// Typography - Headings
+// ========================================
+$heading-huge: 2.5rem; // 40px
+$heading-big: 2.25rem; // 36px
+$heading-large: 2rem; // 32px
+$heading-standard: 1.75rem; // 28px
+$heading-small: 1.5rem; // 24px
+$heading-tiny: 1.25rem; // 20px
+
+// ========================================
+// Typography - Text
+// ========================================
+$text-huge: 1.375rem; // 22px
+$text-big: 1.25rem; // 20px
+$text-large: 1.125rem; // 18px
+$text-standard: 1rem; // 16px
+$text-small: 0.875rem; // 14px
+$text-caption: 0.75rem; // 12px
+
+// ========================================
+// Font Families
+// ========================================
+$font-light: 'CAIXAStd', 'Roboto', 'Helvetica Neue', sans-serif;
+$font-regular: 'CAIXAStd', 'Roboto', 'Helvetica Neue', sans-serif;
+$font-book: 'CAIXAStd', 'Roboto', 'Helvetica Neue', sans-serif;
+$font-semibold: 'CAIXAStd', 'Roboto', 'Helvetica Neue', sans-serif;
+$font-bold: 'CAIXAStd', 'Roboto', 'Helvetica Neue', sans-serif;
+$font-extrabold: 'CAIXAStd', 'Roboto', 'Helvetica Neue', sans-serif;
+$font-mono: 'Space Mono', 'Courier New', monospace;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-book: 350;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// ========================================
+// Border Radius
+// ========================================
+$border-radius-none: 0;
+$border-radius-small: 0.25rem; // 4px
+$border-radius-medium: 0.5rem; // 8px
+$border-radius-large: 0.75rem; // 12px
+$border-radius-xlarge: 1rem; // 16px
+$border-radius-round: 1.5rem; // 24px
+$border-radius-circle: 50%;
+
+// ========================================
+// Component Styles - Mixins
+// ========================================
+
+// Button Styles
+@mixin button-base {
+  border-radius: $border-radius-small;
+  padding: $spacing-micro $spacing-tiny;
+  font-family: $font-semibold;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+// Input Styles
+@mixin input-base {
+  height: 3rem; // 48px
+  border-radius: $border-radius-small;
+  padding: 0 $spacing-micro;
+  border: 1px solid $border;
+  font-family: $font-regular;
+  font-size: $text-standard;
+  transition: border-color 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $azul-caixa;
+  }
+}
+
+// Card Styles
+@mixin card-base {
+  border-radius: $border-radius-large;
+  padding: $spacing-tiny;
+  background: $branco;
+  box-shadow: $shadow-elevation-2;
+  transition: box-shadow 0.2s ease;
+  
+  &:hover {
+    box-shadow: $shadow-elevation-3;
+  }
+}
+
+// Typography Mixins
+@mixin part-title {
+  font-size: $text-huge;
+  font-family: $font-semibold;
+  font-weight: $font-weight-semibold;
+  color: #000;
+  line-height: 1.3;
+}
+
+@mixin card-title {
+  font-size: $text-big;
+  font-family: $font-semibold;
+  font-weight: $font-weight-semibold;
+  color: $charcoal;
+  line-height: 1.4;
+}
+
+@mixin card-subtitle {
+  font-size: $text-large;
+  font-family: $font-regular;
+  font-weight: $font-weight-regular;
+  color: $slate;
+  line-height: 1.5;
+}
+
+@mixin card-text {
+  font-size: $text-standard;
+  font-family: $font-regular;
+  font-weight: $font-weight-regular;
+  color: $gunmetal;
+  line-height: 1.5;
+}
+
+@mixin card-caption {
+  font-size: $text-caption;
+  font-family: $font-regular;
+  font-weight: $font-weight-regular;
+  color: $gunmetal;
+  line-height: 1.4;
+}
+
+// ========================================
+// Utility Classes (optional)
+// ========================================
+
+// Spacing utilities
+.p-none { padding: $spacing-none; }
+.p-quark { padding: $spacing-quark; }
+.p-nano { padding: $spacing-nano; }
+.p-micro { padding: $spacing-micro; }
+.p-tiny { padding: $spacing-tiny; }
+.p-smaller { padding: $spacing-smaller; }
+.p-small { padding: $spacing-small; }
+.p-medium { padding: $spacing-medium; }
+.p-large { padding: $spacing-large; }
+
+.m-none { margin: $spacing-none; }
+.m-quark { margin: $spacing-quark; }
+.m-nano { margin: $spacing-nano; }
+.m-micro { margin: $spacing-micro; }
+.m-tiny { margin: $spacing-tiny; }
+.m-smaller { margin: $spacing-smaller; }
+.m-small { margin: $spacing-small; }
+.m-medium { margin: $spacing-medium; }
+.m-large { margin: $spacing-large; }
+
+// Text utilities
+.text-huge { font-size: $text-huge; }
+.text-big { font-size: $text-big; }
+.text-large { font-size: $text-large; }
+.text-standard { font-size: $text-standard; }
+.text-small { font-size: $text-small; }
+.text-caption { font-size: $text-caption; }
+
+// Color utilities
+.text-primary { color: $azul-caixa; }
+.text-secondary { color: $laranja-caixa; }
+.text-accent { color: $turquesa-caixa; }
+.text-success { color: $success-70; }
+.text-error { color: $negative-70; }
+.text-warning { color: $attention-70; }
+.text-info { color: $info-70; }
+
+.bg-primary { background-color: $azul-caixa; }
+.bg-secondary { background-color: $laranja-caixa; }
+.bg-accent { background-color: $turquesa-caixa; }
+.bg-light { background-color: $light-blue; }
+.bg-white { background-color: $branco; }
+
+// Shadow utilities
+.elevation-0 { box-shadow: $shadow-elevation-0; }
+.elevation-1 { box-shadow: $shadow-elevation-1; }
+.elevation-2 { box-shadow: $shadow-elevation-2; }
+.elevation-3 { box-shadow: $shadow-elevation-3; }
+.elevation-4 { box-shadow: $shadow-elevation-4; }
+.elevation-5 { box-shadow: $shadow-elevation-5; }
+
+// Border radius utilities
+.rounded-none { border-radius: $border-radius-none; }
+.rounded-small { border-radius: $border-radius-small; }
+.rounded-medium { border-radius: $border-radius-medium; }
+.rounded-large { border-radius: $border-radius-large; }
+.rounded-xlarge { border-radius: $border-radius-xlarge; }
+.rounded-round { border-radius: $border-radius-round; }
+.rounded-circle { border-radius: $border-radius-circle; }
