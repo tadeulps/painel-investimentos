@@ -2,7 +2,7 @@
 
 .app-header {
   width: 100%;
-  background: $branco;
+  background: linear-gradient(to right, $oceano-start, $oceano-end);
   box-shadow: $shadow-elevation-1;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .logo img {
-  height: 48px;
+  height: 16px;
   display: block;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .main-nav a {
-  color: $charcoal;
+  color: $branco;
   font-family: $font-regular;
   font-weight: $font-weight-semibold;
   padding: 0.5rem 0.75rem;
