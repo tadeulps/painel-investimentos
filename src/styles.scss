@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import './token.scss';
+
+// Import CAIXA design tokens
+@import './styles/token.scss';
+
 // ========================================
 // CSS Reset
 // ========================================
@@ -16,10 +19,12 @@ html, body {
 
 body {
   margin: 0;
-  font-family: 'CAIXAStd', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: $font-regular;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+  color: $charcoal;
+  background-color: $cinza-100;
 }
 
 // ========================================

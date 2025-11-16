@@ -1,0 +1,19 @@
+<header class="app-header" role="banner">
+  <div class="header-inner">
+    <div class="logo">
+      <a routerLink="/dashboard" aria-label="Ir para o Dashboard">
+        <img src="../../../assets/caixa_chapada_negativada.svg" alt="Caixa" />
+      </a>
+    </div>
+
+    <nav class="main-nav" role="navigation" aria-label="Menu principal">
+      <ul>
+        <li><a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+        <li><a routerLink="/perfil-risco" routerLinkActive="active">Perfil de Risco</a></li>
+        <li><a routerLink="/produtos" routerLinkActive="active">Produtos</a></li>
+        <li><a routerLink="/simulacao" routerLinkActive="active">Simulação</a></li>
+        <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
