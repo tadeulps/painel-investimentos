@@ -1,0 +1,75 @@
+<section class="perfil-risco-page">
+  <div class="page-header">
+    <h1>Perfil de Risco</h1>
+    <p class="subtitle">Selecione o perfil que melhor se adequa ao seu objetivo de investimento</p>
+  </div>
+
+  <div class="carousel-container">
+    <button 
+      class="carousel-btn prev" 
+      (click)="previous()" 
+      [disabled]="currentIndex === 0"
+      aria-label="Perfil anterior">
+      ←
+    </button>
+
+    <div class="carousel-track">
+      <div 
+        *ngFor="let profile of profiles; let i = index" 
+        class="profile-card"
+        [class.active]="i === currentIndex"
+        [class.prev]="i < currentIndex"
+        [class.next]="i > currentIndex"
+        (click)="selectProfile(i)">
+        
+        <div class="card-icon" [style.background]="profile.color">
+          <span class="icon">{{ profile.icon }}</span>
+        </div>
+        
+        <h2 class="card-title">{{ profile.title }}</h2>
+        
+        <div class="card-description">
+          <p>{{ profile.description }}</p>
+        </div>
+        
+        <div class="card-features">
+          <div class="feature-item" *ngFor="let feature of profile.features">
+            <span class="check">✓</span>
+            <span>{{ feature }}</span>
+          </div>
+        </div>
+
+        <div class="card-risk-indicator">
+          <span class="label">Nível de Risco:</span>
+          <div class="risk-bars">
+            <div 
+              *ngFor="let bar of [1,2,3,4,5]" 
+              class="bar"
+              [class.filled]="bar <= profile.riskLevel"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button 
+      class="carousel-btn next" 
+      (click)="next()" 
+      [disabled]="currentIndex === profiles.length - 1"
+      aria-label="Próximo perfil">
+      →
+    </button>
+  </div>
+
+  <div class="selected-indicator">
+    <span *ngFor="let profile of profiles; let i = index" 
+          class="dot" 
+          [class.active]="i === currentIndex"
+          (click)="selectProfile(i)"></span>
+  </div>
+
+  <div class="action-section" *ngIf="selectedProfile">
+    <button class="btn-primary" (click)="confirmSelection()">
+      Confirmar Perfil: {{ selectedProfile.title }}
+    </button>
+  </div>
+</section>

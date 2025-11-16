@@ -1,0 +1,281 @@
+@import '../../../styles/token.scss';
+
+.perfil-risco-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-large $spacing-tiny;
+  min-height: calc(100vh - 70px);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: $spacing-large;
+
+  h1 {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-nano;
+  }
+
+  .subtitle {
+    @include card-subtitle;
+    color: $slate;
+  }
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-tiny;
+  margin-bottom: $spacing-small;
+  min-height: 500px;
+}
+
+.carousel-btn {
+  @include button-base;
+  width: 48px;
+  height: 48px;
+  background: $branco;
+  border: 2px solid $border;
+  color: $azul-caixa;
+  font-size: $text-huge;
+  border-radius: $border-radius-circle;
+  transition: all 0.3s ease;
+  z-index: 2;
+
+  &:hover:not(:disabled) {
+    background: $azul-caixa;
+    color: $branco;
+    transform: scale(1.1);
+    box-shadow: $shadow-elevation-3;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 500px;
+  perspective: 1000px;
+}
+
+.profile-card {
+  @include card-base;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  width: 100%;
+  max-width: 400px;
+  padding: $spacing-small;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.5;
+  pointer-events: none;
+  background: $branco;
+
+  &.active {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    box-shadow: $shadow-elevation-4;
+    z-index: 1;
+  }
+
+  &.prev {
+    transform: translateX(-120%) scale(0.75);
+    opacity: 0.3;
+  }
+
+  &.next {
+    transform: translateX(20%) scale(0.75);
+    opacity: 0.3;
+  }
+
+  &:hover.active {
+    box-shadow: $shadow-elevation-5;
+  }
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: $border-radius-circle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto $spacing-tiny;
+  box-shadow: $shadow-elevation-2;
+
+  .icon {
+    font-size: 2.5rem;
+  }
+}
+
+.card-title {
+  @include card-title;
+  text-align: center;
+  color: $azul-caixa;
+  margin-bottom: $spacing-micro;
+}
+
+.card-description {
+  @include card-text;
+  text-align: center;
+  margin-bottom: $spacing-tiny;
+  min-height: 60px;
+
+  p {
+    line-height: 1.6;
+  }
+}
+
+.card-features {
+  margin-bottom: $spacing-tiny;
+  padding: $spacing-micro 0;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-nano;
+    margin-bottom: $spacing-nano;
+    @include card-text;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .check {
+      color: $success-70;
+      font-weight: $font-weight-bold;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.card-risk-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-quark;
+  align-items: center;
+
+  .label {
+    @include card-caption;
+    font-weight: $font-weight-semibold;
+    color: $slate;
+  }
+
+  .risk-bars {
+    display: flex;
+    gap: $spacing-quark;
+
+    .bar {
+      width: 32px;
+      height: 8px;
+      background: $cinza-200;
+      border-radius: $border-radius-small;
+      transition: background 0.3s ease;
+
+      &.filled {
+        background: linear-gradient(to right, $success-70, $attention-70, $negative-70);
+      }
+    }
+  }
+}
+
+.selected-indicator {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-nano;
+  margin-bottom: $spacing-small;
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: $border-radius-circle;
+    background: $cinza-300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: $azul-caixa;
+      transform: scale(1.3);
+    }
+
+    &:hover {
+      background: $turquesa-caixa;
+    }
+  }
+}
+
+.action-section {
+  display: flex;
+  justify-content: center;
+
+  .btn-primary {
+    @include button-base;
+    background: $azul-caixa;
+    color: $branco;
+    padding: $spacing-micro $spacing-small;
+    font-size: $text-large;
+    border-radius: $border-radius-medium;
+    box-shadow: $shadow-elevation-2;
+
+    &:hover {
+      background: $oceano-start;
+      box-shadow: $shadow-elevation-4;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .perfil-risco-page {
+    padding: $spacing-tiny $spacing-micro;
+  }
+
+  .carousel-container {
+    min-height: 550px;
+  }
+
+  .carousel-track {
+    max-width: 350px;
+  }
+
+  .profile-card {
+    max-width: 320px;
+
+    &.prev,
+    &.next {
+      display: none;
+    }
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: $text-big;
+  }
+
+  .card-icon {
+    width: 64px;
+    height: 64px;
+
+    .icon {
+      font-size: 2rem;
+    }
+  }
+}
