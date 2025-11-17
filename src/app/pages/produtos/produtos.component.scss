@@ -1,0 +1,274 @@
+@import '../../../styles/token.scss';
+
+.produtos-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: $spacing-large $spacing-tiny;
+  min-height: calc(100vh - 70px);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: $spacing-xlarge;
+
+  h1 {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-nano;
+  }
+
+  .subtitle {
+    @include card-subtitle;
+    color: $slate;
+  }
+}
+
+.section-container {
+  margin-bottom: $spacing-xlarge;
+}
+
+.section-header {
+  margin-bottom: $spacing-small;
+
+  h2 {
+    @include card-title;
+    font-size: $heading-small;
+    color: $charcoal;
+    display: flex;
+    align-items: center;
+    gap: $spacing-nano;
+    margin-bottom: $spacing-quark;
+
+    .icon {
+      font-size: $heading-small;
+    }
+  }
+
+  .section-description {
+    @include card-text;
+    color: $slate;
+    margin-left: 2rem;
+  }
+}
+
+.recommended-section {
+  background: linear-gradient(135deg, $light-blue-highlight 0%, $light-green 100%);
+  padding: $spacing-small;
+  border-radius: $border-radius-large;
+  box-shadow: $shadow-elevation-2;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-tiny;
+}
+
+.product-card {
+  @include card-base;
+  background: $branco;
+  padding: $spacing-tiny;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-micro;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  &.recommended {
+    border-color: $laranja-caixa;
+    position: relative;
+
+    &::before {
+      content: '⭐ Recomendado';
+      position: absolute;
+      top: -12px;
+      left: $spacing-tiny;
+      background: $laranja-caixa;
+      color: $branco;
+      padding: $spacing-quark $spacing-nano;
+      border-radius: $border-radius-small;
+      font-size: $text-caption;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-elevation-5;
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-nano;
+}
+
+.product-badge {
+  padding: $spacing-quark $spacing-nano;
+  border-radius: $border-radius-small;
+  font-size: $text-small;
+  font-weight: $font-weight-semibold;
+  background: $cinza-100;
+  color: $charcoal;
+
+  &.badge-baixo {
+    background: $light-green;
+    color: $success-90;
+  }
+
+  &.badge-medio {
+    background: lightyellow;
+    color: $attention-90;
+  }
+
+  &.badge-alto {
+    background: #ffe5e5;
+    color: $negative-90;
+  }
+}
+
+.risk-indicator {
+  padding: $spacing-quark $spacing-nano;
+  border-radius: $border-radius-small;
+  font-size: $text-caption;
+  font-weight: $font-weight-bold;
+
+  &.risk-baixo {
+    background: $success-70;
+    color: $branco;
+  }
+
+  &.risk-medio {
+    background: $attention-70;
+    color: $charcoal;
+  }
+
+  &.risk-alto {
+    background: $negative-70;
+    color: $branco;
+  }
+}
+
+.product-name {
+  @include card-title;
+  color: $azul-caixa;
+  margin-bottom: $spacing-nano;
+  min-height: 48px;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-nano;
+  padding: $spacing-micro 0;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+  margin-bottom: $spacing-nano;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .label {
+    @include card-caption;
+    color: $slate;
+    font-weight: $font-weight-semibold;
+  }
+
+  .value {
+    @include card-text;
+    font-weight: $font-weight-bold;
+    color: $charcoal;
+  }
+
+  &.rentability .value {
+    color: $success-70;
+    font-size: $text-big;
+  }
+}
+
+.btn-simulate {
+  @include button-base;
+  width: 100%;
+  background: $azul-caixa;
+  color: $branco;
+  padding: $spacing-micro;
+  font-size: $text-standard;
+  border-radius: $border-radius-medium;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $oceano-start;
+    box-shadow: $shadow-elevation-3;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.filters-bar {
+  display: flex;
+  gap: $spacing-nano;
+  margin-bottom: $spacing-small;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  @include button-base;
+  padding: $spacing-nano $spacing-tiny;
+  background: $branco;
+  border: 2px solid $border;
+  color: $charcoal;
+  font-size: $text-small;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $azul-caixa;
+    color: $azul-caixa;
+  }
+
+  &.active {
+    background: $azul-caixa;
+    border-color: $azul-caixa;
+    color: $branco;
+  }
+}
+
+.no-results {
+  text-align: center;
+  padding: $spacing-xlarge;
+  color: $slate;
+  @include card-text;
+}
+
+@media (max-width: 768px) {
+  .produtos-page {
+    padding: $spacing-tiny $spacing-micro;
+  }
+
+  .page-header h1 {
+    font-size: $heading-standard;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header h2 {
+    font-size: $text-big;
+  }
+
+  .filters-bar {
+    justify-content: center;
+  }
+
+  .filter-btn {
+    flex: 0 0 auto;
+  }
+}

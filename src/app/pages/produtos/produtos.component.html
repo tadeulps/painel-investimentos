@@ -1,0 +1,108 @@
+<section class="produtos-page">
+  <div class="page-header">
+    <h1>Produtos de Investimento</h1>
+    <p class="subtitle">Conheça os produtos disponíveis e encontre o ideal para você</p>
+  </div>
+
+  <!-- Produtos Recomendados -->
+  <div class="section-container recommended-section">
+    <div class="section-header">
+      <h2>
+        <span class="icon">⭐</span>
+        Produtos Recomendados para Você
+      </h2>
+      <p class="section-description">
+        Baseado no seu perfil de investimento
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <div *ngFor="let product of recommendedProducts" class="product-card recommended">
+        <div class="card-header">
+          <div class="product-badge" [class]="'badge-' + getRiskClass(product.risco)">
+            {{ product.tipo }}
+          </div>
+          <div class="risk-indicator" [class]="'risk-' + getRiskClass(product.risco)">
+            {{ product.risco }}
+          </div>
+        </div>
+
+        <h3 class="product-name">{{ product.nome }}</h3>
+
+        <div class="product-details">
+          <div class="detail-item rentability">
+            <span class="label">Rentabilidade</span>
+            <span class="value">{{ (product.rentabilidade * 100).toFixed(2) }}% a.a.</span>
+          </div>
+
+          <div class="detail-item type">
+            <span class="label">Tipo</span>
+            <span class="value">{{ product.tipo }}</span>
+          </div>
+        </div>
+
+        <button class="btn-simulate" (click)="simulateInvestment(product)">
+          Simular Investimento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Todos os Produtos -->
+  <div class="section-container all-products-section">
+    <div class="section-header">
+      <h2>
+        <span class="icon">📊</span>
+        Todos os Produtos
+      </h2>
+      <p class="section-description">
+        Explore todas as opções disponíveis
+      </p>
+    </div>
+
+    <div class="filters-bar">
+      <button 
+        *ngFor="let type of productTypes" 
+        class="filter-btn"
+        [class.active]="selectedType === type"
+        (click)="filterByType(type)">
+        {{ type === 'Todos' ? 'Todos' : type }}
+      </button>
+    </div>
+
+    <div class="products-grid">
+      <div *ngFor="let product of filteredProducts" class="product-card">
+        <div class="card-header">
+          <div class="product-badge" [class]="'badge-' + getRiskClass(product.risco)">
+            {{ product.tipo }}
+          </div>
+          <div class="risk-indicator" [class]="'risk-' + getRiskClass(product.risco)">
+            {{ product.risco }}
+          </div>
+        </div>
+
+        <h3 class="product-name">{{ product.nome }}</h3>
+
+        <div class="product-details">
+          <div class="detail-item rentability">
+            <span class="label">Rentabilidade</span>
+            <span class="value">{{ (product.rentabilidade * 100).toFixed(2) }}% a.a.</span>
+          </div>
+
+          <div class="detail-item type">
+            <span class="label">Tipo</span>
+            <span class="value">{{ product.tipo }}</span>
+          </div>
+        </div>
+
+        <button class="btn-simulate" (click)="simulateInvestment(product)">
+          Simular Investimento
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="filteredProducts.length === 0" class="no-results">
+      <p>Nenhum produto encontrado para este filtro.</p>
+    </div>
+  </div>
+</section>
