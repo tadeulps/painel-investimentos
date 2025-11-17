@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,9 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Check if user is already logged in
-    const token = localStorage.getItem('authToken');
-    if (token) {
+    if (this.authService.isAuthenticated()) {
       this.router.navigate(['/dashboard']);
     }
   }
@@ -50,34 +50,27 @@ export class LoginComponent implements OnInit {
 
     const { email, senha, rememberMe } = this.loginForm.value;
 
-    // Simulate API call
-    setTimeout(() => {
-      // Mock authentication - replace with real API call
-      if (email === 'cliente@exemplo.com' && senha === '123456') {
-        // Success
-        const mockToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
-        const mockClientId = '123';
-
-        if (rememberMe) {
-          localStorage.setItem('authToken', mockToken);
-          localStorage.setItem('clientId', mockClientId);
-        } else {
-          sessionStorage.setItem('authToken', mockToken);
-          sessionStorage.setItem('clientId', mockClientId);
-        }
-
+    this.authService.login(email, senha, rememberMe).subscribe({
+      next: (response) => {
         this.router.navigate(['/dashboard']);
-      } else {
-        // Failure
-        this.errorMessage = 'E-mail ou senha incorretos. Tente novamente.';
+      },
+      error: (error) => {
+        // Handle error
         this.isLoading = false;
+        if (error.status === 401) {
+          this.errorMessage = 'E-mail ou senha incorretos. Tente novamente.';
+        } else if (error.status === 400) {
+          this.errorMessage = 'Por favor, preencha todos os campos.';
+        } else {
+          this.errorMessage = 'Erro ao fazer login. Tente novamente mais tarde.';
+        }
       }
-    }, 1500);
+    });
   }
 
   forgotPassword(event: Event): void {
     event.preventDefault();
-    alert('Funcionalidade de recuperação de senha será implementada em breve.\n\nPor enquanto, use:\nE-mail: cliente@exemplo.com\nSenha: 123456');
+    alert('Funcionalidade de recuperação de senha será implementada em breve.\n\nPor enquanto, use:\nE-mail: tadeu@caixa.com\nSenha: 123456');
   }
 
   register(event: Event): void {
