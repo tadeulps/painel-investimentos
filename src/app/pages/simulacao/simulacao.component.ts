@@ -2,14 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-interface Product {
-  id: number;
-  nome: string;
-  tipo: string;
-  rentabilidade: number;
-  risco: string;
-}
+import { InvestmentService, Product } from '../../services/investment.service';
+import { AuthService } from '../../services/auth.service';
 
 interface MonthlyDetail {
   mes: number;
@@ -37,56 +31,18 @@ export class SimulacaoComponent implements OnInit {
   selectedProduct: Product | null = null;
   currentProductIndex = 0;
   simulationResult: SimulationResult | null = null;
+  isLoading = false;
+  isInvesting = false;
+  clienteId: number | null = null;
 
-  availableProducts: Product[] = [
-    {
-      id: 101,
-      nome: 'CDB Caixa 2026',
-      tipo: 'CDB',
-      rentabilidade: 0.13,
-      risco: 'Baixo'
-    },
-    {
-      id: 104,
-      nome: 'Tesouro IPCA+ 2035',
-      tipo: 'Tesouro',
-      rentabilidade: 0.14,
-      risco: 'Medio'
-    },
-    {
-      id: 106,
-      nome: 'Fundo Multimercado Equilibrado',
-      tipo: 'Fundo',
-      rentabilidade: 0.15,
-      risco: 'Medio'
-    },
-    {
-      id: 102,
-      nome: 'Fundo Agressivo XPTO',
-      tipo: 'Fundo',
-      rentabilidade: 0.18,
-      risco: 'Alto'
-    },
-    {
-      id: 103,
-      nome: 'LCI Imobiliária Premium',
-      tipo: 'LCI',
-      rentabilidade: 0.11,
-      risco: 'Baixo'
-    },
-    {
-      id: 108,
-      nome: 'Tesouro Selic 2028',
-      tipo: 'Tesouro',
-      rentabilidade: 0.10,
-      risco: 'Baixo'
-    }
-  ];
+  availableProducts: Product[] = [];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private investmentService: InvestmentService,
+    private authService: AuthService
   ) {
     this.simulationForm = this.fb.group({
       valor: [null, [Validators.required, Validators.min(100)]],
@@ -95,14 +51,29 @@ export class SimulacaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Check for productId in query params
-    this.route.queryParams.subscribe(params => {
-      const productId = params['productId'];
-      if (productId) {
-        const product = this.availableProducts.find(p => p.id === +productId);
-        if (product) {
-          this.selectedProduct = product;
-        }
+    this.isLoading = true;
+    this.clienteId = this.authService.getStoredClientId();
+
+    // Load products from API
+    this.investmentService.getProducts().subscribe({
+      next: (products) => {
+        this.availableProducts = products;
+        this.isLoading = false;
+
+        // Check for productId in query params after loading products
+        this.route.queryParams.subscribe(params => {
+          const productId = params['productId'];
+          if (productId) {
+            const product = this.availableProducts.find(p => p.id === +productId);
+            if (product) {
+              this.selectedProduct = product;
+            }
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Erro ao carregar produtos:', error);
+        this.isLoading = false;
       }
     });
   }
@@ -144,7 +115,7 @@ export class SimulacaoComponent implements OnInit {
 
     const valor = this.simulationForm.value.valor;
     const prazoMeses = this.simulationForm.value.prazoMeses;
-    const taxaAnual = this.selectedProduct.rentabilidade;
+    const taxaAnual = this.selectedProduct.taxaAnual;
     const taxaMensal = Math.pow(1 + taxaAnual, 1/12) - 1;
 
     // Calculate monthly breakdown
@@ -188,9 +159,31 @@ export class SimulacaoComponent implements OnInit {
   }
 
   proceedToInvest(): void {
-    if (this.selectedProduct) {
-      alert(`Investimento em ${this.selectedProduct.nome} será processado!\n\nEsta funcionalidade será implementada na próxima fase.`);
-      // TODO: Implement investment flow
+    if (!this.selectedProduct || !this.simulationResult || !this.clienteId) {
+      alert('Erro: Dados incompletos para realizar o investimento.');
+      return;
     }
+
+    this.isInvesting = true;
+
+    this.investmentService.createInvestment(
+      this.clienteId,
+      this.selectedProduct.id,
+      this.simulationResult.valorInicial,
+      this.simulationResult.prazoMeses
+    ).subscribe({
+      next: (response) => {
+        this.isInvesting = false;
+        alert(`Investimento realizado com sucesso!\n\nProduto: ${this.selectedProduct!.nome}\nValor: R$ ${this.simulationResult!.valorInicial.toFixed(2)}\nPrazo: ${this.simulationResult!.prazoMeses} meses`);
+        
+        // Navigate to dashboard to see investments
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        this.isInvesting = false;
+        console.error('Erro ao criar investimento:', error);
+        alert('Erro ao processar investimento. Tente novamente.');
+      }
+    });
   }
 }

@@ -185,6 +185,65 @@ server.get('/investimentos/:clienteId', (req, res) => {
   res.json(investmentsWithProducts);
 });
 
+// Custom route to create new investment
+server.post('/investimentos', (req, res) => {
+  const { clienteId, productId, valor, prazoMeses } = req.body;
+
+  if (!clienteId || !productId || !valor || !prazoMeses) {
+    return res.status(400).json({ 
+      error: 'clienteId, productId, valor e prazoMeses são obrigatórios' 
+    });
+  }
+
+  const db = router.db;
+  
+  // Validate user exists
+  const user = db.get('users').find({ id: clienteId }).value();
+  if (!user) {
+    return res.status(404).json({ error: 'Cliente não encontrado' });
+  }
+
+  // Validate product exists
+  const product = db.get('products').find({ id: productId }).value();
+  if (!product) {
+    return res.status(404).json({ error: 'Produto não encontrado' });
+  }
+
+  // Calculate current value based on time elapsed (simulate initial investment)
+  const taxaMensal = Math.pow(1 + product.taxaAnual, 1/12) - 1;
+  const valorAtual = valor; // Initial investment, no time elapsed yet
+
+  // Get next ID
+  const investments = db.get('investments').value();
+  const newId = investments.length > 0 ? Math.max(...investments.map(i => i.id)) + 1 : 1;
+
+  // Create new investment
+  const newInvestment = {
+    id: newId,
+    userId: clienteId,
+    productId: productId,
+    valor: valor,
+    dataInicio: new Date().toISOString().split('T')[0], // Current date YYYY-MM-DD
+    prazoMeses: prazoMeses,
+    valorAtual: valorAtual
+  };
+
+  // Add to database
+  db.get('investments')
+    .push(newInvestment)
+    .write();
+
+  // Return investment with product details
+  res.status(201).json({
+    success: true,
+    message: 'Investimento criado com sucesso',
+    investment: {
+      ...newInvestment,
+      produto: product
+    }
+  });
+});
+
 // Use default router for other routes
 server.use(router);
 
@@ -199,6 +258,7 @@ server.listen(PORT, () => {
   console.log(`GET    http://localhost:${PORT}/produtos-recomendados/:perfil`);
   console.log(`POST   http://localhost:${PORT}/simular-investimento`);
   console.log(`GET    http://localhost:${PORT}/investimentos/:clienteId`);
+  console.log(`POST   http://localhost:${PORT}/investimentos`);
   console.log(`GET    http://localhost:${PORT}/users`);
   console.log(`GET    http://localhost:${PORT}/products`);
   console.log(`GET    http://localhost:${PORT}/riskProfiles\n`);

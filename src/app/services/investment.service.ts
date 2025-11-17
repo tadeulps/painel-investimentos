@@ -75,4 +75,14 @@ export class InvestmentService {
   simulateInvestment(data: SimulationRequest): Observable<SimulationResponse> {
     return this.http.post<SimulationResponse>(`${this.apiUrl}/simular-investimento`, data);
   }
+
+  // Create new investment
+  createInvestment(clienteId: number, productId: number, valor: number, prazoMeses: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/investimentos`, {
+      clienteId,
+      productId,
+      valor,
+      prazoMeses
+    });
+  }
 }

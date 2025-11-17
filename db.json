@@ -5,7 +5,7 @@
       "name": "Tadeu Lopes",
       "email": "tadeu@caixa.com",
       "password": "123456",
-      "riskProfileId": 1
+      "riskProfileId": 2
     },
     {
       "id": 2,
@@ -179,6 +179,15 @@
       "dataInicio": "2024-03-01",
       "prazoMeses": 24,
       "valorAtual": 10950
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "productId": 7,
+      "valor": 1223,
+      "dataInicio": "2025-11-17",
+      "prazoMeses": 22,
+      "valorAtual": 1223
     }
   ]
 }

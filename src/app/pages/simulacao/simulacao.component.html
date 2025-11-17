@@ -4,8 +4,13 @@
     <p class="subtitle">Simule seu investimento e veja o retorno esperado mês a mês</p>
   </div>
 
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <p>Carregando produtos...</p>
+  </div>
+
   <!-- Step 1: Product Selection (if no productId) -->
-  <div *ngIf="!selectedProduct" class="product-selection-section">
+  <div *ngIf="!selectedProduct && !isLoading" class="product-selection-section">
     <h2 class="section-title">Selecione um Produto</h2>
     
     <div class="carousel-container">
@@ -35,7 +40,7 @@
           <div class="product-info">
             <div class="info-item">
               <span class="label">Rentabilidade:</span>
-              <span class="value">{{ (product.rentabilidade * 100).toFixed(2) }}%</span>
+              <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}%</span>
             </div>
             <div class="info-item">
               <span class="label">Risco:</span>
@@ -76,7 +81,7 @@
       <h3>Produto Selecionado:</h3>
       <div class="product-banner">
         <span class="product-name">{{ selectedProduct.nome }}</span>
-        <span class="product-rent">{{ (selectedProduct.rentabilidade * 100).toFixed(2) }}% a.a.</span>
+        <span class="product-rent">{{ (selectedProduct.taxaAnual * 100).toFixed(2) }}% a.a.</span>
         <button class="btn-change" (click)="changeProduct()">Trocar Produto</button>
       </div>
     </div>
@@ -171,8 +176,11 @@
       <button class="btn-new-simulation" (click)="newSimulation()">
         Nova Simulação
       </button>
-      <button class="btn-invest" (click)="proceedToInvest()">
-        Investir Agora
+      <button 
+        class="btn-invest" 
+        (click)="proceedToInvest()"
+        [disabled]="isInvesting">
+        {{ isInvesting ? 'Processando...' : 'Investir Agora' }}
       </button>
     </div>
   </div>
