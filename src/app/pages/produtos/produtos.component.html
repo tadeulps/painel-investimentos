@@ -4,6 +4,11 @@
     <p class="subtitle">Conheça os produtos disponíveis e encontre o ideal para você</p>
   </div>
 
+  <div *ngIf="isLoading" class="loading-container">
+    <p>Carregando produtos...</p>
+  </div>
+
+  <div *ngIf="!isLoading">
   <!-- Produtos Recomendados -->
   <div class="section-container recommended-section">
     <div class="section-header">
@@ -32,7 +37,7 @@
         <div class="product-details">
           <div class="detail-item rentability">
             <span class="label">Rentabilidade</span>
-            <span class="value">{{ (product.rentabilidade * 100).toFixed(2) }}% a.a.</span>
+            <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
           </div>
 
           <div class="detail-item type">
@@ -86,7 +91,7 @@
         <div class="product-details">
           <div class="detail-item rentability">
             <span class="label">Rentabilidade</span>
-            <span class="value">{{ (product.rentabilidade * 100).toFixed(2) }}% a.a.</span>
+            <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
           </div>
 
           <div class="detail-item type">
@@ -104,5 +109,6 @@
     <div *ngIf="filteredProducts.length === 0" class="no-results">
       <p>Nenhum produto encontrado para este filtro.</p>
     </div>
+  </div>
   </div>
 </section>

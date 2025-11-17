@@ -4,7 +4,11 @@
     <p class="subtitle">Selecione o perfil que melhor se adequa ao seu objetivo de investimento</p>
   </div>
 
-  <div class="carousel-container">
+  <div *ngIf="isLoading" class="loading-container">
+    <p>Carregando seu perfil...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="carousel-container">
     <button 
       class="carousel-btn prev" 
       (click)="previous()" 
@@ -20,6 +24,7 @@
         [class.active]="i === currentIndex"
         [class.prev]="i < currentIndex"
         [class.next]="i > currentIndex"
+        [class.user-profile]="profile.id === userRiskProfileId"
         (click)="selectProfile(i)">
         
         <div class="card-icon" [style.background]="profile.color">
@@ -67,9 +72,15 @@
           (click)="selectProfile(i)"></span>
   </div>
 
-  <div class="action-section" *ngIf="selectedProfile">
-    <button class="btn-primary" (click)="confirmSelection()">
-      Confirmar Perfil: {{ selectedProfile.title }}
+  <div class="action-section" *ngIf="selectedProfile && !isLoading">
+    <p *ngIf="selectedProfile.id === userRiskProfileId" class="current-profile-badge">
+      ✓ Este é o seu perfil atual
+    </p>
+    <button 
+      class="btn-primary" 
+      (click)="confirmSelection()"
+      [disabled]="isSaving || selectedProfile.id === userRiskProfileId">
+      {{ isSaving ? 'Salvando...' : (selectedProfile.id === userRiskProfileId ? 'Perfil Atual' : 'Confirmar Perfil: ' + selectedProfile.title) }}
     </button>
   </div>
 </section>

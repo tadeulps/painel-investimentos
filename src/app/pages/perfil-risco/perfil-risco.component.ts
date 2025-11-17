@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 interface RiskProfile {
-  id: string;
+  id: number;
   title: string;
   description: string;
   icon: string;
@@ -18,13 +19,17 @@ interface RiskProfile {
   templateUrl: './perfil-risco.component.html',
   styleUrls: ['./perfil-risco.component.scss']
 })
-export class PerfilRiscoComponent {
+export class PerfilRiscoComponent implements OnInit {
   currentIndex = 1; // Start with Moderado in center
   selectedProfile: RiskProfile | null = null;
+  userRiskProfileId: number | null = null;
+  clienteId: number | null = null;
+  isLoading = false;
+  isSaving = false;
 
   profiles: RiskProfile[] = [
     {
-      id: 'conservador',
+      id: 1,
       title: 'Conservador',
       description: 'Perfil focado em segurança e preservação de capital, com baixa tolerância a riscos.',
       icon: '🛡️',
@@ -38,7 +43,7 @@ export class PerfilRiscoComponent {
       ]
     },
     {
-      id: 'moderado',
+      id: 2,
       title: 'Moderado',
       description: 'Perfil equilibrado entre segurança e rentabilidade, com tolerância moderada a riscos.',
       icon: '⚖️',
@@ -52,7 +57,7 @@ export class PerfilRiscoComponent {
       ]
     },
     {
-      id: 'agressivo',
+      id: 3,
       title: 'Agressivo',
       description: 'Perfil voltado para alta rentabilidade, com maior tolerância a riscos e volatilidade.',
       icon: '🚀',
@@ -66,6 +71,8 @@ export class PerfilRiscoComponent {
       ]
     }
   ];
+
+  constructor(private authService: AuthService) {}
 
   selectProfile(index: number): void {
     this.currentIndex = index;
@@ -87,15 +94,67 @@ export class PerfilRiscoComponent {
   }
 
   confirmSelection(): void {
-    if (this.selectedProfile) {
-      console.log('Perfil selecionado:', this.selectedProfile);
-      // TODO: Implement API call to save profile
-      alert(`Perfil "${this.selectedProfile.title}" selecionado com sucesso!`);
+    if (!this.selectedProfile || !this.clienteId) {
+      return;
     }
+
+    // Check if profile has changed
+    if (this.selectedProfile.id === this.userRiskProfileId) {
+      alert('Este já é o seu perfil atual.');
+      return;
+    }
+
+    this.isSaving = true;
+
+    this.authService.updateRiskProfile(this.clienteId, this.selectedProfile.id).subscribe({
+      next: (response) => {
+        this.userRiskProfileId = this.selectedProfile!.id;
+        this.isSaving = false;
+        alert(`Perfil "${this.selectedProfile!.title}" atualizado com sucesso!`);
+      },
+      error: (error) => {
+        this.isSaving = false;
+        console.error('Erro ao atualizar perfil:', error);
+        alert('Erro ao atualizar perfil. Tente novamente.');
+      }
+    });
   }
 
   ngOnInit(): void {
-    // Set initial selected profile (Moderado)
-    this.selectedProfile = this.profiles[this.currentIndex];
+    this.isLoading = true;
+    this.clienteId = this.authService.getStoredClientId();
+
+    if (!this.clienteId) {
+      console.error('Cliente ID não encontrado');
+      this.isLoading = false;
+      return;
+    }
+
+    // Load user profile from API
+    this.authService.getUserProfile(this.clienteId).subscribe({
+      next: (userProfile) => {
+        this.userRiskProfileId = userProfile.perfilRisco.id;
+        
+        // Set current index based on user's risk profile
+        const profileIndex = this.profiles.findIndex(p => p.id === this.userRiskProfileId);
+        if (profileIndex !== -1) {
+          this.currentIndex = profileIndex;
+          this.selectedProfile = this.profiles[profileIndex];
+        } else {
+          // Fallback to Moderado if not found
+          this.currentIndex = 1;
+          this.selectedProfile = this.profiles[1];
+        }
+        
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar perfil do usuário:', error);
+        // Fallback to default (Moderado)
+        this.currentIndex = 1;
+        this.selectedProfile = this.profiles[1];
+        this.isLoading = false;
+      }
+    });
   }
 }

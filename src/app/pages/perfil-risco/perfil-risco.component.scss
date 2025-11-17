@@ -219,7 +219,21 @@
 
 .action-section {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-nano;
+
+  .current-profile-badge {
+    @include card-text;
+    color: $success-70;
+    font-weight: $font-weight-semibold;
+    display: flex;
+    align-items: center;
+    gap: $spacing-quark;
+    padding: $spacing-quark $spacing-micro;
+    background: rgba($success-70, 0.1);
+    border-radius: $border-radius-small;
+  }
 
   .btn-primary {
     @include button-base;
@@ -229,16 +243,53 @@
     font-size: $text-large;
     border-radius: $border-radius-medium;
     box-shadow: $shadow-elevation-2;
+    transition: all 0.3s ease;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background: $oceano-start;
       box-shadow: $shadow-elevation-4;
       transform: translateY(-2px);
     }
 
-    &:active {
+    &:active:not(:disabled) {
       transform: translateY(0);
     }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background: $cinza-300;
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+
+  p {
+    @include card-title;
+    color: $azul-caixa;
+  }
+}
+
+.profile-card.user-profile {
+  border: 3px solid $success-70;
+  
+  &::before {
+    content: '✓ Seu perfil atual';
+    position: absolute;
+    top: $spacing-micro;
+    right: $spacing-micro;
+    background: $success-70;
+    color: $branco;
+    padding: $spacing-quark $spacing-nano;
+    border-radius: $border-radius-small;
+    font-size: $text-small;
+    font-weight: $font-weight-semibold;
+    font-family: $font-regular;
   }
 }
 

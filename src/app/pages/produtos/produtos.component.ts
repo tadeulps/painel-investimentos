@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 export interface Product {
   id: number;
   nome: string;
   tipo: string;
-  rentabilidade: number;
+  taxaAnual: number;
   risco: string;
+  aplicacaoMinima: number;
+  liquidez: string;
+  riskProfileId: number;
 }
 
 @Component({
@@ -19,121 +24,76 @@ export interface Product {
 })
 export class ProdutosComponent implements OnInit {
   selectedType = 'Todos';
-  productTypes = ['Todos', 'CDB', 'LCI', 'LCA', 'Tesouro', 'Fundo'];
+  productTypes = ['Todos', 'Renda Fixa', 'Tesouro Direto', 'Fundos', 'Renda Variável', 'Estruturados'];
 
-  // Mock user profile - in real app, get from service
-  userRiskProfile = 'Moderado'; // Conservador, Moderado, Agressivo
+  userRiskProfileId: number | null = null;
+  clienteId: number | null = null;
+  isLoading = false;
 
-  allProducts: Product[] = [
-    {
-      id: 101,
-      nome: 'CDB Caixa 2026',
-      tipo: 'CDB',
-      rentabilidade: 0.13,
-      risco: 'Baixo'
-    },
-    {
-      id: 102,
-      nome: 'Fundo Agressivo XPTO',
-      tipo: 'Fundo',
-      rentabilidade: 0.18,
-      risco: 'Alto'
-    },
-    {
-      id: 103,
-      nome: 'LCI Imobiliária Premium',
-      tipo: 'LCI',
-      rentabilidade: 0.11,
-      risco: 'Baixo'
-    },
-    {
-      id: 104,
-      nome: 'Tesouro IPCA+ 2035',
-      tipo: 'Tesouro',
-      rentabilidade: 0.14,
-      risco: 'Medio'
-    },
-    {
-      id: 105,
-      nome: 'LCA Agro Sustentável',
-      tipo: 'LCA',
-      rentabilidade: 0.12,
-      risco: 'Baixo'
-    },
-    {
-      id: 106,
-      nome: 'Fundo Multimercado Equilibrado',
-      tipo: 'Fundo',
-      rentabilidade: 0.15,
-      risco: 'Medio'
-    },
-    {
-      id: 107,
-      nome: 'CDB Progressivo 2027',
-      tipo: 'CDB',
-      rentabilidade: 0.14,
-      risco: 'Medio'
-    },
-    {
-      id: 108,
-      nome: 'Tesouro Selic 2028',
-      tipo: 'Tesouro',
-      rentabilidade: 0.10,
-      risco: 'Baixo'
-    },
-    {
-      id: 109,
-      nome: 'Fundo de Ações Dinamico',
-      tipo: 'Fundo',
-      rentabilidade: 0.22,
-      risco: 'Alto'
-    },
-    {
-      id: 110,
-      nome: 'CDB Liquidez Diária',
-      tipo: 'CDB',
-      rentabilidade: 0.09,
-      risco: 'Baixo'
-    },
-    {
-      id: 111,
-      nome: 'LCI Caixa Rentabilidade',
-      tipo: 'LCI',
-      rentabilidade: 0.12,
-      risco: 'Baixo'
-    },
-    {
-      id: 112,
-      nome: 'Tesouro Prefixado 2030',
-      tipo: 'Tesouro',
-      rentabilidade: 0.13,
-      risco: 'Medio'
-    }
+  allProducts: Product[] = [];
+  originalProducts: Product[] = [
   ];
 
   recommendedProducts: Product[] = [];
   filteredProducts: Product[] = [];
 
-  constructor(private router: Router) {}
+  private apiUrl = 'http://localhost:3000';
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
-    this.loadRecommendedProducts();
-    this.filteredProducts = [...this.allProducts];
+    this.isLoading = true;
+    this.clienteId = this.authService.getStoredClientId();
+
+    if (!this.clienteId) {
+      console.error('Cliente ID não encontrado');
+      this.isLoading = false;
+      return;
+    }
+
+    // Load user profile first
+    this.authService.getUserProfile(this.clienteId).subscribe({
+      next: (userProfile) => {
+        this.userRiskProfileId = userProfile.perfilRisco.id;
+        this.loadProducts();
+      },
+      error: (error) => {
+        console.error('Erro ao carregar perfil do usuário:', error);
+        this.loadProducts(); // Load products anyway
+      }
+    });
+  }
+
+  loadProducts(): void {
+    this.http.get<Product[]>(`${this.apiUrl}/products`).subscribe({
+      next: (products) => {
+        this.allProducts = products;
+        this.originalProducts = [...products];
+        this.filteredProducts = [...products];
+        this.loadRecommendedProducts();
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar produtos:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
   loadRecommendedProducts(): void {
-    // Filter products based on user risk profile
-    const riskMapping: { [key: string]: string[] } = {
-      'Conservador': ['Baixo'],
-      'Moderado': ['Baixo', 'Medio'],
-      'Agressivo': ['Baixo', 'Medio', 'Alto']
-    };
+    if (!this.userRiskProfileId) {
+      this.recommendedProducts = [];
+      return;
+    }
 
-    const allowedRisks = riskMapping[this.userRiskProfile] || ['Baixo'];
-    
+    // Filter products based on user's risk profile ID
     this.recommendedProducts = this.allProducts
-      .filter(product => allowedRisks.includes(product.risco))
-      .sort((a, b) => b.rentabilidade - a.rentabilidade)
+      .filter(product => product.riskProfileId === this.userRiskProfileId)
+      .sort((a, b) => b.taxaAnual - a.taxaAnual)
       .slice(0, 3); // Show top 3 recommended products
   }
 
@@ -141,9 +101,9 @@ export class ProdutosComponent implements OnInit {
     this.selectedType = type;
     
     if (type === 'Todos') {
-      this.filteredProducts = [...this.allProducts];
+      this.filteredProducts = [...this.originalProducts];
     } else {
-      this.filteredProducts = this.allProducts.filter(
+      this.filteredProducts = this.originalProducts.filter(
         product => product.tipo === type
       );
     }
