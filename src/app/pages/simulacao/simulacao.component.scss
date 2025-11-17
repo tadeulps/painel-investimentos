@@ -1,0 +1,506 @@
+@import '../../../styles/token.scss';
+
+.simulacao-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-large $spacing-tiny;
+  min-height: calc(100vh - 70px);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: $spacing-xlarge;
+
+  h1 {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-nano;
+  }
+
+  .subtitle {
+    @include card-subtitle;
+    color: $slate;
+  }
+}
+
+.section-title {
+  @include card-title;
+  font-size: $heading-small;
+  color: $azul-caixa;
+  text-align: center;
+  margin-bottom: $spacing-small;
+}
+
+// Product Selection Carousel
+.product-selection-section {
+  margin-bottom: $spacing-xlarge;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-tiny;
+  margin-bottom: $spacing-tiny;
+  min-height: 400px;
+}
+
+.carousel-btn {
+  @include button-base;
+  width: 48px;
+  height: 48px;
+  background: $branco;
+  border: 2px solid $border;
+  color: $azul-caixa;
+  font-size: $text-huge;
+  border-radius: $border-radius-circle;
+  transition: all 0.3s ease;
+  z-index: 2;
+
+  &:hover:not(:disabled) {
+    background: $azul-caixa;
+    color: $branco;
+    transform: scale(1.1);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 380px;
+}
+
+.product-card-mini {
+  @include card-base;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  width: 100%;
+  max-width: 350px;
+  padding: $spacing-small;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.5;
+  pointer-events: none;
+
+  &.active {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    box-shadow: $shadow-elevation-4;
+    z-index: 1;
+  }
+
+  &.prev {
+    transform: translateX(-120%) scale(0.75);
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  &.next {
+    transform: translateX(20%) scale(0.75);
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  h3 {
+    @include card-title;
+    color: $azul-caixa;
+    margin: $spacing-micro 0;
+    text-align: center;
+  }
+}
+
+.card-badge {
+  display: inline-block;
+  padding: $spacing-quark $spacing-nano;
+  border-radius: $border-radius-small;
+  font-size: $text-small;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-nano;
+
+  &.badge-baixo {
+    background: $success-70;
+    color: $branco;
+  }
+
+  &.badge-medio {
+    background: $attention-70;
+    color: $charcoal;
+  }
+
+  &.badge-alto {
+    background: $negative-70;
+    color: $branco;
+  }
+}
+
+.product-info {
+  margin: $spacing-tiny 0;
+  padding: $spacing-micro 0;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing-nano;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      @include card-caption;
+      color: $slate;
+    }
+
+    .value {
+      @include card-text;
+      font-weight: $font-weight-bold;
+      color: $success-70;
+
+      &.risk {
+        padding: 2px $spacing-quark;
+        border-radius: $border-radius-small;
+        font-size: $text-caption;
+
+        &.risk-baixo {
+          background: $success-70;
+          color: $branco;
+        }
+
+        &.risk-medio {
+          background: $attention-70;
+          color: $charcoal;
+        }
+
+        &.risk-alto {
+          background: $negative-70;
+          color: $branco;
+        }
+      }
+    }
+  }
+}
+
+.btn-select {
+  @include button-base;
+  width: 100%;
+  background: $azul-caixa;
+  color: $branco;
+  padding: $spacing-micro;
+  margin-top: $spacing-micro;
+  border-radius: $border-radius-medium;
+
+  &:hover {
+    background: $oceano-start;
+  }
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-nano;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: $border-radius-circle;
+    background: $cinza-300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: $azul-caixa;
+      transform: scale(1.3);
+    }
+  }
+}
+
+// Simulation Form
+.simulation-form-section {
+  max-width: 600px;
+  margin: 0 auto $spacing-xlarge;
+}
+
+.selected-product-info {
+  margin-bottom: $spacing-small;
+
+  h3 {
+    @include card-text;
+    color: $slate;
+    margin-bottom: $spacing-nano;
+  }
+}
+
+.product-banner {
+  @include card-base;
+  padding: $spacing-tiny;
+  background: linear-gradient(135deg, $light-blue-highlight, $light-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $spacing-nano;
+
+  .product-name {
+    @include card-title;
+    color: $azul-caixa;
+  }
+
+  .product-rent {
+    @include card-text;
+    font-weight: $font-weight-bold;
+    color: $success-70;
+  }
+
+  .btn-change {
+    @include button-base;
+    padding: $spacing-quark $spacing-nano;
+    background: $branco;
+    border: 1px solid $border;
+    color: $azul-caixa;
+    font-size: $text-small;
+
+    &:hover {
+      border-color: $azul-caixa;
+      background: $azul-caixa;
+      color: $branco;
+    }
+  }
+}
+
+.simulation-form {
+  @include card-base;
+  padding: $spacing-small;
+}
+
+.form-group {
+  margin-bottom: $spacing-tiny;
+
+  label {
+    display: block;
+    @include card-text;
+    font-weight: $font-weight-semibold;
+    color: $charcoal;
+    margin-bottom: $spacing-quark;
+  }
+
+  input {
+    @include input-base;
+    width: 100%;
+  }
+
+  .error {
+    display: block;
+    color: $negative-70;
+    font-size: $text-caption;
+    margin-top: $spacing-quark;
+  }
+}
+
+.btn-simulate {
+  @include button-base;
+  width: 100%;
+  background: $azul-caixa;
+  color: $branco;
+  padding: $spacing-micro;
+  font-size: $text-large;
+  border-radius: $border-radius-medium;
+  margin-top: $spacing-tiny;
+
+  &:hover:not(:disabled) {
+    background: $oceano-start;
+    box-shadow: $shadow-elevation-4;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Results
+.simulation-results-section {
+  margin-top: $spacing-xlarge;
+}
+
+.results-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-tiny;
+  margin-bottom: $spacing-small;
+}
+
+.summary-card {
+  @include card-base;
+  padding: $spacing-tiny;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-quark;
+  text-align: center;
+
+  &.highlight {
+    background: linear-gradient(135deg, $azul-caixa, $turquesa-caixa);
+
+    .label,
+    .value {
+      color: $branco;
+    }
+  }
+
+  .label {
+    @include card-caption;
+    color: $slate;
+    font-weight: $font-weight-semibold;
+  }
+
+  .value {
+    @include card-title;
+    font-size: $heading-small;
+    color: $charcoal;
+
+    &.gain {
+      color: $success-70;
+    }
+  }
+}
+
+.monthly-breakdown {
+  @include card-base;
+  padding: $spacing-small;
+  margin-bottom: $spacing-small;
+
+  h3 {
+    @include card-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-tiny;
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    position: sticky;
+    top: 0;
+    background: $cinza-100;
+    z-index: 1;
+
+    th {
+      padding: $spacing-micro;
+      text-align: left;
+      @include card-text;
+      font-weight: $font-weight-bold;
+      color: $charcoal;
+      border-bottom: 2px solid $border;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border;
+
+      &:hover {
+        background: $light-blue-highlight;
+      }
+
+      td {
+        padding: $spacing-nano $spacing-micro;
+        @include card-text;
+
+        &.gain {
+          color: $success-70;
+          font-weight: $font-weight-semibold;
+        }
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-tiny;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  button {
+    @include button-base;
+    padding: $spacing-micro $spacing-small;
+    font-size: $text-large;
+    border-radius: $border-radius-medium;
+  }
+
+  .btn-new-simulation {
+    background: $branco;
+    border: 2px solid $azul-caixa;
+    color: $azul-caixa;
+
+    &:hover {
+      background: $azul-caixa;
+      color: $branco;
+    }
+  }
+
+  .btn-invest {
+    background: $success-70;
+    color: $branco;
+
+    &:hover {
+      background: $success-90;
+      box-shadow: $shadow-elevation-4;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .simulacao-page {
+    padding: $spacing-tiny $spacing-micro;
+  }
+
+  .carousel-track {
+    max-width: 320px;
+  }
+
+  .product-card-mini {
+    max-width: 300px;
+
+    &.prev,
+    &.next {
+      display: none;
+    }
+  }
+
+  .results-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .product-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}

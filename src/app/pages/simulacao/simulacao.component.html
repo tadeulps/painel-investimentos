@@ -1,0 +1,179 @@
+<section class="simulacao-page">
+  <div class="page-header">
+    <h1>Simulador de Investimentos</h1>
+    <p class="subtitle">Simule seu investimento e veja o retorno esperado mês a mês</p>
+  </div>
+
+  <!-- Step 1: Product Selection (if no productId) -->
+  <div *ngIf="!selectedProduct" class="product-selection-section">
+    <h2 class="section-title">Selecione um Produto</h2>
+    
+    <div class="carousel-container">
+      <button 
+        class="carousel-btn prev" 
+        (click)="previousProduct()" 
+        [disabled]="currentProductIndex === 0"
+        aria-label="Produto anterior">
+        ←
+      </button>
+
+      <div class="carousel-track">
+        <div 
+          *ngFor="let product of availableProducts; let i = index" 
+          class="product-card-mini"
+          [class.active]="i === currentProductIndex"
+          [class.prev]="i < currentProductIndex"
+          [class.next]="i > currentProductIndex"
+          (click)="selectProduct(product)">
+          
+          <div class="card-badge" [class]="'badge-' + getRiskClass(product.risco)">
+            {{ product.tipo }}
+          </div>
+          
+          <h3>{{ product.nome }}</h3>
+          
+          <div class="product-info">
+            <div class="info-item">
+              <span class="label">Rentabilidade:</span>
+              <span class="value">{{ (product.rentabilidade * 100).toFixed(2) }}%</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Risco:</span>
+              <span class="value risk" [class]="'risk-' + getRiskClass(product.risco)">
+                {{ product.risco }}
+              </span>
+            </div>
+          </div>
+
+          <button class="btn-select" (click)="selectProduct(product)">
+            Selecionar Produto
+          </button>
+        </div>
+      </div>
+
+      <button 
+        class="carousel-btn next" 
+        (click)="nextProduct()" 
+        [disabled]="currentProductIndex === availableProducts.length - 1"
+        aria-label="Próximo produto">
+        →
+      </button>
+    </div>
+
+    <div class="carousel-dots">
+      <span 
+        *ngFor="let product of availableProducts; let i = index" 
+        class="dot" 
+        [class.active]="i === currentProductIndex"
+        (click)="goToProduct(i)">
+      </span>
+    </div>
+  </div>
+
+  <!-- Step 2: Simulation Form (after product selected) -->
+  <div *ngIf="selectedProduct" class="simulation-form-section">
+    <div class="selected-product-info">
+      <h3>Produto Selecionado:</h3>
+      <div class="product-banner">
+        <span class="product-name">{{ selectedProduct.nome }}</span>
+        <span class="product-rent">{{ (selectedProduct.rentabilidade * 100).toFixed(2) }}% a.a.</span>
+        <button class="btn-change" (click)="changeProduct()">Trocar Produto</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">Dados da Simulação</h2>
+
+    <form [formGroup]="simulationForm" (ngSubmit)="simulate()" class="simulation-form">
+      <div class="form-group">
+        <label for="valor">Valor do Investimento (R$)</label>
+        <input 
+          type="number" 
+          id="valor" 
+          formControlName="valor"
+          placeholder="Ex: 10000"
+          min="100"
+          step="100">
+        <span class="error" *ngIf="simulationForm.get('valor')?.invalid && simulationForm.get('valor')?.touched">
+          Por favor, insira um valor mínimo de R$ 100,00
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="prazoMeses">Prazo (meses)</label>
+        <input 
+          type="number" 
+          id="prazoMeses" 
+          formControlName="prazoMeses"
+          placeholder="Ex: 12"
+          min="1"
+          max="360"
+          step="1">
+        <span class="error" *ngIf="simulationForm.get('prazoMeses')?.invalid && simulationForm.get('prazoMeses')?.touched">
+          Prazo deve ser entre 1 e 360 meses
+        </span>
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn-simulate"
+        [disabled]="simulationForm.invalid">
+        Simular Investimento
+      </button>
+    </form>
+  </div>
+
+  <!-- Step 3: Simulation Results -->
+  <div *ngIf="simulationResult" class="simulation-results-section">
+    <h2 class="section-title">Resultado da Simulação</h2>
+
+    <div class="results-summary">
+      <div class="summary-card">
+        <span class="label">Valor Inicial</span>
+        <span class="value">{{ simulationResult.valorInicial | currency:'BRL' }}</span>
+      </div>
+      <div class="summary-card highlight">
+        <span class="label">Valor Final</span>
+        <span class="value">{{ simulationResult.valorFinal | currency:'BRL' }}</span>
+      </div>
+      <div class="summary-card">
+        <span class="label">Rendimento Total</span>
+        <span class="value gain">{{ simulationResult.rendimentoTotal | currency:'BRL' }}</span>
+      </div>
+      <div class="summary-card">
+        <span class="label">Prazo</span>
+        <span class="value">{{ simulationResult.prazoMeses }} meses</span>
+      </div>
+    </div>
+
+    <div class="monthly-breakdown">
+      <h3>Evolução Mensal</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th>Saldo</th>
+              <th>Rendimento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let month of simulationResult.detalheMensal">
+              <td>{{ month.mes }}</td>
+              <td>{{ month.saldo | currency:'BRL' }}</td>
+              <td class="gain">{{ month.rendimento | currency:'BRL' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-new-simulation" (click)="newSimulation()">
+        Nova Simulação
+      </button>
+      <button class="btn-invest" (click)="proceedToInvest()">
+        Investir Agora
+      </button>
+    </div>
+  </div>
+</section>
