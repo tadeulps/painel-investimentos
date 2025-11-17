@@ -8,11 +8,12 @@
 
     <nav class="main-nav" role="navigation" aria-label="Menu principal">
       <ul>
-        <li><a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
-        <li><a routerLink="/perfil-risco" routerLinkActive="active">Perfil de Risco</a></li>
-        <li><a routerLink="/produtos" routerLinkActive="active">Produtos</a></li>
-        <li><a routerLink="/simulacao" routerLinkActive="active">Simulação</a></li>
-        <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/perfil-risco" routerLinkActive="active">Perfil de Risco</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/produtos" routerLinkActive="active">Produtos</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/simulacao" routerLinkActive="active">Simulação</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="onLogout()" class="logout-link">Sair</a></li>
       </ul>
     </nav>
   </div>
