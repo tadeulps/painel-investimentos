@@ -1,0 +1,248 @@
+@import '../../../styles/token.scss';
+
+.dashboard-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-large $spacing-tiny;
+  min-height: calc(100vh - 70px);
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+
+  p {
+    @include card-title;
+    color: $azul-caixa;
+  }
+}
+
+// 1️⃣ Resumo do Investidor
+.investor-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-small;
+  padding: $spacing-small;
+  background: linear-gradient(135deg, $azul-caixa, $oceano-end);
+  border-radius: $border-radius-large;
+  color: $branco;
+  box-shadow: $shadow-elevation-3;
+}
+
+.welcome-section {
+  flex: 1;
+
+  .greeting {
+    @include part-title;
+    color: $branco;
+    margin-bottom: $spacing-quark;
+    font-size: $heading-large;
+  }
+
+  .subtitle {
+    @include card-text;
+    color: rgba($branco, 0.9);
+    font-size: $text-standard;
+  }
+}
+
+.risk-profile-badge {
+  display: flex;
+  align-items: center;
+  gap: $spacing-micro;
+  padding: $spacing-micro $spacing-small;
+  background: rgba($branco, 0.2);
+  border-radius: $border-radius-medium;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba($branco, 0.3);
+
+  .profile-icon {
+    font-size: 2rem;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-label {
+    font-size: $text-small;
+    opacity: 0.9;
+    font-family: $font-regular;
+  }
+
+  .profile-name {
+    font-size: $text-large;
+    font-weight: $font-weight-bold;
+    font-family: $font-bold;
+  }
+
+  &.profile-conservador {
+    border-color: rgba($success-70, 0.5);
+  }
+
+  &.profile-moderado {
+    border-color: rgba($attention-70, 0.5);
+  }
+
+  &.profile-agressivo {
+    border-color: rgba($negative-70, 0.5);
+  }
+}
+
+// 📊 Indicadores Rápidos
+.quick-indicators {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-tiny;
+  margin-bottom: $spacing-small;
+}
+
+.indicator-card {
+  @include card-base;
+  display: flex;
+  align-items: center;
+  gap: $spacing-micro;
+  padding: $spacing-small;
+  background: $branco;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-elevation-4;
+  }
+
+  .card-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-label {
+    @include card-caption;
+    color: $slate;
+    margin-bottom: $spacing-quark;
+  }
+
+  .card-value {
+    @include card-title;
+    color: $azul-caixa;
+    font-size: $heading-tiny;
+    
+    &.positive {
+      color: $success-70;
+    }
+    
+    &.negative {
+      color: $negative-70;
+    }
+  }
+
+  .card-percentage {
+    @include card-text;
+    color: $success-70;
+    font-weight: $font-weight-semibold;
+    margin-top: $spacing-quark;
+  }
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: $spacing-xlarge $spacing-small;
+  background: $branco;
+  border-radius: $border-radius-large;
+  box-shadow: $shadow-elevation-2;
+
+  .empty-icon {
+    font-size: 5rem;
+    margin-bottom: $spacing-tiny;
+    opacity: 0.5;
+  }
+
+  h2 {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-micro;
+  }
+
+  p {
+    @include card-text;
+    color: $slate;
+    margin-bottom: $spacing-small;
+  }
+
+  .empty-actions {
+    display: flex;
+    gap: $spacing-micro;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    @include button-base;
+    padding: $spacing-micro $spacing-small;
+    font-size: $text-standard;
+    border-radius: $border-radius-medium;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: $azul-caixa;
+    color: $branco;
+    box-shadow: $shadow-elevation-2;
+
+    &:hover {
+      background: $oceano-start;
+      box-shadow: $shadow-elevation-4;
+      transform: translateY(-2px);
+    }
+  }
+
+  .btn-secondary {
+    background: $branco;
+    color: $azul-caixa;
+    border: 2px solid $azul-caixa;
+
+    &:hover {
+      background: $azul-caixa;
+      color: $branco;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .dashboard-page {
+    padding: $spacing-tiny $spacing-micro;
+  }
+
+  .investor-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-micro;
+  }
+
+  .risk-profile-badge {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .quick-indicators {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-section .greeting {
+    font-size: $heading-small;
+  }
+}
