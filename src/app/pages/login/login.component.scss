@@ -1,0 +1,240 @@
+@import '../../../styles/token.scss';
+
+.login-page {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-small $spacing-tiny;
+  background: linear-gradient(135deg, $light-blue 0%, $light-blue-highlight 50%, $light-green 100%);
+}
+
+.login-container {
+  @include card-base;
+  width: 100%;
+  max-width: 450px;
+  padding: $spacing-large $spacing-small;
+  background: $branco;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: $spacing-small;
+
+  .logo {
+    height: 60px;
+    width: auto;
+    margin: 0 auto $spacing-tiny;
+    display: block;
+  }
+
+  h1 {
+    @include part-title;
+    font-size: $heading-large;
+    color: $azul-caixa;
+    margin-bottom: $spacing-nano;
+  }
+
+  .subtitle {
+    @include card-subtitle;
+    color: $slate;
+  }
+}
+
+.login-form {
+  margin-bottom: $spacing-tiny;
+}
+
+.form-group {
+  margin-bottom: $spacing-tiny;
+
+  label {
+    display: block;
+    @include card-text;
+    font-weight: $font-weight-semibold;
+    color: $charcoal;
+    margin-bottom: $spacing-quark;
+  }
+
+  input {
+    @include input-base;
+    width: 100%;
+
+    &.invalid {
+      border-color: $negative-70;
+    }
+
+    &:focus {
+      border-color: $azul-caixa;
+      box-shadow: 0 0 0 3px rgba(0, 92, 169, 0.1);
+    }
+  }
+
+  .error {
+    display: block;
+    color: $negative-70;
+    font-size: $text-caption;
+    margin-top: $spacing-quark;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    padding-right: 48px;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: $spacing-micro;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: $text-big;
+    padding: $spacing-quark;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-tiny;
+  flex-wrap: wrap;
+  gap: $spacing-nano;
+
+  .remember-me {
+    display: flex;
+    align-items: center;
+    gap: $spacing-quark;
+    cursor: pointer;
+    @include card-text;
+    color: $charcoal;
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: $azul-caixa;
+    }
+  }
+
+  .forgot-password {
+    @include card-text;
+    color: $azul-caixa;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.btn-login {
+  @include button-base;
+  width: 100%;
+  background: linear-gradient(to right, $oceano-start, $oceano-end);
+  color: $branco;
+  padding: $spacing-micro;
+  font-size: $text-large;
+  border-radius: $border-radius-medium;
+  transition: all 0.3s ease;
+  font-weight: $font-weight-bold;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(to right, $oceano-end, $oceano-start);
+    box-shadow: $shadow-elevation-4;
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .loading {
+    display: inline-block;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.error-message {
+  margin-top: $spacing-tiny;
+  padding: $spacing-micro;
+  background: lighten($negative-70, 35%);
+  border: 1px solid $negative-70;
+  border-radius: $border-radius-small;
+  color: $negative-90;
+  @include card-text;
+  text-align: center;
+  font-weight: $font-weight-semibold;
+}
+
+.login-footer {
+  text-align: center;
+  padding-top: $spacing-tiny;
+  border-top: 1px solid $border;
+
+  p {
+    @include card-text;
+    color: $slate;
+
+    a {
+      color: $azul-caixa;
+      text-decoration: none;
+      font-weight: $font-weight-bold;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    padding: $spacing-tiny $spacing-micro;
+  }
+
+  .login-container {
+    padding: $spacing-tiny;
+  }
+
+  .login-header {
+    .logo {
+      height: 48px;
+    }
+
+    h1 {
+      font-size: $heading-standard;
+    }
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
