@@ -2,18 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { HttpClient } from '@angular/common/http';
-
-export interface Product {
-  id: number;
-  nome: string;
-  tipo: string;
-  taxaAnual: number;
-  risco: string;
-  aplicacaoMinima: number;
-  liquidez: string;
-  riskProfileId: number;
-}
+import { InvestmentService, Product } from '../../services/investment.service';
 
 @Component({
   selector: 'app-produtos',
@@ -37,12 +26,10 @@ export class ProdutosComponent implements OnInit {
   recommendedProducts: Product[] = [];
   filteredProducts: Product[] = [];
 
-  private apiUrl = 'http://localhost:3000';
-
   constructor(
     private router: Router,
     private authService: AuthService,
-    private http: HttpClient
+    private investmentService: InvestmentService
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +56,7 @@ export class ProdutosComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.http.get<Product[]>(`${this.apiUrl}/products`).subscribe({
+    this.investmentService.getProducts().subscribe({
       next: (products) => {
         this.allProducts = products;
         this.originalProducts = [...products];
