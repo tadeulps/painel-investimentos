@@ -100,11 +100,35 @@ server.get("/perfil-risco/:clienteId", (req, res) => {
   // Convert 1–3 → 0–100 scale
   const pontuacao = Math.round((baseScore - 1) * 50);
 
+  // Auto-update riskProfileId based on pontuacao
+  let newRiskProfileId;
+  if (pontuacao <= 33) {
+    newRiskProfileId = 1; // Conservador
+  } else if (pontuacao <= 66) {
+    newRiskProfileId = 2; // Moderado
+  } else {
+    newRiskProfileId = 3; // Agressivo
+  }
+
+  // Update user's risk profile if it changed
+  if (user.riskProfileId !== newRiskProfileId) {
+    db.get("users")
+      .find({ id: clienteId })
+      .assign({ riskProfileId: newRiskProfileId })
+      .write();
+  }
+
+  // Get updated risk profile
+  const updatedRiskProfile = db
+    .get("riskProfiles")
+    .find({ id: newRiskProfileId })
+    .value();
+
   res.json({
     clienteId: user.id,
     nome: user.name,
     email: user.email,
-    perfilRisco: riskProfile,
+    perfilRisco: updatedRiskProfile,
     pontuacao,
   });
 });
