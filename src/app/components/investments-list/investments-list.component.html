@@ -1,0 +1,85 @@
+<div class="investments-list-section">
+  <h2 class="section-title">💼 Meus Investimentos</h2>
+  
+  <div *ngIf="investments.length === 0" class="empty-message">
+    <p>Nenhum investimento encontrado</p>
+  </div>
+
+  <div *ngIf="investments.length > 0" class="investments-grid">
+    <div *ngFor="let investment of displayedInvestments" class="investment-card">
+      <!-- Card Header -->
+      <div class="card-header">
+        <div class="product-info">
+          <h3 class="product-name">{{ investment.produto?.nome }}</h3>
+          <span class="product-type">{{ investment.produto?.tipo }}</span>
+        </div>
+        <div class="risk-badge" [class]="'risk-' + getRiskClass(investment.produto?.risco || 'Médio')">
+          <span class="risk-icon">{{ getRiskIcon(investment.produto?.risco || 'Médio') }}</span>
+          <span class="risk-label">{{ investment.produto?.risco }}</span>
+        </div>
+      </div>
+
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="info-row">
+          <div class="info-item">
+            <span class="info-label">Investido</span>
+            <span class="info-value">{{ investment.valor | currency:'BRL' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Valor Atual</span>
+            <span class="info-value highlight">{{ investment.valorAtual | currency:'BRL' }}</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-item">
+            <span class="info-label">Rentabilidade</span>
+            <span class="info-value" [class.positive]="calculateReturn(investment) > 0" [class.negative]="calculateReturn(investment) < 0">
+              {{ calculateReturn(investment) | currency:'BRL' }}
+              <span class="percentage">({{ calculateReturnPercentage(investment) | number:'1.2-2' }}%)</span>
+            </span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Taxa Anual</span>
+            <span class="info-value">{{ investment.produto?.taxaAnual }}% a.a.</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-item">
+            <span class="info-label">Data Início</span>
+            <span class="info-value">{{ investment.dataInicio | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Prazo</span>
+            <span class="info-value">{{ investment.prazoMeses }} meses ({{ getMonthsRemaining(investment) }} restantes)</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-item full-width">
+            <span class="info-label">Liquidez</span>
+            <span class="info-value">{{ investment.produto?.liquidez }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Footer -->
+      <div class="card-footer">
+        <button class="btn-details" routerLink="/simulacao" [queryParams]="{ productId: investment.produto?.id }">
+          Ver Detalhes
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ver Mais Button -->
+  <div *ngIf="hasMore" class="show-more-container">
+    <button class="btn-show-more" (click)="toggleShowAll()">
+      <span *ngIf="!showAll">Ver Mais ({{ investments.length - displayLimit }} restantes)</span>
+      <span *ngIf="showAll">Ver Menos</span>
+      <span class="icon">{{ showAll ? '▲' : '▼' }}</span>
+    </button>
+  </div>
+</div>

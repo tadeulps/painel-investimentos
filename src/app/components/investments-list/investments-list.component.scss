@@ -1,0 +1,262 @@
+@import '../../../styles/token.scss';
+
+.investments-list-section {
+  margin-bottom: $spacing-small;
+  background: $branco;
+  border-radius: $border-radius-large;
+  padding: $spacing-small;
+  box-shadow: $shadow-elevation-2;
+
+  .section-title {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-small;
+    font-size: $heading-small;
+  }
+
+  .empty-message {
+    text-align: center;
+    padding: $spacing-large;
+    color: $slate;
+
+    p {
+      @include card-text;
+      font-size: $text-standard;
+    }
+  }
+}
+
+.investments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-small;
+  margin-bottom: $spacing-small;
+}
+
+.investment-card {
+  background: $branco;
+  border: 1px solid rgba($slate, 0.2);
+  border-radius: $border-radius-medium;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: $shadow-elevation-1;
+
+  &:hover {
+    box-shadow: $shadow-elevation-3;
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    background: linear-gradient(135deg, $azul-caixa, $oceano-end);
+    padding: $spacing-small;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $spacing-micro;
+
+    .product-info {
+      flex: 1;
+      min-width: 0;
+
+      .product-name {
+        @include card-title;
+        color: $branco;
+        margin: 0 0 $spacing-quark 0;
+        font-size: $text-large;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .product-type {
+        @include card-text;
+        color: rgba($branco, 0.9);
+        font-size: $text-small;
+      }
+    }
+
+    .risk-badge {
+      display: flex;
+      align-items: center;
+      gap: $spacing-quark;
+      padding: $spacing-quark $spacing-micro;
+      background: rgba($branco, 0.2);
+      border-radius: $border-radius-small;
+      backdrop-filter: blur(10px);
+      flex-shrink: 0;
+
+      .risk-icon {
+        font-size: 1rem;
+      }
+
+      .risk-label {
+        @include card-text;
+        color: $branco;
+        font-size: $text-small;
+        font-weight: $font-weight-semibold;
+      }
+
+      &.risk-low {
+        border: 1px solid rgba($success-70, 0.5);
+      }
+
+      &.risk-medium {
+        border: 1px solid rgba($attention-70, 0.5);
+      }
+
+      &.risk-high {
+        border: 1px solid rgba($negative-70, 0.5);
+      }
+    }
+  }
+
+  .card-body {
+    padding: $spacing-small;
+
+    .info-row {
+      display: flex;
+      gap: $spacing-small;
+      margin-bottom: $spacing-micro;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .info-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-quark;
+
+        &.full-width {
+          flex: 1 1 100%;
+        }
+
+        .info-label {
+          @include card-caption;
+          color: $slate;
+          font-size: $text-small;
+        }
+
+        .info-value {
+          @include card-text;
+          color: $charcoal;
+          font-size: $text-standard;
+          font-weight: $font-weight-semibold;
+
+          &.highlight {
+            color: $azul-caixa;
+            font-weight: $font-weight-bold;
+          }
+
+          &.positive {
+            color: $success-70;
+          }
+
+          &.negative {
+            color: $negative-70;
+          }
+
+          .percentage {
+            font-size: $text-small;
+            margin-left: $spacing-quark;
+          }
+        }
+      }
+    }
+  }
+
+  .card-footer {
+    padding: $spacing-micro $spacing-small $spacing-small;
+    border-top: 1px solid rgba($slate, 0.1);
+
+    .btn-details {
+      @include button-base;
+      width: 100%;
+      padding: $spacing-micro $spacing-small;
+      background: $azul-caixa;
+      color: $branco;
+      border: none;
+      border-radius: $border-radius-small;
+      font-size: $text-standard;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+
+      &:hover {
+        background: $oceano-start;
+        box-shadow: $shadow-elevation-2;
+      }
+    }
+  }
+}
+
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  padding-top: $spacing-small;
+
+  .btn-show-more {
+    @include button-base;
+    padding: $spacing-micro $spacing-small;
+    background: transparent;
+    color: $azul-caixa;
+    border: 2px solid $azul-caixa;
+    border-radius: $border-radius-medium;
+    font-size: $text-standard;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: $spacing-micro;
+
+    .icon {
+      font-size: $text-small;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      background: $azul-caixa;
+      color: $branco;
+      box-shadow: $shadow-elevation-2;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 1024px) {
+  .investments-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .investments-list-section {
+    padding: $spacing-tiny;
+  }
+
+  .investments-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-tiny;
+  }
+
+  .investment-card {
+    .card-header {
+      flex-direction: column;
+      gap: $spacing-micro;
+
+      .risk-badge {
+        align-self: flex-start;
+      }
+    }
+
+    .card-body {
+      .info-row {
+        flex-direction: column;
+        gap: $spacing-micro;
+      }
+    }
+  }
+}
