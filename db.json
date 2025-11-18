@@ -278,15 +278,6 @@
       "dataInicio": "2025-11-18",
       "prazoMeses": 22,
       "valorAtual": 123
-    },
-    {
-      "id": 14,
-      "userId": 1,
-      "productId": 11,
-      "valor": 333333333,
-      "dataInicio": "2025-11-18",
-      "prazoMeses": 12,
-      "valorAtual": 333333333
     }
   ]
 }
