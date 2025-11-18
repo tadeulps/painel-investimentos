@@ -69,6 +69,12 @@
       [investments]="investments">
     </app-investment-evolution-chart>
 
+    <!-- 📊 Distribuição por Tipo de Produto -->
+    <app-product-distribution-chart 
+      *ngIf="investments.length > 0" 
+      [investments]="investments">
+    </app-product-distribution-chart>
+
     <!-- Empty State -->
     <div *ngIf="investments.length === 0" class="empty-state">
       <div class="empty-icon">💼</div>
