@@ -52,14 +52,65 @@ server.get('/perfil-risco/:clienteId', (req, res) => {
   if (!user) {
     return res.status(404).json({ error: 'Cliente não encontrado' });
   }
-
-  const riskProfile = db.get('riskProfiles').find({ id: user.riskProfileId }).value();
   
+  const riskProfile = db.get('riskProfiles').find({ id: user.riskProfileId }).value();
+
+  // Compute pontuacao (1-100) based on user's investments and product risks
+  const userInvestments = db.get('investments').filter({ userId: clienteId }).value() || [];
+
+  let pontuacao = null;
+
+  if (!userInvestments || userInvestments.length === 0) {
+    // Fallback to a default score based on the declared risk profile
+    const name = (riskProfile && riskProfile.name) ? riskProfile.name.toLowerCase() : '';
+    if (name.includes('conservador') || name.includes('baixo')) pontuacao = 25;
+    else if (name.includes('moderado') || name.includes('médio') || name.includes('medio')) pontuacao = 50;
+    else if (name.includes('agressivo') || name.includes('alto')) pontuacao = 75;
+    else pontuacao = 50;
+  } else {
+    // Enrich investments with product details
+    const investmentsWithProducts = userInvestments.map(inv => {
+      const product = db.get('products').find({ id: inv.productId }).value();
+      return { ...inv, produto: product };
+    });
+
+    // Use valorAtual as weight when available, else fallback to valor
+    const totalValue = investmentsWithProducts.reduce((sum, it) => {
+      return sum + (typeof it.valorAtual === 'number' && it.valorAtual > 0 ? it.valorAtual : it.valor || 0);
+    }, 0) || 0;
+
+    // Map textual risk to numeric score (1-100 scale). We'll use representative values: low=25, medium=50, medium-high=62.5, high=75
+    const mapRiskToScore = (riskText) => {
+      if (!riskText) return 50;
+      const r = String(riskText).toLowerCase();
+      if (r.includes('baixo') || r.includes('conservador')) return 25;
+      if (r.includes('médio') || r.includes('medio') || r.includes('moderado')) return 50;
+      if (r.includes('alto') || r.includes('agressivo')) return 75;
+      return 50;
+    };
+
+    // Weighted average
+    let weightedSum = 0;
+    if (totalValue <= 0) {
+      // If total is zero, fallback to simple average
+      const avg = investmentsWithProducts.reduce((acc, it) => acc + mapRiskToScore(it.produto?.risco), 0) / investmentsWithProducts.length;
+      pontuacao = Math.round(avg);
+    } else {
+      investmentsWithProducts.forEach(it => {
+        const weight = (typeof it.valorAtual === 'number' && it.valorAtual > 0 ? it.valorAtual : it.valor || 0) / totalValue;
+        const score = mapRiskToScore(it.produto?.risco);
+        weightedSum += score * weight;
+      });
+      pontuacao = Math.round(weightedSum);
+    }
+  }
+
   res.json({
     clienteId: user.id,
     nome: user.name,
     email: user.email,
-    perfilRisco: riskProfile
+    perfilRisco: riskProfile,
+    pontuacao
   });
 });
 

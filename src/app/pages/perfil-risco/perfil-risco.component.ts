@@ -129,12 +129,11 @@ export class PerfilRiscoComponent implements OnInit {
       this.isLoading = false;
       return;
     }
-
     // Load user profile from API
     this.authService.getUserProfile(this.clienteId).subscribe({
       next: (userProfile) => {
         this.userRiskProfileId = userProfile.perfilRisco.id;
-        
+        console.log(userProfile)
         // Set current index based on user's risk profile
         const profileIndex = this.profiles.findIndex(p => p.id === this.userRiskProfileId);
         if (profileIndex !== -1) {

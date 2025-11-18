@@ -17,6 +17,7 @@ interface UserProfile {
   clienteId: number;
   nome: string;
   email: string;
+  pontuacao:number;
   perfilRisco: {
     id: number;
     name: string;
