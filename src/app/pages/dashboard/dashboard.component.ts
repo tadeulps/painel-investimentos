@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { InvestmentService, Investment } from '../../services/investment.service';
+import { InvestmentEvolutionChartComponent } from '../../components/investment-evolution-chart/investment-evolution-chart.component';
 
 interface UserProfile {
   clienteId: number;
@@ -25,7 +26,7 @@ interface DashboardSummary {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, InvestmentEvolutionChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

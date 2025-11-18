@@ -1,0 +1,33 @@
+@import '../../../styles/token.scss';
+
+.chart-section {
+  margin-bottom: $spacing-small;
+  background: $branco;
+  border-radius: $border-radius-large;
+  padding: $spacing-small;
+  box-shadow: $shadow-elevation-2;
+
+  .section-title {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-small;
+    font-size: $heading-small;
+  }
+
+  .chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .chart-section {
+    padding: $spacing-tiny;
+
+    .chart-container {
+      height: 300px;
+    }
+  }
+}

@@ -5,7 +5,7 @@
       "name": "Tadeu Lopes",
       "email": "tadeu@caixa.com",
       "password": "123456",
-      "riskProfileId": 3
+      "riskProfileId": 2
     },
     {
       "id": 2,
@@ -188,6 +188,78 @@
       "dataInicio": "2025-11-17",
       "prazoMeses": 22,
       "valorAtual": 1223
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "productId": 3,
+      "valor": 8000,
+      "dataInicio": "2024-05-10",
+      "prazoMeses": 18,
+      "valorAtual": 8600
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "productId": 4,
+      "valor": 3500,
+      "dataInicio": "2024-07-20",
+      "prazoMeses": 36,
+      "valorAtual": 3720
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "productId": 2,
+      "valor": 2000,
+      "dataInicio": "2024-09-01",
+      "prazoMeses": 12,
+      "valorAtual": 2100
+    },
+    {
+      "id": 7,
+      "userId": 1,
+      "productId": 5,
+      "valor": 7500,
+      "dataInicio": "2024-10-05",
+      "prazoMeses": 48,
+      "valorAtual": 7900
+    },
+    {
+      "id": 8,
+      "userId": 1,
+      "productId": 3,
+      "valor": 4200,
+      "dataInicio": "2025-01-10",
+      "prazoMeses": 24,
+      "valorAtual": 4350
+    },
+    {
+      "id": 9,
+      "userId": 1,
+      "productId": 1,
+      "valor": 6200,
+      "dataInicio": "2025-03-01",
+      "prazoMeses": 18,
+      "valorAtual": 6480
+    },
+    {
+      "id": 10,
+      "userId": 1,
+      "productId": 2,
+      "valor": 3000,
+      "dataInicio": "2025-05-22",
+      "prazoMeses": 12,
+      "valorAtual": 3100
+    },
+    {
+      "id": 11,
+      "userId": 1,
+      "productId": 4,
+      "valor": 555,
+      "dataInicio": "2025-11-18",
+      "prazoMeses": 222,
+      "valorAtual": 555
     }
   ]
 }
