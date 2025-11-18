@@ -1,0 +1,93 @@
+@import '../../../styles/token.scss';
+
+.chart-section {
+  margin-bottom: $spacing-small;
+  background: $branco;
+  border-radius: $border-radius-large;
+  padding: $spacing-small;
+  box-shadow: $shadow-elevation-2;
+
+  .section-title {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-micro;
+    font-size: $heading-small;
+  }
+
+  .chart-info {
+    margin-bottom: $spacing-small;
+
+    .chart-description {
+      @include card-text;
+      color: $slate;
+      font-size: $text-small;
+      margin: 0;
+    }
+  }
+
+  .chart-container {
+    position: relative;
+    height: 350px;
+    width: 100%;
+    margin-bottom: $spacing-small;
+  }
+
+  .risk-legend {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-small;
+    flex-wrap: wrap;
+    padding-top: $spacing-micro;
+    border-top: 1px solid rgba($slate, 0.2);
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-quark;
+
+      .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid $branco;
+
+        &.low {
+          background-color: #00A86B;
+        }
+
+        &.medium {
+          background-color: #FF9500;
+        }
+
+        &.high {
+          background-color: #FF6B6B;
+        }
+      }
+
+      .legend-label {
+        @include card-text;
+        font-size: $text-small;
+        color: $slate;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .chart-section {
+    padding: $spacing-tiny;
+
+    .chart-container {
+      height: 300px;
+    }
+
+    .risk-legend {
+      gap: $spacing-micro;
+
+      .legend-item {
+        font-size: $text-caption;
+      }
+    }
+  }
+}

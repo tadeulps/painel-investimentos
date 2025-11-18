@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { InvestmentService, Investment } from '../../services/investment.service';
 import { InvestmentEvolutionChartComponent } from '../../components/investment-evolution-chart/investment-evolution-chart.component';
 import { ProductDistributionChartComponent } from '../../components/product-distribution-chart/product-distribution-chart.component';
+import { RiskHistoryChartComponent } from '../../components/risk-history-chart/risk-history-chart.component';
 
 interface UserProfile {
   clienteId: number;
@@ -27,7 +28,7 @@ interface DashboardSummary {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, InvestmentEvolutionChartComponent, ProductDistributionChartComponent],
+  imports: [CommonModule, RouterModule, InvestmentEvolutionChartComponent, ProductDistributionChartComponent, RiskHistoryChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
