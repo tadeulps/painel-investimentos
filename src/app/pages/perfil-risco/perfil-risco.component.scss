@@ -9,7 +9,7 @@
 
 .page-header {
   text-align: center;
-  margin-bottom: $spacing-large;
+  margin-bottom: $spacing-small;
 
   h1 {
     @include part-title;
@@ -23,84 +23,157 @@
   }
 }
 
-.carousel-container {
-  position: relative;
+.loading-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: $spacing-tiny;
-  margin-bottom: $spacing-small;
-  min-height: 500px;
+  align-items: center;
+  min-height: 400px;
+
+  p {
+    @include card-title;
+    color: $azul-caixa;
+  }
 }
 
-.carousel-btn {
-  @include button-base;
-  width: 48px;
-  height: 48px;
+// Pontuação Section
+.pontuacao-section {
+  margin-bottom: $spacing-large;
+  display: flex;
+  justify-content: center;
+}
+
+.pontuacao-card {
   background: $branco;
-  border: 2px solid $border;
-  color: $azul-caixa;
-  font-size: $text-huge;
-  border-radius: $border-radius-circle;
-  transition: all 0.3s ease;
-  z-index: 2;
+  border-radius: $border-radius-large;
+  padding: $spacing-small;
+  box-shadow: $shadow-elevation-3;
+  max-width: 600px;
+  width: 100%;
 
-  &:hover:not(:disabled) {
-    background: $azul-caixa;
-    color: $branco;
-    transform: scale(1.1);
-    box-shadow: $shadow-elevation-3;
+  .pontuacao-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-small;
+    margin-bottom: $spacing-small;
+
+    .pontuacao-icon {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .pontuacao-info {
+      flex: 1;
+
+      .pontuacao-title {
+        @include part-title;
+        color: $azul-caixa;
+        margin: 0;
+        font-size: $heading-small;
+      }
+
+      .pontuacao-subtitle {
+        @include card-text;
+        color: $slate;
+        margin: $spacing-quark 0 0;
+        font-size: $text-standard;
+      }
+    }
   }
 
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
+  .pontuacao-display {
+    text-align: center;
+    margin-bottom: $spacing-small;
+
+    .pontuacao-value {
+      @include part-title;
+      font-size: $heading-huge;
+      font-weight: $font-weight-bold;
+      line-height: 1;
+    }
+
+    .pontuacao-max {
+      @include card-text;
+      color: $slate;
+      font-size: $heading-standard;
+      margin-left: $spacing-quark;
+    }
+  }
+
+  .pontuacao-bar-container {
+    margin-bottom: $spacing-small;
+
+    .pontuacao-bar {
+      width: 100%;
+      height: 24px;
+      background: rgba($slate, 0.1);
+      border-radius: $border-radius-medium;
+      overflow: hidden;
+      position: relative;
+
+      .pontuacao-fill {
+        height: 100%;
+        transition: width 0.6s ease, background 0.3s ease;
+        border-radius: $border-radius-medium;
+      }
+    }
+
+    .pontuacao-markers {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: $spacing-quark;
+
+      .marker {
+        @include card-caption;
+        color: $slate;
+        font-size: $text-small;
+      }
+    }
+  }
+
+  .pontuacao-category {
+    text-align: center;
+    padding-top: $spacing-micro;
+    border-top: 1px solid rgba($slate, 0.2);
+
+    .category-label {
+      @include card-text;
+      color: $slate;
+      font-size: $text-standard;
+      margin-right: $spacing-micro;
+    }
+
+    .category-value {
+      @include card-title;
+      font-size: $text-large;
+      font-weight: $font-weight-bold;
+    }
   }
 }
 
-.carousel-track {
-  position: relative;
-  width: 100%;
-  max-width: 450px;
-  height: 500px;
-  perspective: 1000px;
+// Profiles Grid
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-small;
 }
 
 .profile-card {
   @include card-base;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) scale(0.85);
-  width: 100%;
-  max-width: 400px;
   padding: $spacing-small;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0.5;
-  pointer-events: none;
+  transition: all 0.3s ease;
   background: $branco;
+  position: relative;
+  opacity: 0.6;
 
-  &.active {
-    transform: translateX(-50%) scale(1);
+  &.current {
     opacity: 1;
-    pointer-events: all;
     box-shadow: $shadow-elevation-4;
-    z-index: 1;
+    border: 3px solid $azul-caixa;
   }
 
-  &.prev {
-    transform: translateX(-120%) scale(0.75);
-    opacity: 0.3;
-  }
-
-  &.next {
-    transform: translateX(20%) scale(0.75);
-    opacity: 0.3;
-  }
-
-  &:hover.active {
-    box-shadow: $shadow-elevation-5;
+  &:hover {
+    box-shadow: $shadow-elevation-3;
   }
 }
 
@@ -192,87 +265,16 @@
   }
 }
 
-.selected-indicator {
-  display: flex;
-  justify-content: center;
-  gap: $spacing-nano;
-  margin-bottom: $spacing-small;
-
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: $border-radius-circle;
-    background: $cinza-300;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &.active {
-      background: $azul-caixa;
-      transform: scale(1.3);
-    }
-
-    &:hover {
-      background: $turquesa-caixa;
-    }
-  }
-}
-
-.action-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: $spacing-nano;
-
-  .current-profile-badge {
-    @include card-text;
-    color: $success-70;
-    font-weight: $font-weight-semibold;
-    display: flex;
-    align-items: center;
-    gap: $spacing-quark;
-    padding: $spacing-quark $spacing-micro;
-    background: rgba($success-70, 0.1);
-    border-radius: $border-radius-small;
-  }
-
-  .btn-primary {
-    @include button-base;
-    background: $azul-caixa;
-    color: $branco;
-    padding: $spacing-micro $spacing-small;
-    font-size: $text-large;
-    border-radius: $border-radius-medium;
-    box-shadow: $shadow-elevation-2;
-    transition: all 0.3s ease;
-
-    &:hover:not(:disabled) {
-      background: $oceano-start;
-      box-shadow: $shadow-elevation-4;
-      transform: translateY(-2px);
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      background: $cinza-300;
-    }
-  }
-}
-
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-
-  p {
-    @include card-title;
-    color: $azul-caixa;
-  }
+.current-badge {
+  @include card-text;
+  color: $branco;
+  background: $azul-caixa;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+  padding: $spacing-micro;
+  border-radius: $border-radius-small;
+  margin-top: $spacing-micro;
+  font-size: $text-standard;
 }
 
 .profile-card.user-profile {
@@ -295,30 +297,49 @@
 
 @media (max-width: 768px) {
   .perfil-risco-page {
-    padding: $spacing-tiny $spacing-micro;
+    padding: $spacing-small $spacing-micro;
   }
 
-  .carousel-container {
-    min-height: 550px;
-  }
+  .page-header {
+    margin-bottom: $spacing-small;
 
-  .carousel-track {
-    max-width: 350px;
-  }
-
-  .profile-card {
-    max-width: 320px;
-
-    &.prev,
-    &.next {
-      display: none;
+    h1 {
+      font-size: $heading-standard;
     }
   }
 
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
-    font-size: $text-big;
+  .pontuacao-card {
+    padding: $spacing-tiny;
+
+    .pontuacao-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-micro;
+
+      .pontuacao-icon {
+        font-size: 2.5rem;
+      }
+
+      .pontuacao-info {
+        .pontuacao-title {
+          font-size: $heading-tiny;
+        }
+      }
+    }
+
+    .pontuacao-display {
+      .pontuacao-value {
+        font-size: $heading-large;
+      }
+
+      .pontuacao-max {
+        font-size: $heading-small;
+      }
+    }
+  }
+
+  .profiles-grid {
+    grid-template-columns: 1fr;
   }
 
   .card-icon {

@@ -25,7 +25,8 @@ export class PerfilRiscoComponent implements OnInit {
   userRiskProfileId: number | null = null;
   clienteId: number | null = null;
   isLoading = false;
-  isSaving = false;
+  userPontuacao: number = 0;
+  userName: string = '';
 
   profiles: RiskProfile[] = [
     {
@@ -74,50 +75,22 @@ export class PerfilRiscoComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
 
-  selectProfile(index: number): void {
-    this.currentIndex = index;
-    this.selectedProfile = this.profiles[index];
+  getRiskCategory(): string {
+    if (this.userPontuacao <= 33) return 'Conservador';
+    if (this.userPontuacao <= 66) return 'Moderado';
+    return 'Agressivo';
   }
 
-  previous(): void {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.selectedProfile = this.profiles[this.currentIndex];
-    }
+  getRiskColor(): string {
+    if (this.userPontuacao <= 33) return '#179231';
+    if (this.userPontuacao <= 66) return '#FCBE05';
+    return '#D93636';
   }
 
-  next(): void {
-    if (this.currentIndex < this.profiles.length - 1) {
-      this.currentIndex++;
-      this.selectedProfile = this.profiles[this.currentIndex];
-    }
-  }
-
-  confirmSelection(): void {
-    if (!this.selectedProfile || !this.clienteId) {
-      return;
-    }
-
-    // Check if profile has changed
-    if (this.selectedProfile.id === this.userRiskProfileId) {
-      alert('Este já é o seu perfil atual.');
-      return;
-    }
-
-    this.isSaving = true;
-
-    this.authService.updateRiskProfile(this.clienteId, this.selectedProfile.id).subscribe({
-      next: (response) => {
-        this.userRiskProfileId = this.selectedProfile!.id;
-        this.isSaving = false;
-        alert(`Perfil "${this.selectedProfile!.title}" atualizado com sucesso!`);
-      },
-      error: (error) => {
-        this.isSaving = false;
-        console.error('Erro ao atualizar perfil:', error);
-        alert('Erro ao atualizar perfil. Tente novamente.');
-      }
-    });
+  getRiskIcon(): string {
+    if (this.userPontuacao <= 33) return '🛡️';
+    if (this.userPontuacao <= 66) return '⚖️';
+    return '🚀';
   }
 
   ngOnInit(): void {
@@ -133,23 +106,26 @@ export class PerfilRiscoComponent implements OnInit {
     this.authService.getUserProfile(this.clienteId).subscribe({
       next: (userProfile) => {
         this.userRiskProfileId = userProfile.perfilRisco.id;
-        console.log(userProfile)
-        // Set current index based on user's risk profile
-        const profileIndex = this.profiles.findIndex(p => p.id === this.userRiskProfileId);
-        if (profileIndex !== -1) {
-          this.currentIndex = profileIndex;
-          this.selectedProfile = this.profiles[profileIndex];
+        this.userPontuacao = userProfile.pontuacao || 50;
+        this.userName = userProfile.nome;
+        console.log('User profile loaded:', userProfile);
+        
+        // Set current index based on pontuacao
+        if (this.userPontuacao <= 33) {
+          this.currentIndex = 0; // Conservador
+        } else if (this.userPontuacao <= 66) {
+          this.currentIndex = 1; // Moderado
         } else {
-          // Fallback to Moderado if not found
-          this.currentIndex = 1;
-          this.selectedProfile = this.profiles[1];
+          this.currentIndex = 2; // Agressivo
         }
         
+        this.selectedProfile = this.profiles[this.currentIndex];
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Erro ao carregar perfil do usuário:', error);
-        // Fallback to default (Moderado)
+        // Fallback to default
+        this.userPontuacao = 50;
         this.currentIndex = 1;
         this.selectedProfile = this.profiles[1];
         this.isLoading = false;
