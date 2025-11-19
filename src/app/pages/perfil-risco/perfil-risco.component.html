@@ -11,38 +11,28 @@
   <!-- Pontuação Indicator -->
   <div *ngIf="!isLoading" class="pontuacao-section">
     <div class="pontuacao-card">
-      <div class="pontuacao-header">
-        <span class="pontuacao-icon" [style.color]="getRiskColor()">{{ getRiskIcon() }}</span>
-        <div class="pontuacao-info">
-          <h2 class="pontuacao-title">Sua Pontuação de Risco</h2>
-          <p class="pontuacao-subtitle">{{ userName }}</p>
-        </div>
+      <h2 class="pontuacao-title">Pontuação de Risco</h2>
+      
+      <div class="pontuacao-score">
+        <span class="score-number" [style.color]="getRiskColor()">{{ userPontuacao }}</span>
       </div>
 
-      <div class="pontuacao-display">
-        <span class="pontuacao-value" [style.color]="getRiskColor()">{{ userPontuacao }}</span>
-        <span class="pontuacao-max">/100</span>
-      </div>
-
-      <div class="pontuacao-bar-container">
-        <div class="pontuacao-bar">
+      <div class="pontuacao-progress">
+        <div class="progress-bar">
           <div 
-            class="pontuacao-fill" 
+            class="progress-fill" 
             [style.width.%]="userPontuacao"
             [style.background]="getRiskColor()">
           </div>
         </div>
-        <div class="pontuacao-markers">
-          <span class="marker" style="left: 0%">0</span>
-          <span class="marker" style="left: 33%">33</span>
-          <span class="marker" style="left: 66%">66</span>
-          <span class="marker" style="left: 100%">100</span>
+        <div class="progress-labels">
+          <span class="label-min">0</span>
+          <span class="label-max">100</span>
         </div>
       </div>
 
-      <div class="pontuacao-category">
-        <span class="category-label">Categoria:</span>
-        <span class="category-value" [style.color]="getRiskColor()">{{ getRiskCategory() }}</span>
+      <div class="pontuacao-level">
+        <span class="level-text" [style.color]="getRiskColor()">{{ getRiskCategory() }}</span>
       </div>
     </div>
   </div>

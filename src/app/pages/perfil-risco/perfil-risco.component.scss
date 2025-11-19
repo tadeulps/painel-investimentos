@@ -3,23 +3,28 @@
 .perfil-risco-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: $spacing-large $spacing-tiny;
+  padding: $spacing-large $spacing-small;
   min-height: calc(100vh - 70px);
+  background-color: #F8F9FA;
 }
 
 .page-header {
   text-align: center;
-  margin-bottom: $spacing-small;
+  margin-bottom: $spacing-large;
 
   h1 {
     @include part-title;
     color: $azul-caixa;
     margin-bottom: $spacing-nano;
+    font-size: $heading-large;
   }
 
   .subtitle {
     @include card-subtitle;
     color: $slate;
+    font-size: $text-large;
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 
@@ -32,6 +37,51 @@
   p {
     @include card-title;
     color: $azul-caixa;
+    animation: pulse 1.5s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -40,113 +90,101 @@
   margin-bottom: $spacing-large;
   display: flex;
   justify-content: center;
+  padding: 0 $spacing-small;
 }
 
 .pontuacao-card {
   background: $branco;
-  border-radius: $border-radius-medium;
-  padding: $spacing-small;
-  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+  border-radius: $border-radius-xlarge;
+  padding: $spacing-large $spacing-medium;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   max-width: 600px;
   width: 100%;
-
-  .pontuacao-header {
-    display: flex;
-    align-items: center;
-    gap: $spacing-small;
-    margin-bottom: $spacing-small;
-
-    .pontuacao-icon {
-      font-size: 3rem;
-      line-height: 1;
-    }
-
-    .pontuacao-info {
-      flex: 1;
-
-      .pontuacao-title {
-        @include part-title;
-        color: $azul-caixa;
-        margin: 0;
-        font-size: $heading-tiny;
-      }
-
-      .pontuacao-subtitle {
-        @include card-text;
-        color: $slate;
-        margin: $spacing-quark 0 0;
-        font-size: $text-standard;
-      }
-    }
-  }
-
-  .pontuacao-display {
+  border: 1px solid rgba($slate, 0.06);
+  
+  .pontuacao-title {
+    @include card-title;
     text-align: center;
-    margin-bottom: $spacing-small;
-
-    .pontuacao-value {
+    color: $slate;
+    font-size: $text-large;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-medium 0;
+    letter-spacing: 0.5px;
+  }
+  
+  .pontuacao-score {
+    text-align: center;
+    margin-bottom: $spacing-medium;
+    
+    .score-number {
       @include part-title;
-      font-size: $heading-huge;
+      font-size: 5.5rem;
       font-weight: $font-weight-bold;
       line-height: 1;
-    }
-
-    .pontuacao-max {
-      @include card-text;
-      color: $slate;
-      font-size: $heading-standard;
-      margin-left: $spacing-quark;
+      letter-spacing: -3px;
+      display: inline-block;
+      animation: countUp 1s ease-out;
     }
   }
-
-  .pontuacao-bar-container {
-    margin-bottom: $spacing-small;
-
-    .pontuacao-bar {
+  
+  .pontuacao-progress {
+    margin-bottom: $spacing-medium;
+    
+    .progress-bar {
       width: 100%;
-      height: 24px;
-      background: rgba($slate, 0.1);
-      border-radius: $border-radius-medium;
+      height: 12px;
+      background: $cinza-200;
+      border-radius: 10px;
       overflow: hidden;
       position: relative;
-
-      .pontuacao-fill {
+      
+      .progress-fill {
         height: 100%;
-        transition: width 0.6s ease, background 0.3s ease;
-        border-radius: $border-radius-medium;
+        border-radius: 10px;
+        transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        background: linear-gradient(90deg, currentColor 0%, color-mix(in srgb, currentColor 70%, white) 100%);
+        box-shadow: 0 0 10px currentColor;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+          border-radius: 10px;
+        }
       }
     }
-
-    .pontuacao-markers {
+    
+    .progress-labels {
       display: flex;
       justify-content: space-between;
-      position: relative;
       margin-top: $spacing-quark;
-
-      .marker {
+      padding: 0 $spacing-quark;
+      
+      .label-min,
+      .label-max {
         @include card-caption;
-        color: $slate;
-        font-size: $text-small;
+        color: $cinza-600;
+        font-size: $text-caption;
+        font-weight: $font-weight-regular;
       }
     }
   }
-
-  .pontuacao-category {
+  
+  .pontuacao-level {
     text-align: center;
-    padding-top: $spacing-micro;
-    border-top: 1px solid rgba($slate, 0.2);
-
-    .category-label {
-      @include card-text;
-      color: $slate;
-      font-size: $text-standard;
-      margin-right: $spacing-micro;
-    }
-
-    .category-value {
+    
+    .level-text {
       @include card-title;
-      font-size: $text-large;
+      font-size: $heading-small;
       font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: inline-block;
     }
   }
 }
@@ -154,74 +192,100 @@
 // Profiles Grid
 .profiles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: $spacing-small;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: $spacing-medium;
+  padding: 0 $spacing-small;
 }
 
 .profile-card {
   @include card-base;
-  padding: $spacing-small;
-  transition: all 0.3s ease;
+  padding: $spacing-medium;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   background: $branco;
   position: relative;
-  opacity: 0.6;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  // Non-active state
+  opacity: 0.7;
+  transform: scale(0.95);
+  filter: grayscale(0.8);
 
   &.current {
     opacity: 1;
-    box-shadow: $shadow-elevation-4;
-    border: 3px solid $azul-caixa;
+    transform: scale(1);
+    filter: grayscale(0);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-color: rgba($azul-caixa, 0.2);
+    z-index: 2;
   }
 
   &:hover {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: translateY(-5px) scale(0.98);
     box-shadow: $shadow-elevation-3;
+    
+    &.current {
+      transform: translateY(-5px) scale(1);
+    }
   }
 }
 
 .card-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: $border-radius-circle;
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto $spacing-tiny;
-  box-shadow: $shadow-elevation-2;
+  margin: 0 auto $spacing-small;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transform: rotate(-5deg);
+  transition: transform 0.3s ease;
 
   .icon {
     font-size: 2.5rem;
   }
 }
 
+.profile-card:hover .card-icon,
+.profile-card.current .card-icon {
+  transform: rotate(0deg) scale(1.1);
+}
+
 .card-title {
   @include card-title;
   text-align: center;
-  color: $azul-caixa;
-  margin-bottom: $spacing-micro;
+  color: $preto;
+  margin-bottom: $spacing-tiny;
+  font-size: $heading-small;
 }
 
 .card-description {
   @include card-text;
   text-align: center;
-  margin-bottom: $spacing-tiny;
-  min-height: 60px;
-
-  p {
-    line-height: 1.6;
-  }
+  margin-bottom: $spacing-small;
+  color: $slate;
+  line-height: 1.6;
+  flex-grow: 1;
 }
 
 .card-features {
-  margin-bottom: $spacing-tiny;
-  padding: $spacing-micro 0;
-  border-top: 1px solid $border;
-  border-bottom: 1px solid $border;
+  margin-bottom: $spacing-medium;
+  padding: $spacing-small;
+  background: rgba($slate, 0.03);
+  border-radius: $border-radius-medium;
 
   .feature-item {
     display: flex;
     align-items: flex-start;
-    gap: $spacing-nano;
-    margin-bottom: $spacing-nano;
+    gap: $spacing-tiny;
+    margin-bottom: $spacing-tiny;
     @include card-text;
+    font-size: $text-small;
 
     &:last-child {
       margin-bottom: 0;
@@ -238,70 +302,77 @@
 .card-risk-indicator {
   display: flex;
   flex-direction: column;
-  gap: $spacing-quark;
+  gap: $spacing-tiny;
   align-items: center;
+  margin-top: auto;
 
   .label {
     @include card-caption;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     color: $slate;
+    text-transform: uppercase;
+    font-size: $text-small;
+    letter-spacing: 1px;
   }
 
   .risk-bars {
     display: flex;
-    gap: $spacing-quark;
+    gap: 4px;
+    align-items: flex-end;
+    height: 24px;
 
     .bar {
-      width: 32px;
-      height: 8px;
+      width: 8px;
       background: $cinza-200;
-      border-radius: $border-radius-small;
-      transition: background 0.3s ease;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          height: #{8 + ($i * 4)}px;
+        }
+      }
 
       &.filled {
-        background: linear-gradient(to right, $success-70, $attention-70, $negative-70);
+        background: currentColor; // Will inherit from parent or set via JS if needed, but here we use gradient logic
       }
     }
   }
 }
 
+// Dynamic colors for risk bars based on profile type
+.profile-card:nth-child(1) .risk-bars .bar.filled { background: #179231; }
+.profile-card:nth-child(2) .risk-bars .bar.filled { background: #FCBE05; }
+.profile-card:nth-child(3) .risk-bars .bar.filled { background: #D93636; }
+
 .current-badge {
   @include card-text;
   color: $branco;
   background: $azul-caixa;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold;
   text-align: center;
-  padding: $spacing-micro;
-  border-radius: $border-radius-small;
-  margin-top: $spacing-micro;
-  font-size: $text-standard;
+  padding: $spacing-tiny;
+  border-radius: $border-radius-medium;
+  margin-top: $spacing-small;
+  font-size: $text-small;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba($azul-caixa, 0.3);
+  animation: slideUp 0.5s ease-out;
 }
 
-.profile-card.user-profile {
-  border: 3px solid $success-70;
-  
-  &::before {
-    content: '✓ Seu perfil atual';
-    position: absolute;
-    top: $spacing-micro;
-    right: $spacing-micro;
-    background: $success-70;
-    color: $branco;
-    padding: $spacing-quark $spacing-nano;
-    border-radius: $border-radius-small;
-    font-size: $text-small;
-    font-weight: $font-weight-semibold;
-    font-family: $font-regular;
-  }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
   .perfil-risco-page {
-    padding: $spacing-small $spacing-micro;
+    padding: $spacing-small $spacing-tiny;
   }
 
   .page-header {
-    margin-bottom: $spacing-small;
+    margin-bottom: $spacing-medium;
 
     h1 {
       font-size: $heading-standard;
@@ -309,45 +380,27 @@
   }
 
   .pontuacao-card {
-    padding: $spacing-tiny;
+    padding: $spacing-small;
 
-    .pontuacao-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: $spacing-micro;
-
-      .pontuacao-icon {
-        font-size: 2.5rem;
-      }
-
-      .pontuacao-info {
-        .pontuacao-title {
-          font-size: $heading-tiny;
-        }
-      }
-    }
-
-    .pontuacao-display {
-      .pontuacao-value {
-        font-size: $heading-large;
-      }
-
-      .pontuacao-max {
-        font-size: $heading-small;
+    .pontuacao-score {
+      .score-number {
+        font-size: 4rem;
       }
     }
   }
 
   .profiles-grid {
     grid-template-columns: 1fr;
+    gap: $spacing-small;
   }
-
-  .card-icon {
-    width: 64px;
-    height: 64px;
-
-    .icon {
-      font-size: 2rem;
+  
+  .profile-card {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: scale(1);
+    
+    &.current {
+      border-width: 2px;
     }
   }
 }
