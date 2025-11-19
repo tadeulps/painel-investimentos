@@ -44,9 +44,9 @@
 
 .pontuacao-card {
   background: $branco;
-  border-radius: $border-radius-large;
+  border-radius: $border-radius-medium;
   padding: $spacing-small;
-  box-shadow: $shadow-elevation-3;
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
   max-width: 600px;
   width: 100%;
 
@@ -68,7 +68,7 @@
         @include part-title;
         color: $azul-caixa;
         margin: 0;
-        font-size: $heading-small;
+        font-size: $heading-tiny;
       }
 
       .pontuacao-subtitle {

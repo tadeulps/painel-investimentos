@@ -90,7 +90,7 @@ export class PerfilRiscoComponent implements OnInit {
   getRiskIcon(): string {
     if (this.userPontuacao <= 33) return '🛡️';
     if (this.userPontuacao <= 66) return '⚖️';
-    return '🚀';
+    return '⚡';
   }
 
   ngOnInit(): void {
