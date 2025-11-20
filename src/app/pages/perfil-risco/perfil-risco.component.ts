@@ -38,6 +38,7 @@ export class PerfilRiscoComponent implements OnInit {
   clienteId: number | null = null;
   isLoading = false;
   userPontuacao: number = 0;
+  displayedScore: number = 0;
   userName: string = '';
 
   profiles: RiskProfile[] = [
@@ -105,6 +106,24 @@ export class PerfilRiscoComponent implements OnInit {
     return '🚀';
   }
 
+  animateScore(target: number): void {
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    const interval = duration / steps;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        this.displayedScore = target;
+        clearInterval(timer);
+      } else {
+        this.displayedScore = Math.floor(current);
+      }
+    }, interval);
+  }
+
   ngOnInit(): void {
     this.isLoading = true;
     this.clienteId = this.authService.getStoredClientId();
@@ -121,6 +140,9 @@ export class PerfilRiscoComponent implements OnInit {
         this.userPontuacao = userProfile.pontuacao || 50;
         this.userName = userProfile.nome;
         console.log('User profile loaded:', userProfile);
+        
+        // Animate score counter
+        this.animateScore(this.userPontuacao);
         
         // Set current index based on pontuacao
         if (this.userPontuacao <= 33) {

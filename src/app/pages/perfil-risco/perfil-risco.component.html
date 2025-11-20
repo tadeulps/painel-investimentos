@@ -10,26 +10,27 @@
 
   <!-- Pontuação Indicator -->
   <div *ngIf="!isLoading" class="pontuacao-section">
-    <mat-card class="pontuacao-card">
+    <mat-card class="pontuacao-card" elevation="5">
       <mat-card-header>
         <mat-card-title class="pontuacao-title">Seu nível de risco da carteira</mat-card-title>
       </mat-card-header>
       
       <mat-card-content>
         <div class="pontuacao-score">
-          <span class="score-number" [style.color]="getRiskColor()">{{ userPontuacao }}</span>
+          <span class="score-number" [style.color]="getRiskColor()">{{ displayedScore }}</span>
+          <span class="score-max">/100</span>
         </div>
 
         <div class="pontuacao-progress">
-          <div class="progress-labels-top">
+          <div class="progress-bar-container">
+            <div class="progress-bar-gradient">
+              <div class="progress-fill" [style.width.%]="userPontuacao"></div>
+            </div>
+          </div>
+          <div class="progress-labels">
             <span class="label-min">0</span>
             <span class="label-max">100</span>
           </div>
-          <mat-progress-bar 
-            mode="determinate" 
-            [value]="userPontuacao"
-            [color]="'primary'">
-          </mat-progress-bar>
         </div>
 
         <div class="pontuacao-level">
@@ -79,7 +80,7 @@
       </mat-card-content>
 
       <mat-card-actions *ngIf="i === currentIndex">
-        <button mat-raised-button color="primary" disabled>
+        <button mat-raised-button color="primary">
           <mat-icon>check</mat-icon> Seu Perfil Atual
         </button>
       </mat-card-actions>

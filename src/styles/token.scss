@@ -8,6 +8,7 @@ $laranja-caixa: #F39200;
 $turquesa-caixa: #54BBAB;
 $branco: #FFFFFF;
 $preto: #000000;
+$background-default: #F7F9FC;
 
 // ---- Extensão (paleta de apoio)
 $light-azul-caixa: #E5F1FC;
@@ -81,8 +82,10 @@ $shadow-elevation-4: 0 4px 8px rgba(0, 0, 0, 0.15);
 $shadow-elevation-5: 0 6px 12px rgba(0, 0, 0, 0.18);
 
 
-$shadow-elevation-dscard: 0 1px 3px 1px rgba(0, 0, 0, 0.15);
-$shadow-elevation-dscard2: 0 1px 2px 0px rgba(0, 0, 0, 0.3);
+$shadow-elevation-dscard: 0px 4px 12px rgba(0, 0, 0, 0.06);
+$shadow-elevation-dscard2: 0px 1px 3px rgba(0, 0, 0, 0.04);
+$shadow-elevation-soft:  0px 2px 4px rgba(0, 0, 0, 0.08);
+
 // ========================================
 // Typography - Headings
 // ========================================
