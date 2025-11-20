@@ -34,7 +34,7 @@
         </div>
 
         <div class="pontuacao-level">
-          <mat-chip [style.background-color]="getRiskColor()" [style.color]="'white'">
+          <mat-chip [style.background-color]="getRiskColor()" [style.color]="'white'" >
             {{ getRiskCategory() }}
           </mat-chip>
         </div>
@@ -80,9 +80,9 @@
       </mat-card-content>
 
       <mat-card-actions *ngIf="i === currentIndex">
-        <button mat-raised-button color="primary">
-          <mat-icon>check</mat-icon> Seu Perfil Atual
-        </button>
+        <mat-chip class="current-profile-chip">
+          <mat-icon>check</mat-icon> Seu perfil atual
+        </mat-chip>
       </mat-card-actions>
     </mat-card>
   </div>

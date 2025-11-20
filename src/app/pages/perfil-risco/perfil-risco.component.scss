@@ -240,13 +240,14 @@
       padding: $spacing-micro $spacing-small;
       height: auto;
       border-radius: $border-radius-medium;
-      color: #179231;
+      border: none;
       span {
         font-size: $text-standard;
         text-transform: uppercase;
         letter-spacing: 1px;
         color: $branco;
         font-family: "CAIXAStd", sans-serif;
+         border: none;
       }
     }
   }
@@ -306,9 +307,32 @@
 
   ::ng-deep .mat-mdc-card-actions {
     padding: $spacing-tiny $spacing-medium $spacing-medium;
+    justify-content: center;
 
-    button {
-      width: 100%;
+    .current-profile-chip {
+      background-color: $azul-caixa;
+      color: $branco;
+      padding: $spacing-micro $spacing-small;
+      height: auto;
+      font-weight: $font-weight-semibold;
+      
+      .mat-mdc-chip-action-label {
+        display: flex;
+        align-items: center;
+        gap: $spacing-quark;
+      }
+        span {
+        font-size: $text-standard;
+        letter-spacing: 1px;
+        color: $branco;
+        font-family: "CAIXAStd", sans-serif;
+      }
+      mat-icon {
+        color: $branco;
+        font-size: 1.25rem;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
     }
   }
 }

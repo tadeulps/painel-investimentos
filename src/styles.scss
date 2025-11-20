@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Import CAIXA design tokens
-@import './styles/token.scss';
+@import "./styles/token.scss";
 
 // ========================================
 // CSS Reset
@@ -13,7 +13,8 @@
   font-family: $font-regular;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
 }
@@ -25,110 +26,112 @@ body {
   line-height: 1.5;
   color: $charcoal;
   background-color: $cinza-100;
+  --mdc-chip-outline-color: transparent;
+  --mdc-chip-outline-width: 0;
 }
 
 // ========================================
 // CAIXA Font Imports
 // ========================================
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-Regular.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-Italic.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-Italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-Book.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-Book.ttf") format("truetype");
   font-weight: 350;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-BookItalic.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-BookItalic.ttf") format("truetype");
   font-weight: 350;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-Light.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-LightItalic.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-LightItalic.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-SemiBold.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-SemiBoldItalic.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-SemiBoldItalic.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-Bold.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-BoldItalic.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-BoldItalic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-ExtraBold.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CAIXAStd';
-  src: url('/fonts/CAIXAStd-ExtraBoldItalic.ttf') format('truetype');
+  font-family: "CAIXAStd";
+  src: url("/fonts/CAIXAStd-ExtraBoldItalic.ttf") format("truetype");
   font-weight: 800;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Space Mono';
-  src: url('/fonts/SpaceMono-Regular.ttf') format('truetype');
+  font-family: "Space Mono";
+  src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -137,7 +140,8 @@ body {
 // ========================================
 // Additional Reset Styles
 // ========================================
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -159,7 +163,9 @@ button {
   font-family: inherit;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
 }
