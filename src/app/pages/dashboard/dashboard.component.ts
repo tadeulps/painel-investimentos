@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../../services/auth.service';
 import { InvestmentService, Investment } from '../../services/investment.service';
 import { InvestmentEvolutionChartComponent } from '../../components/investment-evolution-chart/investment-evolution-chart.component';
@@ -29,7 +34,19 @@ interface DashboardSummary {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, InvestmentEvolutionChartComponent, ProductDistributionChartComponent, RiskHistoryChartComponent, InvestmentsListComponent],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    MatCardModule,
+    MatChipsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    InvestmentEvolutionChartComponent, 
+    ProductDistributionChartComponent, 
+    RiskHistoryChartComponent, 
+    InvestmentsListComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

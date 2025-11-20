@@ -1,26 +1,35 @@
-<div class="investments-list-section">
-  <h2 class="section-title">💼 Meus Investimentos</h2>
+<mat-card class="investments-list-section">
+  <mat-card-header>
+    <mat-card-title class="section-title">
+      <mat-icon>account_balance_wallet</mat-icon>
+      Meus Investimentos
+    </mat-card-title>
+  </mat-card-header>
   
-  <div *ngIf="investments.length === 0" class="empty-message">
-    <p>Nenhum investimento encontrado</p>
-  </div>
+  <mat-card-content>
+    <div *ngIf="investments.length === 0" class="empty-message">
+      <mat-icon>inbox</mat-icon>
+      <p>Nenhum investimento encontrado</p>
+    </div>
 
-  <div *ngIf="investments.length > 0" class="investments-grid">
-    <div *ngFor="let investment of displayedInvestments" class="investment-card">
-      <!-- Card Header -->
-      <div class="card-header">
-        <div class="product-info">
-          <h3 class="product-name">{{ investment.produto?.nome }}</h3>
-          <span class="product-type">{{ investment.produto?.tipo }}</span>
-        </div>
-        <div class="risk-badge" [class]="'risk-' + getRiskClass(investment.produto?.risco || 'Médio')">
-          <span class="risk-icon">{{ getRiskIcon(investment.produto?.risco || 'Médio') }}</span>
-          <span class="risk-label">{{ investment.produto?.risco }}</span>
-        </div>
-      </div>
+    <div *ngIf="investments.length > 0" class="investments-grid">
+      <mat-card *ngFor="let investment of displayedInvestments" class="investment-card">
+        <!-- Card Header -->
+        <mat-card-header class="card-header">
+          <div class="product-info">
+            <mat-card-title class="product-name">{{ investment.produto?.nome }}</mat-card-title>
+            <mat-card-subtitle class="product-type">{{ investment.produto?.tipo }}</mat-card-subtitle>
+          </div>
+          <mat-chip-set class="risk-badge" [class]="'risk-' + getRiskClass(investment.produto?.risco || 'Médio')">
+            <mat-chip>
+              <mat-icon>{{ getRiskIcon(investment.produto?.risco || 'Médio') }}</mat-icon>
+              {{ investment.produto?.risco }}
+            </mat-chip>
+          </mat-chip-set>
+        </mat-card-header>
 
-      <!-- Card Body -->
-      <div class="card-body">
+        <!-- Card Body -->
+        <mat-card-content class="card-body">
         <div class="info-row">
           <div class="info-item">
             <span class="info-label">Investido</span>
@@ -63,23 +72,24 @@
             <span class="info-value">{{ investment.produto?.liquidez }}</span>
           </div>
         </div>
-      </div>
+        </mat-card-content>
 
-      <!-- Card Footer -->
-      <div class="card-footer">
-        <button class="btn-details" routerLink="/simulacao" [queryParams]="{ productId: investment.produto?.id }">
-          Ver Detalhes
-        </button>
-      </div>
+        <!-- Card Footer -->
+        <mat-card-actions class="card-footer">
+          <button mat-raised-button color="primary" class="btn-details" routerLink="/simulacao" [queryParams]="{ productId: investment.produto?.id }">
+            Ver Detalhes
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
-  </div>
 
-  <!-- Ver Mais Button -->
-  <div *ngIf="hasMore" class="show-more-container">
-    <button class="btn-show-more" (click)="toggleShowAll()">
-      <span *ngIf="!showAll">Ver Mais ({{ investments.length - displayLimit }} restantes)</span>
-      <span *ngIf="showAll">Ver Menos</span>
-      <span class="icon">{{ showAll ? '▲' : '▼' }}</span>
-    </button>
-  </div>
-</div>
+    <!-- Ver Mais Button -->
+    <div *ngIf="hasMore" class="show-more-container">
+      <button mat-stroked-button color="primary" class="btn-show-more" (click)="toggleShowAll()">
+        <span *ngIf="!showAll">Ver Mais ({{ investments.length - displayLimit }} restantes)</span>
+        <span *ngIf="showAll">Ver Menos</span>
+        <mat-icon>{{ showAll ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

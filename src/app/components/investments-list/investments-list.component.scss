@@ -2,22 +2,45 @@
 
 .investments-list-section {
   margin-bottom: $spacing-small;
-  background: $branco;
-  border-radius: $border-radius-large;
-  padding: $spacing-small;
-  box-shadow: $shadow-elevation-2;
+
+  ::ng-deep .mat-mdc-card-header {
+    padding: $spacing-small $spacing-small $spacing-tiny;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    padding: 0 $spacing-small $spacing-small;
+  }
 
   .section-title {
     @include part-title;
     color: $azul-caixa;
-    margin-bottom: $spacing-small;
     font-size: $heading-small;
+    display: flex;
+    align-items: center;
+    gap: $spacing-micro;
+
+    mat-icon {
+      font-size: 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
   .empty-message {
     text-align: center;
     padding: $spacing-large;
     color: $slate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-micro;
+
+    mat-icon {
+      font-size: 3rem;
+      width: 3rem;
+      height: 3rem;
+      opacity: 0.5;
+    }
 
     p {
       @include card-text;
@@ -34,22 +57,22 @@
 }
 
 .investment-card {
-  background: $branco;
-  border: 1px solid rgba($slate, 0.2);
-  border-radius: $border-radius-medium;
-  overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: $shadow-elevation-1;
 
   &:hover {
     box-shadow: $shadow-elevation-3;
     transform: translateY(-2px);
   }
 
-  .card-header {
+  ::ng-deep .mat-mdc-card {
+    overflow: hidden;
+  }
+
+  ::ng-deep .card-header {
     background: linear-gradient(135deg, $azul-caixa, $oceano-end);
     padding: $spacing-small;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     gap: $spacing-micro;
@@ -61,7 +84,6 @@
       .product-name {
         @include card-title;
         color: $branco;
-        margin: 0 0 $spacing-quark 0;
         font-size: $text-large;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -76,42 +98,38 @@
     }
 
     .risk-badge {
-      display: flex;
-      align-items: center;
-      gap: $spacing-quark;
-      padding: $spacing-quark $spacing-micro;
-      background: rgba($branco, 0.2);
-      border-radius: $border-radius-small;
-      backdrop-filter: blur(10px);
       flex-shrink: 0;
 
-      .risk-icon {
-        font-size: 1rem;
-      }
-
-      .risk-label {
-        @include card-text;
+      .mat-mdc-chip {
+        background: rgba($branco, 0.2);
         color: $branco;
+        backdrop-filter: blur(10px);
         font-size: $text-small;
         font-weight: $font-weight-semibold;
+
+        mat-icon {
+          font-size: 1rem;
+          width: 1rem;
+          height: 1rem;
+        }
       }
 
-      &.risk-low {
+      &.risk-low .mat-mdc-chip {
         border: 1px solid rgba($success-70, 0.5);
       }
 
-      &.risk-medium {
+      &.risk-medium .mat-mdc-chip {
         border: 1px solid rgba($attention-70, 0.5);
       }
 
-      &.risk-high {
+      &.risk-high .mat-mdc-chip {
         border: 1px solid rgba($negative-70, 0.5);
       }
     }
   }
 
-  .card-body {
-    padding: $spacing-small;
+  ::ng-deep .card-body {
+    padding: $spacing-small $spacing-small 0;
 
     .info-row {
       display: flex;
@@ -166,29 +184,13 @@
     }
   }
 
-  .card-footer {
-    padding: $spacing-micro $spacing-small $spacing-small;
+  ::ng-deep .card-footer {
+    padding: $spacing-small;
     border-top: 1px solid rgba($slate, 0.1);
+    justify-content: center;
 
     .btn-details {
-      @include button-base;
       width: 100%;
-      padding: $spacing-micro $spacing-small;
-      background: $azul-caixa;
-      color: $branco;
-      border: none;
-      border-radius: $border-radius-small;
-      font-size: $text-standard;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-
-      &:hover {
-        background: $oceano-start;
-        box-shadow: $shadow-elevation-2;
-      }
     }
   }
 }
@@ -199,28 +201,12 @@
   padding-top: $spacing-small;
 
   .btn-show-more {
-    @include button-base;
-    padding: $spacing-micro $spacing-small;
-    background: transparent;
-    color: $azul-caixa;
-    border: 2px solid $azul-caixa;
-    border-radius: $border-radius-medium;
-    font-size: $text-standard;
-    cursor: pointer;
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: $spacing-micro;
 
-    .icon {
-      font-size: $text-small;
+    mat-icon {
       transition: transform 0.3s ease;
-    }
-
-    &:hover {
-      background: $azul-caixa;
-      color: $branco;
-      box-shadow: $shadow-elevation-2;
     }
   }
 }
@@ -233,8 +219,10 @@
 }
 
 @media (max-width: 768px) {
-  .investments-list-section {
-    padding: $spacing-tiny;
+  .investments-list-section ::ng-deep .mat-mdc-card-header,
+  .investments-list-section ::ng-deep .mat-mdc-card-content {
+    padding-left: $spacing-tiny;
+    padding-right: $spacing-tiny;
   }
 
   .investments-grid {
@@ -243,7 +231,7 @@
   }
 
   .investment-card {
-    .card-header {
+    ::ng-deep .card-header {
       flex-direction: column;
       gap: $spacing-micro;
 
@@ -252,7 +240,7 @@
       }
     }
 
-    .card-body {
+    ::ng-deep .card-body {
       .info-row {
         flex-direction: column;
         gap: $spacing-micro;

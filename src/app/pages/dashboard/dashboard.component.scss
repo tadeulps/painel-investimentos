@@ -9,8 +9,10 @@
 
 .loading-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: $spacing-tiny;
   min-height: 400px;
 
   p {
@@ -21,15 +23,16 @@
 
 // 1️⃣ Resumo do Investidor
 .investor-summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: $spacing-small;
-  padding: $spacing-small;
   background: linear-gradient(135deg, $azul-caixa, $oceano-end);
-  border-radius: $border-radius-large;
   color: $branco;
-  box-shadow: $shadow-elevation-3;
+
+  ::ng-deep .mat-mdc-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-small;
+  }
 }
 
 .welcome-section {
@@ -50,17 +53,26 @@
 }
 
 .risk-profile-badge {
-  display: flex;
-  align-items: center;
-  gap: $spacing-micro;
-  padding: $spacing-micro $spacing-small;
-  background: rgba($branco, 0.2);
-  border-radius: $border-radius-medium;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba($branco, 0.3);
+  ::ng-deep .mat-mdc-chip {
+    background: rgba($branco, 0.2);
+    color: $branco;
+    border: 2px solid rgba($branco, 0.3);
+    padding: $spacing-micro $spacing-small;
+    backdrop-filter: blur(10px);
+    height: auto;
+    min-height: 48px;
 
-  .profile-icon {
-    font-size: 2rem;
+    .mat-mdc-chip-action-label {
+      display: flex;
+      align-items: center;
+      gap: $spacing-micro;
+    }
+
+    mat-icon {
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   .profile-info {
@@ -80,15 +92,15 @@
     font-family: $font-bold;
   }
 
-  &.profile-conservador {
+  &.profile-conservador ::ng-deep .mat-mdc-chip {
     border-color: rgba($success-70, 0.5);
   }
 
-  &.profile-moderado {
+  &.profile-moderado ::ng-deep .mat-mdc-chip {
     border-color: rgba($attention-70, 0.5);
   }
 
-  &.profile-agressivo {
+  &.profile-agressivo ::ng-deep .mat-mdc-chip {
     border-color: rgba($negative-70, 0.5);
   }
 }
@@ -102,12 +114,6 @@
 }
 
 .indicator-card {
-  @include card-base;
-  display: flex;
-  align-items: center;
-  gap: $spacing-micro;
-  padding: $spacing-small;
-  background: $branco;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
@@ -115,9 +121,22 @@
     box-shadow: $shadow-elevation-4;
   }
 
+  ::ng-deep .mat-mdc-card-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-micro;
+    padding: $spacing-small;
+  }
+
   .card-icon {
-    font-size: 2.5rem;
     flex-shrink: 0;
+
+    mat-icon {
+      font-size: 2.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      color: $azul-caixa;
+    }
   }
 
   .card-content {
@@ -156,16 +175,21 @@
 
 // Empty State
 .empty-state {
-  text-align: center;
-  padding: $spacing-xlarge $spacing-small;
-  background: $branco;
-  border-radius: $border-radius-large;
-  box-shadow: $shadow-elevation-2;
+  ::ng-deep .mat-mdc-card-content {
+    text-align: center;
+    padding: $spacing-xlarge $spacing-small;
+  }
 
   .empty-icon {
-    font-size: 5rem;
     margin-bottom: $spacing-tiny;
-    opacity: 0.5;
+
+    mat-icon {
+      font-size: 5rem;
+      width: 5rem;
+      height: 5rem;
+      opacity: 0.5;
+      color: $azul-caixa;
+    }
   }
 
   h2 {
@@ -186,39 +210,6 @@
     justify-content: center;
     flex-wrap: wrap;
   }
-
-  .btn-primary,
-  .btn-secondary {
-    @include button-base;
-    padding: $spacing-micro $spacing-small;
-    font-size: $text-standard;
-    border-radius: $border-radius-medium;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary {
-    background: $azul-caixa;
-    color: $branco;
-    box-shadow: $shadow-elevation-2;
-
-    &:hover {
-      background: $oceano-start;
-      box-shadow: $shadow-elevation-4;
-      transform: translateY(-2px);
-    }
-  }
-
-  .btn-secondary {
-    background: $branco;
-    color: $azul-caixa;
-    border: 2px solid $azul-caixa;
-
-    &:hover {
-      background: $azul-caixa;
-      color: $branco;
-    }
-  }
 }
 
 // Responsive
@@ -227,15 +218,19 @@
     padding: $spacing-tiny $spacing-micro;
   }
 
-  .investor-summary {
+  .investor-summary ::ng-deep .mat-mdc-card-content {
     flex-direction: column;
     align-items: flex-start;
     gap: $spacing-micro;
+    padding: $spacing-tiny;
   }
 
   .risk-profile-badge {
     width: 100%;
-    justify-content: center;
+
+    ::ng-deep .mat-mdc-chip-set {
+      justify-content: center;
+    }
   }
 
   .quick-indicators {

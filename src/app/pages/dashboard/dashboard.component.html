@@ -1,6 +1,7 @@
 <section class="dashboard-page">
   <!-- Loading State -->
   <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
     <p>Carregando seu dashboard...</p>
   </div>
 
@@ -8,59 +9,79 @@
   <div *ngIf="!isLoading && userProfile" class="dashboard-content">
     
     <!-- 1️⃣ Resumo do Investidor -->
-    <div class="investor-summary">
-      <div class="welcome-section">
-        <h1 class="greeting">{{ getGreeting() }}, {{ userProfile.nome }}!</h1>
-        <p class="subtitle">Acompanhe seus investimentos em tempo real</p>
-      </div>
-
-      <div class="risk-profile-badge" [class]="'profile-' + getRiskProfileClass()">
-        <span class="profile-icon">{{ getRiskProfileIcon() }}</span>
-        <div class="profile-info">
-          <span class="profile-label">Perfil de Risco</span>
-          <span class="profile-name">{{ userProfile.perfilRisco.name }}</span>
+    <mat-card class="investor-summary">
+      <mat-card-content>
+        <div class="welcome-section">
+          <h1 class="greeting">{{ getGreeting() }}, {{ userProfile.nome }}!</h1>
+          <p class="subtitle">Acompanhe seus investimentos em tempo real</p>
         </div>
-      </div>
-    </div>
+
+        <mat-chip-set class="risk-profile-badge" [class]="'profile-' + getRiskProfileClass()">
+          <mat-chip>
+            <mat-icon>{{ getRiskProfileIcon() }}</mat-icon>
+            <div class="profile-info">
+              <span class="profile-label">Perfil de Risco</span>
+              <span class="profile-name">{{ userProfile.perfilRisco.name }}</span>
+            </div>
+          </mat-chip>
+        </mat-chip-set>
+      </mat-card-content>
+    </mat-card>
 
     <!-- 📊 Indicadores Rápidos -->
     <div class="quick-indicators">
-      <div class="indicator-card investments">
-        <div class="card-icon">💰</div>
-        <div class="card-content">
-          <span class="card-label">Valor Total Investido</span>
-          <span class="card-value">{{ summary.valorTotalInvestido | currency:'BRL' }}</span>
-        </div>
-      </div>
+      <mat-card class="indicator-card investments">
+        <mat-card-content>
+          <div class="card-icon">
+            <mat-icon>account_balance_wallet</mat-icon>
+          </div>
+          <div class="card-content">
+            <span class="card-label">Valor Total Investido</span>
+            <span class="card-value">{{ summary.valorTotalInvestido | currency:'BRL' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
 
-      <div class="indicator-card return">
-        <div class="card-icon">📈</div>
-        <div class="card-content">
-          <span class="card-label">Rentabilidade Acumulada</span>
-          <span class="card-value" [class.positive]="summary.rentabilidadeAcumulada > 0" [class.negative]="summary.rentabilidadeAcumulada < 0">
-            {{ summary.rentabilidadeAcumulada | currency:'BRL' }}
-          </span>
-          <span class="card-percentage" *ngIf="summary.valorTotalInvestido > 0">
-            {{ (summary.rentabilidadeAcumulada / summary.valorTotalInvestido * 100) | number:'1.2-2' }}%
-          </span>
-        </div>
-      </div>
+      <mat-card class="indicator-card return">
+        <mat-card-content>
+          <div class="card-icon">
+            <mat-icon>trending_up</mat-icon>
+          </div>
+          <div class="card-content">
+            <span class="card-label">Rentabilidade Acumulada</span>
+            <span class="card-value" [class.positive]="summary.rentabilidadeAcumulada > 0" [class.negative]="summary.rentabilidadeAcumulada < 0">
+              {{ summary.rentabilidadeAcumulada | currency:'BRL' }}
+            </span>
+            <span class="card-percentage" *ngIf="summary.valorTotalInvestido > 0">
+              {{ (summary.rentabilidadeAcumulada / summary.valorTotalInvestido * 100) | number:'1.2-2' }}%
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
 
-      <div class="indicator-card total">
-        <div class="card-icon">💎</div>
-        <div class="card-content">
-          <span class="card-label">Valor Atual Total</span>
-          <span class="card-value">{{ summary.valorAtualTotal | currency:'BRL' }}</span>
-        </div>
-      </div>
+      <mat-card class="indicator-card total">
+        <mat-card-content>
+          <div class="card-icon">
+            <mat-icon>diamond</mat-icon>
+          </div>
+          <div class="card-content">
+            <span class="card-label">Valor Atual Total</span>
+            <span class="card-value">{{ summary.valorAtualTotal | currency:'BRL' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
 
-      <div class="indicator-card count">
-        <div class="card-icon">📊</div>
-        <div class="card-content">
-          <span class="card-label">Investimentos Ativos</span>
-          <span class="card-value">{{ summary.numeroInvestimentos }}</span>
-        </div>
-      </div>
+      <mat-card class="indicator-card count">
+        <mat-card-content>
+          <div class="card-icon">
+            <mat-icon>bar_chart</mat-icon>
+          </div>
+          <div class="card-content">
+            <span class="card-label">Investimentos Ativos</span>
+            <span class="card-value">{{ summary.numeroInvestimentos }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
 
     <!-- 📈 Evolução dos Investimentos -->
@@ -88,15 +109,19 @@
     </app-investments-list>
 
     <!-- Empty State -->
-    <div *ngIf="investments.length === 0" class="empty-state">
-      <div class="empty-icon">💼</div>
-      <h2>Você ainda não possui investimentos</h2>
-      <p>Comece agora explorando nossos produtos e simulando investimentos!</p>
-      <div class="empty-actions">
-        <a routerLink="/produtos" class="btn-primary">Ver Produtos</a>
-        <a routerLink="/simulacao" class="btn-secondary">Simular Investimento</a>
-      </div>
-    </div>
+    <mat-card *ngIf="investments.length === 0" class="empty-state">
+      <mat-card-content>
+        <div class="empty-icon">
+          <mat-icon>work_outline</mat-icon>
+        </div>
+        <h2>Você ainda não possui investimentos</h2>
+        <p>Comece agora explorando nossos produtos e simulando investimentos!</p>
+        <div class="empty-actions">
+          <a routerLink="/produtos" mat-raised-button color="primary" class="btn-primary">Ver Produtos</a>
+          <a routerLink="/simulacao" mat-stroked-button color="primary" class="btn-secondary">Simular Investimento</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
   </div>
 </section>

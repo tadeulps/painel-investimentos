@@ -1,12 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { Investment } from '../../services/investment.service';
 
 @Component({
   selector: 'app-investments-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatCardModule, MatButtonModule, MatChipsModule, MatIconModule],
   templateUrl: './investments-list.component.html',
   styleUrls: ['./investments-list.component.scss']
 })
@@ -52,13 +56,13 @@ export class InvestmentsListComponent {
   getRiskIcon(risk: string): string {
     const riskLower = risk.toLowerCase();
     if (riskLower.includes('baixo') || riskLower.includes('conservador')) {
-      return '🛡️';
+      return 'shield';
     } else if (riskLower.includes('médio') || riskLower.includes('moderado')) {
-      return '⚖️';
+      return 'balance';
     } else if (riskLower.includes('alto') || riskLower.includes('agressivo')) {
-      return '🚀';
+      return 'rocket_launch';
     }
-    return '📊';
+    return 'show_chart';
   }
 
   getMonthsRemaining(investment: Investment): number {
