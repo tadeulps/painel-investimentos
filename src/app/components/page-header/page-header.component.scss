@@ -1,0 +1,21 @@
+@import '../../../styles/token.scss';
+
+.page-header {
+  text-align: center;
+  margin-bottom: $spacing-large;
+
+  h1 {
+    @include part-title;
+    color: $azul-caixa;
+    margin-bottom: $spacing-nano;
+    font-size: $heading-large;
+  }
+
+  .subtitle {
+    @include card-subtitle;
+    color: $slate;
+    font-size: $text-large;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

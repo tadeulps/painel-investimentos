@@ -6,6 +6,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 
 interface RiskProfile {
   id: number;
@@ -26,7 +27,8 @@ interface RiskProfile {
     MatProgressBarModule,
     MatChipsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    PageHeaderComponent
   ],
   templateUrl: './perfil-risco.component.html',
   styleUrls: ['./perfil-risco.component.scss']

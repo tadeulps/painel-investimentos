@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
+import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 
 interface MonthlyDetail {
   mes: number;
@@ -38,7 +39,8 @@ interface SimulationResult {
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
-    MatTableModule
+    MatTableModule,
+    PageHeaderComponent
   ],
   templateUrl: './simulacao.component.html',
   styleUrls: ['./simulacao.component.scss']
