@@ -170,11 +170,11 @@
       height: 20px;
       background: linear-gradient(
         to right,
-        #22c55e 0%,
-        #84cc16 25%,
-        #eab308 50%,
+        $green-conservador 0%,
+       #84cc16 25%,
+        $yellow-moderado 50%,
         #f97316 75%,
-        #ef4444 100%
+        $red-agressivo 100%
       );
       border-radius: 12px;
       position: relative;
@@ -272,13 +272,13 @@
   transform: scale(0.95);
   filter: grayscale(0.8);
   border-radius: $border-radius-large;
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
   &.current {
     opacity: 1;
     transform: scale(1);
     filter: grayscale(0);
     border: 2px solid $azul-caixa;
     z-index: 2;
-     box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
 
   }
 
@@ -286,7 +286,6 @@
     opacity: 1;
     filter: grayscale(0);
     transform: translateY(-5px) scale(0.98);
-     box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
 
     &.current {
       transform: translateY(-5px) scale(1);
@@ -348,8 +347,11 @@
   transform: rotate(-5deg);
   transition: transform 0.3s ease;
 
-  .icon {
+  mat-icon.icon {
     font-size: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: $branco;
   }
 }
 
@@ -443,13 +445,13 @@
 
 // Dynamic colors for risk bars based on profile type
 .profile-card:nth-child(1) .risk-bars .bar.filled {
-  background: #179231;
+  background: $green-conservador;
 }
 .profile-card:nth-child(2) .risk-bars .bar.filled {
-  background: #fcbe05;
+  background: $yellow-moderado;
 }
 .profile-card:nth-child(3) .risk-bars .bar.filled {
-  background: #d93636;
+  background: $red-agressivo;
 }
 
 @keyframes slideUp {

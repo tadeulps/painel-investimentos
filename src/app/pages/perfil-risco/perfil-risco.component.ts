@@ -46,7 +46,7 @@ export class PerfilRiscoComponent implements OnInit {
       id: 1,
       title: 'Conservador',
       description: 'Perfil focado em segurança e preservação de capital, com baixa tolerância a riscos.',
-      icon: '🛡️',
+      icon: 'shield',
       color: 'linear-gradient(135deg, #127527, #179231)',
       riskLevel: 2,
       features: [
@@ -60,7 +60,7 @@ export class PerfilRiscoComponent implements OnInit {
       id: 2,
       title: 'Moderado',
       description: 'Perfil equilibrado entre segurança e rentabilidade, com tolerância moderada a riscos.',
-      icon: '⚖️',
+      icon: 'balance',
       color: 'linear-gradient(135deg, #FCBE05, #CA9804)',
       riskLevel: 3,
       features: [
@@ -74,7 +74,7 @@ export class PerfilRiscoComponent implements OnInit {
       id: 3,
       title: 'Agressivo',
       description: 'Perfil voltado para alta rentabilidade, com maior tolerância a riscos e volatilidade.',
-      icon: '🚀',
+      icon: 'rocket_launch',
       color: 'linear-gradient(135deg, #D93636, #B22C2C)',
       riskLevel: 5,
       features: [
@@ -101,9 +101,9 @@ export class PerfilRiscoComponent implements OnInit {
   }
 
   getRiskIcon(): string {
-    if (this.userPontuacao <= 33) return '🛡️';
-    if (this.userPontuacao <= 66) return '⚖️';
-    return '🚀';
+    if (this.userPontuacao <= 33) return 'shield';
+    if (this.userPontuacao <= 66) return 'balance';
+    return 'rocket_launch';
   }
 
   animateScore(target: number): void {
