@@ -1,72 +1,78 @@
 <section class="login-page">
-  <div class="login-container">
-    <div class="login-header">
+  <mat-card class="login-container">
+    <mat-card-header class="login-header">
       <img src="/images/CAIXA_PB_negativa.svg" alt="CAIXA" class="logo" />
-      <h1>Acesse sua Conta</h1>
-      <p class="subtitle">Digite suas credenciais para continuar</p>
-    </div>
+      <mat-card-title>Acesse sua Conta</mat-card-title>
+      <mat-card-subtitle>Digite suas credenciais para continuar</mat-card-subtitle>
+    </mat-card-header>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input 
-          type="email" 
-          id="email" 
-          formControlName="email"
-          placeholder="seu@email.com"
-          [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-        <span class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <span *ngIf="loginForm.get('email')?.errors?.['required']">E-mail é obrigatório</span>
-          <span *ngIf="loginForm.get('email')?.errors?.['email']">E-mail inválido</span>
-        </span>
-      </div>
-
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <div class="password-wrapper">
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
           <input 
+            matInput 
+            type="email" 
+            formControlName="email"
+            placeholder="seu@email.com">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">
+            E-mail é obrigatório
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">
+            E-mail inválido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input 
+            matInput 
             [type]="showPassword ? 'text' : 'password'" 
-            id="senha" 
             formControlName="senha"
-            placeholder="Digite sua senha"
-            [class.invalid]="loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched">
+            placeholder="Digite sua senha">
+          <mat-icon matPrefix>lock</mat-icon>
           <button 
-            type="button" 
-            class="toggle-password"
+            mat-icon-button 
+            matSuffix 
+            type="button"
             (click)="togglePassword()"
             aria-label="Mostrar/Ocultar senha">
-            {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+            <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
           </button>
+          <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']">
+            Senha é obrigatória
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('senha')?.errors?.['minlength']">
+            Senha deve ter no mínimo 6 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <mat-checkbox formControlName="rememberMe">Lembrar-me</mat-checkbox>
+          <a href="#" class="forgot-password" (click)="forgotPassword($event)">Esqueci minha senha</a>
         </div>
-        <span class="error" *ngIf="loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched">
-          <span *ngIf="loginForm.get('senha')?.errors?.['required']">Senha é obrigatória</span>
-          <span *ngIf="loginForm.get('senha')?.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres</span>
-        </span>
-      </div>
 
-      <div class="form-actions">
-        <label class="remember-me">
-          <input type="checkbox" formControlName="rememberMe">
-          <span>Lembrar-me</span>
-        </label>
-        <a href="#" class="forgot-password" (click)="forgotPassword($event)">Esqueci minha senha</a>
-      </div>
+        <button 
+          mat-raised-button 
+          color="primary"
+          type="submit"
+          class="btn-login"
+          [disabled]="loginForm.invalid || isLoading">
+          <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+          <span *ngIf="!isLoading">Entrar</span>
+          <span *ngIf="isLoading">Entrando...</span>
+        </button>
 
-      <button 
-        type="submit" 
-        class="btn-login"
-        [disabled]="loginForm.invalid || isLoading">
-        <span *ngIf="!isLoading">Entrar</span>
-        <span *ngIf="isLoading" class="loading">Entrando...</span>
-      </button>
+        <div class="error-message" *ngIf="errorMessage">
+          <mat-icon>error</mat-icon>
+          <span>{{ errorMessage }}</span>
+        </div>
+      </form>
+    </mat-card-content>
 
-      <div class="error-message" *ngIf="errorMessage">
-        {{ errorMessage }}
-      </div>
-    </form>
-
-    <div class="login-footer">
+    <mat-card-footer class="login-footer">
       <p>Não tem uma conta? <a href="#" (click)="register($event)">Cadastre-se</a></p>
-    </div>
-  </div>
+    </mat-card-footer>
+  </mat-card>
 </section>

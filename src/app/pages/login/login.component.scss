@@ -10,16 +10,28 @@
 }
 
 .login-container {
-  @include card-base;
   width: 100%;
   max-width: 450px;
-  padding: $spacing-large $spacing-small;
-  background: $branco;
+
+  ::ng-deep .mat-mdc-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $spacing-small $spacing-small $spacing-tiny;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    padding: $spacing-tiny $spacing-small;
+  }
+
+  ::ng-deep .mat-mdc-card-footer {
+    padding: $spacing-tiny $spacing-small $spacing-small;
+  }
 }
 
 .login-header {
   text-align: center;
-  margin-bottom: $spacing-small;
+  width: 100%;
 
   .logo {
     height: 60px;
@@ -28,79 +40,26 @@
     display: block;
   }
 
-  h1 {
+  ::ng-deep .mat-mdc-card-title {
     @include part-title;
     font-size: $heading-large;
     color: $azul-caixa;
-    margin-bottom: $spacing-nano;
+    margin-bottom: $spacing-quark;
   }
 
-  .subtitle {
+  ::ng-deep .mat-mdc-card-subtitle {
     @include card-subtitle;
     color: $slate;
   }
 }
 
 .login-form {
-  margin-bottom: $spacing-tiny;
-}
-
-.form-group {
-  margin-bottom: $spacing-tiny;
-
-  label {
-    display: block;
-    @include card-text;
-    font-weight: $font-weight-semibold;
-    color: $charcoal;
-    margin-bottom: $spacing-quark;
-  }
-
-  input {
-    @include input-base;
-    width: 100%;
-
-    &.invalid {
-      border-color: $negative-70;
-    }
-
-    &:focus {
-      border-color: $azul-caixa;
-      box-shadow: 0 0 0 3px rgba(0, 92, 169, 0.1);
-    }
-  }
-
-  .error {
-    display: block;
-    color: $negative-70;
-    font-size: $text-caption;
-    margin-top: $spacing-quark;
-    font-weight: $font-weight-semibold;
-  }
-}
-
-.password-wrapper {
-  position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: $spacing-tiny;
 
-  input {
-    padding-right: 48px;
-  }
-
-  .toggle-password {
-    position: absolute;
-    right: $spacing-micro;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: $text-big;
-    padding: $spacing-quark;
-    transition: transform 0.2s ease;
-
-    &:hover {
-      transform: scale(1.1);
-    }
+  ::ng-deep .mat-mdc-form-field {
+    width: 100%;
   }
 }
 
@@ -108,25 +67,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: $spacing-tiny;
   flex-wrap: wrap;
-  gap: $spacing-nano;
-
-  .remember-me {
-    display: flex;
-    align-items: center;
-    gap: $spacing-quark;
-    cursor: pointer;
-    @include card-text;
-    color: $charcoal;
-
-    input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: $azul-caixa;
-    }
-  }
+  gap: $spacing-quark;
 
   .forgot-password {
     @include card-text;
@@ -141,13 +83,12 @@
 }
 
 .btn-login {
-  @include button-base;
   width: 100%;
-  background: linear-gradient(to right, $oceano-start, $oceano-end);
-  color: $branco;
   padding: $spacing-micro;
   font-size: $text-large;
-  border-radius: $border-radius-medium;
+
+  ::ng-deep .mat-mdc-button-persistent-ripple {
+    border-radius: $border-radius-medium;
   transition: all 0.3s ease;
   font-weight: $font-weight-bold;
 
@@ -166,18 +107,16 @@
     cursor: not-allowed;
   }
 
-  .loading {
-    display: inline-block;
-    animation: pulse 1.5s ease-in-out infinite;
+  ::ng-deep .mdc-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-quark;
   }
-}
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
+  &.loading {
+    opacity: 0.8;
+    cursor: wait;
   }
 }
 
@@ -220,7 +159,14 @@
   }
 
   .login-container {
-    padding: $spacing-tiny;
+    max-width: 100%;
+
+    ::ng-deep .mat-mdc-card-header,
+    ::ng-deep .mat-mdc-card-content,
+    ::ng-deep .mat-mdc-card-footer {
+      padding-left: $spacing-tiny;
+      padding-right: $spacing-tiny;
+    }
   }
 
   .login-header {
@@ -228,7 +174,7 @@
       height: 48px;
     }
 
-    h1 {
+    ::ng-deep .mat-mdc-card-title {
       font-size: $heading-standard;
     }
   }
@@ -237,4 +183,5 @@
     flex-direction: column;
     align-items: flex-start;
   }
+}
 }

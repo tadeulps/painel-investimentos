@@ -22,34 +22,33 @@
     </div>
 
     <div class="products-grid">
-      <div *ngFor="let product of recommendedProducts" class="product-card recommended">
-        <div class="card-header">
-          <div class="product-badge" [class]="'badge-' + getRiskClass(product.risco)">
-            {{ product.tipo }}
-          </div>
-          <div class="risk-indicator" [class]="'risk-' + getRiskClass(product.risco)">
-            {{ product.risco }}
-          </div>
-        </div>
+      <mat-card *ngFor="let product of recommendedProducts" class="product-card recommended">
+        <mat-card-header>
+          <mat-chip [class]="'chip-' + getRiskClass(product.risco)">{{ product.tipo }}</mat-chip>
+          <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
+        </mat-card-header>
 
-        <h3 class="product-name">{{ product.nome }}</h3>
+        <mat-card-content>
+          <h3 class="product-name">{{ product.nome }}</h3>
 
-        <div class="product-details">
-          <div class="detail-item rentability">
-            <span class="label">Rentabilidade</span>
-            <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
+          <div class="product-details">
+            <div class="detail-item">
+              <span class="label">Rentabilidade</span>
+              <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Tipo</span>
+              <span class="value">{{ product.tipo }}</span>
+            </div>
           </div>
+        </mat-card-content>
 
-          <div class="detail-item type">
-            <span class="label">Tipo</span>
-            <span class="value">{{ product.tipo }}</span>
-          </div>
-        </div>
-
-        <button class="btn-simulate" (click)="simulateInvestment(product)">
-          Simular Investimento
-        </button>
-      </div>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="simulateInvestment(product)">
+            <mat-icon>calculate</mat-icon> Simular
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 
@@ -68,42 +67,41 @@
     <div class="filters-bar">
       <button 
         *ngFor="let type of productTypes" 
-        class="filter-btn"
-        [class.active]="selectedType === type"
+        mat-stroked-button
+        [color]="selectedType === type ? 'primary' : ''"
         (click)="filterByType(type)">
         {{ type === 'Todos' ? 'Todos' : type }}
       </button>
     </div>
 
     <div class="products-grid">
-      <div *ngFor="let product of filteredProducts" class="product-card">
-        <div class="card-header">
-          <div class="product-badge" [class]="'badge-' + getRiskClass(product.risco)">
-            {{ product.tipo }}
-          </div>
-          <div class="risk-indicator" [class]="'risk-' + getRiskClass(product.risco)">
-            {{ product.risco }}
-          </div>
-        </div>
+      <mat-card *ngFor="let product of filteredProducts" class="product-card">
+        <mat-card-header>
+          <mat-chip [class]="'chip-' + getRiskClass(product.risco)">{{ product.tipo }}</mat-chip>
+          <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
+        </mat-card-header>
 
-        <h3 class="product-name">{{ product.nome }}</h3>
+        <mat-card-content>
+          <h3 class="product-name">{{ product.nome }}</h3>
 
-        <div class="product-details">
-          <div class="detail-item rentability">
-            <span class="label">Rentabilidade</span>
-            <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
+          <div class="product-details">
+            <div class="detail-item">
+              <span class="label">Rentabilidade</span>
+              <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Tipo</span>
+              <span class="value">{{ product.tipo }}</span>
+            </div>
           </div>
+        </mat-card-content>
 
-          <div class="detail-item type">
-            <span class="label">Tipo</span>
-            <span class="value">{{ product.tipo }}</span>
-          </div>
-        </div>
-
-        <button class="btn-simulate" (click)="simulateInvestment(product)">
-          Simular Investimento
-        </button>
-      </div>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="simulateInvestment(product)">
+            <mat-icon>calculate</mat-icon> Simular
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
 
     <div *ngIf="filteredProducts.length === 0" class="no-results">

@@ -10,70 +10,79 @@
 
   <!-- Pontuação Indicator -->
   <div *ngIf="!isLoading" class="pontuacao-section">
-    <div class="pontuacao-card">
-      <h2 class="pontuacao-title">Pontuação de Risco</h2>
+    <mat-card class="pontuacao-card">
+      <mat-card-header>
+        <mat-card-title class="pontuacao-title">Seu nível de risco da carteira</mat-card-title>
+      </mat-card-header>
       
-      <div class="pontuacao-score">
-        <span class="score-number" [style.color]="getRiskColor()">{{ userPontuacao }}</span>
-      </div>
+      <mat-card-content>
+        <div class="pontuacao-score">
+          <span class="score-number" [style.color]="getRiskColor()">{{ userPontuacao }}</span>
+        </div>
 
-      <div class="pontuacao-progress">
-        <div class="progress-bar">
-          <div 
-            class="progress-fill" 
-            [style.width.%]="userPontuacao"
-            [style.background]="getRiskColor()">
+        <div class="pontuacao-progress">
+          <div class="progress-labels-top">
+            <span class="label-min">0</span>
+            <span class="label-max">100</span>
           </div>
+          <mat-progress-bar 
+            mode="determinate" 
+            [value]="userPontuacao"
+            [color]="'primary'">
+          </mat-progress-bar>
         </div>
-        <div class="progress-labels">
-          <span class="label-min">0</span>
-          <span class="label-max">100</span>
-        </div>
-      </div>
 
-      <div class="pontuacao-level">
-        <span class="level-text" [style.color]="getRiskColor()">{{ getRiskCategory() }}</span>
-      </div>
-    </div>
+        <div class="pontuacao-level">
+          <mat-chip [style.background-color]="getRiskColor()" [style.color]="'white'">
+            {{ getRiskCategory() }}
+          </mat-chip>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <!-- Profile Cards (Read-only) -->
   <div *ngIf="!isLoading" class="profiles-grid">
-    <div 
+    <mat-card 
       *ngFor="let profile of profiles; let i = index" 
       class="profile-card"
       [class.current]="i === currentIndex">
       
-      <div class="card-icon" [style.background]="profile.color">
-        <span class="icon">{{ profile.icon }}</span>
-      </div>
-      
-      <h2 class="card-title">{{ profile.title }}</h2>
-      
-      <div class="card-description">
-        <p>{{ profile.description }}</p>
-      </div>
-      
-      <div class="card-features">
-        <div class="feature-item" *ngFor="let feature of profile.features">
-          <span class="check">✓</span>
-          <span>{{ feature }}</span>
+      <mat-card-header>
+        <div mat-card-avatar class="card-icon" [style.background]="profile.color">
+          <span class="icon">{{ profile.icon }}</span>
         </div>
-      </div>
-
-      <div class="card-risk-indicator">
-        <span class="label">Nível de Risco:</span>
-        <div class="risk-bars">
-          <div 
-            *ngFor="let bar of [1,2,3,4,5]" 
-            class="bar"
-            [class.filled]="bar <= profile.riskLevel"></div>
+        <mat-card-title class="card-title">{{ profile.title }}</mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="card-description">
+          <p>{{ profile.description }}</p>
         </div>
-      </div>
+        
+        <div class="card-features">
+          <div class="feature-item" *ngFor="let feature of profile.features">
+            <mat-icon class="check-icon">check_circle</mat-icon>
+            <span>{{ feature }}</span>
+          </div>
+        </div>
 
-      <div *ngIf="i === currentIndex" class="current-badge">
-        ✓ Seu Perfil Atual
-      </div>
-    </div>
+        <div class="card-risk-indicator">
+          <span class="label">Nível de Risco:</span>
+          <div class="risk-bars">
+            <div 
+              *ngFor="let bar of [1,2,3,4,5]" 
+              class="bar"
+              [class.filled]="bar <= profile.riskLevel"></div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions *ngIf="i === currentIndex">
+        <button mat-raised-button color="primary" disabled>
+          <mat-icon>check</mat-icon> Seu Perfil Atual
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </section>

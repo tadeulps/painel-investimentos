@@ -65,17 +65,10 @@
 }
 
 .product-card {
-  @include card-base;
-  background: $branco;
-  padding: $spacing-tiny;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-micro;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
 
   &.recommended {
-    border-color: $laranja-caixa;
+    border: 2px solid $laranja-caixa;
     position: relative;
 
     &::before {
@@ -94,60 +87,60 @@
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: $shadow-elevation-5;
+  }
+
+  ::ng-deep .mat-mdc-card-header {
+    display: flex;
+    gap: $spacing-quark;
+    padding: $spacing-tiny;
+    justify-content: space-between;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    padding: $spacing-quark $spacing-tiny;
+  }
+
+  ::ng-deep .mat-mdc-card-actions {
+    padding: $spacing-quark $spacing-tiny $spacing-tiny;
+
+    button {
+      width: 100%;
+    }
   }
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $spacing-nano;
-}
-
-.product-badge {
-  padding: $spacing-quark $spacing-nano;
-  border-radius: $border-radius-small;
+::ng-deep .mat-mdc-chip {
   font-size: $text-small;
   font-weight: $font-weight-semibold;
-  background: $cinza-100;
-  color: $charcoal;
 
-  &.badge-baixo {
-    background: $light-green;
-    color: $success-90;
+  &.chip-baixo {
+    background: $light-green !important;
+    color: $success-90 !important;
   }
 
-  &.badge-medio {
-    background: lightyellow;
-    color: $attention-90;
+  &.chip-medio {
+    background: lightyellow !important;
+    color: $attention-90 !important;
   }
 
-  &.badge-alto {
-    background: #ffe5e5;
-    color: $negative-90;
+  &.chip-alto {
+    background: #ffe5e5 !important;
+    color: $negative-90 !important;
   }
-}
-
-.risk-indicator {
-  padding: $spacing-quark $spacing-nano;
-  border-radius: $border-radius-small;
-  font-size: $text-caption;
-  font-weight: $font-weight-bold;
 
   &.risk-baixo {
-    background: $success-70;
-    color: $branco;
+    background: $success-70 !important;
+    color: $branco !important;
   }
 
   &.risk-medio {
-    background: $attention-70;
-    color: $charcoal;
+    background: $attention-70 !important;
+    color: $charcoal !important;
   }
 
   &.risk-alto {
-    background: $negative-70;
-    color: $branco;
+    background: $negative-70 !important;
+    color: $branco !important;
   }
 }
 
@@ -158,20 +151,25 @@
   min-height: 48px;
 }
 
+.product-name {
+  @include card-title;
+  color: $azul-caixa;
+  margin-bottom: $spacing-tiny;
+  font-size: $text-large;
+}
+
 .product-details {
   display: flex;
   flex-direction: column;
-  gap: $spacing-nano;
-  padding: $spacing-micro 0;
+  gap: $spacing-quark;
+  padding: $spacing-tiny 0;
   border-top: 1px solid $border;
-  border-bottom: 1px solid $border;
-  margin-bottom: $spacing-nano;
+  margin-bottom: $spacing-tiny;
 }
 
 .detail-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 
   .label {
     @include card-caption;
@@ -182,10 +180,6 @@
   .value {
     @include card-text;
     font-weight: $font-weight-bold;
-    color: $charcoal;
-  }
-
-  &.rentability .value {
     color: $success-70;
     font-size: $text-big;
   }
@@ -214,30 +208,10 @@
 
 .filters-bar {
   display: flex;
-  gap: $spacing-nano;
+  gap: $spacing-quark;
   margin-bottom: $spacing-small;
   flex-wrap: wrap;
-}
-
-.filter-btn {
-  @include button-base;
-  padding: $spacing-nano $spacing-tiny;
-  background: $branco;
-  border: 2px solid $border;
-  color: $charcoal;
-  font-size: $text-small;
-  transition: all 0.3s ease;
-
-  &:hover {
-    border-color: $azul-caixa;
-    color: $azul-caixa;
-  }
-
-  &.active {
-    background: $azul-caixa;
-    border-color: $azul-caixa;
-    color: $branco;
-  }
+  justify-content: center;
 }
 
 .no-results {

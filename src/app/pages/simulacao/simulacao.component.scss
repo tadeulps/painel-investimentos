@@ -78,14 +78,12 @@
 }
 
 .product-card-mini {
-  @include card-base;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%) scale(0.85);
   width: 100%;
   max-width: 350px;
-  padding: $spacing-small;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.5;
@@ -95,7 +93,6 @@
     transform: translateX(-50%) scale(1);
     opacity: 1;
     pointer-events: all;
-    box-shadow: $shadow-elevation-4;
     z-index: 1;
   }
 
@@ -111,35 +108,44 @@
     z-index: 0;
   }
 
+  ::ng-deep .mat-mdc-card-header {
+    padding: $spacing-tiny;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    padding: $spacing-quark $spacing-tiny;
+  }
+
+  ::ng-deep .mat-mdc-card-actions {
+    padding: $spacing-quark $spacing-tiny $spacing-tiny;
+
+    button {
+      width: 100%;
+    }
+  }
+
   h3 {
     @include card-title;
     color: $azul-caixa;
-    margin: $spacing-micro 0;
+    margin: $spacing-quark 0;
     text-align: center;
   }
 }
 
-.card-badge {
-  display: inline-block;
-  padding: $spacing-quark $spacing-nano;
-  border-radius: $border-radius-small;
-  font-size: $text-small;
-  font-weight: $font-weight-bold;
-  margin-bottom: $spacing-nano;
-
-  &.badge-baixo {
-    background: $success-70;
-    color: $branco;
+::ng-deep .mat-mdc-chip {
+  &.chip-baixo {
+    background: $success-70 !important;
+    color: $branco !important;
   }
 
-  &.badge-medio {
-    background: $attention-70;
-    color: $charcoal;
+  &.chip-medio {
+    background: $attention-70 !important;
+    color: $charcoal !important;
   }
 
-  &.badge-alto {
-    background: $negative-70;
-    color: $branco;
+  &.chip-alto {
+    background: $negative-70 !important;
+    color: $branco !important;
   }
 }
 
@@ -232,91 +238,110 @@
   margin: 0 auto $spacing-xlarge;
 }
 
-.selected-product-info {
+.selected-product-card {
   margin-bottom: $spacing-small;
-
-  h3 {
-    @include card-text;
-    color: $slate;
-    margin-bottom: $spacing-nano;
-  }
-}
-
-.product-banner {
-  @include card-base;
-  padding: $spacing-tiny;
   background: linear-gradient(135deg, $light-blue-highlight, $light-green);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: $spacing-nano;
 
-  .product-name {
-    @include card-title;
-    color: $azul-caixa;
-  }
+  .product-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-tiny;
 
-  .product-rent {
-    @include card-text;
-    font-weight: $font-weight-bold;
-    color: $success-70;
-  }
+    .product-name {
+      @include card-title;
+      color: $azul-caixa;
+    }
 
-  .btn-change {
-    @include button-base;
-    padding: $spacing-quark $spacing-nano;
-    background: $branco;
-    border: 1px solid $border;
-    color: $azul-caixa;
-    font-size: $text-small;
-
-    &:hover {
-      border-color: $azul-caixa;
-      background: $azul-caixa;
-      color: $branco;
+    .product-rent {
+      @include card-text;
+      font-weight: $font-weight-bold;
+      color: $success-70;
     }
   }
 }
 
-.simulation-form {
-  @include card-base;
+.form-card {
   padding: $spacing-small;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-tiny;
+
+    ::ng-deep .mat-mdc-form-field {
+      width: 100%;
+    }
+
+    button {
+      margin-top: $spacing-tiny;
+    }
+  }
 }
 
-.form-group {
-  margin-bottom: $spacing-tiny;
+.results-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-tiny;
+  margin-bottom: $spacing-small;
+}
 
-  label {
-    display: block;
-    @include card-text;
-    font-weight: $font-weight-semibold;
+.summary-card {
+  text-align: center;
+
+  &.highlight {
+    background: linear-gradient(135deg, $light-blue-highlight, $light-green);
+    border: 2px solid $azul-caixa;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-quark;
+    padding: $spacing-tiny;
+  }
+
+  .label {
+    @include card-caption;
+    color: $slate;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .value {
+    @include card-title;
+    font-size: $heading-small;
     color: $charcoal;
-    margin-bottom: $spacing-quark;
-  }
 
-  input {
-    @include input-base;
-    width: 100%;
-  }
-
-  .error {
-    display: block;
-    color: $negative-70;
-    font-size: $text-caption;
-    margin-top: $spacing-quark;
+    &.gain {
+      color: $success-70;
+    }
   }
 }
 
-.btn-simulate {
-  @include button-base;
-  width: 100%;
-  background: $azul-caixa;
-  color: $branco;
-  padding: $spacing-micro;
-  font-size: $text-large;
-  border-radius: $border-radius-medium;
-  margin-top: $spacing-tiny;
+.monthly-breakdown {
+  margin-bottom: $spacing-small;
+
+  ::ng-deep .mat-mdc-card-content {
+    padding: $spacing-tiny;
+    overflow-x: auto;
+  }
+
+  .monthly-table {
+    width: 100%;
+    
+    .gain {
+      color: $success-70;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-tiny;
+  justify-content: center;
+  flex-wrap: wrap;
 
   &:hover:not(:disabled) {
     background: $oceano-start;

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 interface RiskProfile {
   id: number;
@@ -15,7 +20,14 @@ interface RiskProfile {
 @Component({
   selector: 'app-perfil-risco',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatChipsModule,
+    MatIconModule,
+    MatButtonModule
+  ],
   templateUrl: './perfil-risco.component.html',
   styleUrls: ['./perfil-risco.component.scss']
 })

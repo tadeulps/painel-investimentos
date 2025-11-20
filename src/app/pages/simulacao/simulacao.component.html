@@ -23,7 +23,7 @@
       </button>
 
       <div class="carousel-track">
-        <div 
+        <mat-card 
           *ngFor="let product of availableProducts; let i = index" 
           class="product-card-mini"
           [class.active]="i === currentProductIndex"
@@ -31,29 +31,33 @@
           [class.next]="i > currentProductIndex"
           (click)="selectProduct(product)">
           
-          <div class="card-badge" [class]="'badge-' + getRiskClass(product.risco)">
-            {{ product.tipo }}
-          </div>
+          <mat-card-header>
+            <mat-chip [class]="'chip-' + getRiskClass(product.risco)">{{ product.tipo }}</mat-chip>
+          </mat-card-header>
           
-          <h3>{{ product.nome }}</h3>
-          
-          <div class="product-info">
-            <div class="info-item">
-              <span class="label">Rentabilidade:</span>
-              <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}%</span>
+          <mat-card-content>
+            <h3>{{ product.nome }}</h3>
+            
+            <div class="product-info">
+              <div class="info-item">
+                <span class="label">Rentabilidade:</span>
+                <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}%</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Risco:</span>
+                <span class="value risk" [class]="'risk-' + getRiskClass(product.risco)">
+                  {{ product.risco }}
+                </span>
+              </div>
             </div>
-            <div class="info-item">
-              <span class="label">Risco:</span>
-              <span class="value risk" [class]="'risk-' + getRiskClass(product.risco)">
-                {{ product.risco }}
-              </span>
-            </div>
-          </div>
+          </mat-card-content>
 
-          <button class="btn-select" (click)="selectProduct(product)">
-            Selecionar Produto
-          </button>
-        </div>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="selectProduct(product)">
+              <mat-icon>check_circle</mat-icon> Selecionar
+            </button>
+          </mat-card-actions>
+        </mat-card>
       </div>
 
       <button 
@@ -77,54 +81,67 @@
 
   <!-- Step 2: Simulation Form (after product selected) -->
   <div *ngIf="selectedProduct" class="simulation-form-section">
-    <div class="selected-product-info">
-      <h3>Produto Selecionado:</h3>
-      <div class="product-banner">
-        <span class="product-name">{{ selectedProduct.nome }}</span>
-        <span class="product-rent">{{ (selectedProduct.taxaAnual * 100).toFixed(2) }}% a.a.</span>
-        <button class="btn-change" (click)="changeProduct()">Trocar Produto</button>
-      </div>
-    </div>
+    <mat-card class="selected-product-card">
+      <mat-card-header>
+        <mat-card-title>Produto Selecionado</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="product-banner">
+          <span class="product-name">{{ selectedProduct.nome }}</span>
+          <span class="product-rent">{{ (selectedProduct.taxaAnual * 100).toFixed(2) }}% a.a.</span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="changeProduct()">
+          <mat-icon>swap_horiz</mat-icon> Trocar Produto
+        </button>
+      </mat-card-actions>
+    </mat-card>
 
     <h2 class="section-title">Dados da Simulação</h2>
 
-    <form [formGroup]="simulationForm" (ngSubmit)="simulate()" class="simulation-form">
-      <div class="form-group">
-        <label for="valor">Valor do Investimento (R$)</label>
-        <input 
-          type="number" 
-          id="valor" 
-          formControlName="valor"
-          placeholder="Ex: 10000"
-          min="100"
-          step="100">
-        <span class="error" *ngIf="simulationForm.get('valor')?.invalid && simulationForm.get('valor')?.touched">
-          Por favor, insira um valor mínimo de R$ 100,00
-        </span>
-      </div>
+    <mat-card class="form-card">
+      <form [formGroup]="simulationForm" (ngSubmit)="simulate()">
+        <mat-form-field appearance="outline">
+          <mat-label>Valor do Investimento (R$)</mat-label>
+          <input 
+            matInput 
+            type="number" 
+            formControlName="valor"
+            placeholder="Ex: 10000"
+            min="100"
+            step="100">
+          <mat-icon matPrefix>attach_money</mat-icon>
+          <mat-error *ngIf="simulationForm.get('valor')?.invalid">
+            Valor mínimo de R$ 100,00
+          </mat-error>
+        </mat-form-field>
 
-      <div class="form-group">
-        <label for="prazoMeses">Prazo (meses)</label>
-        <input 
-          type="number" 
-          id="prazoMeses" 
-          formControlName="prazoMeses"
-          placeholder="Ex: 12"
-          min="1"
-          max="360"
-          step="1">
-        <span class="error" *ngIf="simulationForm.get('prazoMeses')?.invalid && simulationForm.get('prazoMeses')?.touched">
-          Prazo deve ser entre 1 e 360 meses
-        </span>
-      </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Prazo (meses)</mat-label>
+          <input 
+            matInput 
+            type="number" 
+            formControlName="prazoMeses"
+            placeholder="Ex: 12"
+            min="1"
+            max="360"
+            step="1">
+          <mat-icon matPrefix>schedule</mat-icon>
+          <mat-error *ngIf="simulationForm.get('prazoMeses')?.invalid">
+            Prazo entre 1 e 360 meses
+          </mat-error>
+        </mat-form-field>
 
-      <button 
-        type="submit" 
-        class="btn-simulate"
-        [disabled]="simulationForm.invalid">
-        Simular Investimento
-      </button>
-    </form>
+        <button 
+          mat-raised-button 
+          color="primary"
+          type="submit"
+          [disabled]="simulationForm.invalid">
+          <mat-icon>calculate</mat-icon> Simular Investimento
+        </button>
+      </form>
+    </mat-card>
   </div>
 
   <!-- Step 3: Simulation Results -->
@@ -132,54 +149,69 @@
     <h2 class="section-title">Resultado da Simulação</h2>
 
     <div class="results-summary">
-      <div class="summary-card">
-        <span class="label">Valor Inicial</span>
-        <span class="value">{{ simulationResult.valorInicial | currency:'BRL' }}</span>
-      </div>
-      <div class="summary-card highlight">
-        <span class="label">Valor Final</span>
-        <span class="value">{{ simulationResult.valorFinal | currency:'BRL' }}</span>
-      </div>
-      <div class="summary-card">
-        <span class="label">Rendimento Total</span>
-        <span class="value gain">{{ simulationResult.rendimentoTotal | currency:'BRL' }}</span>
-      </div>
-      <div class="summary-card">
-        <span class="label">Prazo</span>
-        <span class="value">{{ simulationResult.prazoMeses }} meses</span>
-      </div>
+      <mat-card class="summary-card">
+        <mat-card-content>
+          <span class="label">Valor Inicial</span>
+          <span class="value">{{ simulationResult.valorInicial | currency:'BRL' }}</span>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="summary-card highlight">
+        <mat-card-content>
+          <span class="label">Valor Final</span>
+          <span class="value">{{ simulationResult.valorFinal | currency:'BRL' }}</span>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="summary-card">
+        <mat-card-content>
+          <span class="label">Rendimento Total</span>
+          <span class="value gain">{{ simulationResult.rendimentoTotal | currency:'BRL' }}</span>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="summary-card">
+        <mat-card-content>
+          <span class="label">Prazo</span>
+          <span class="value">{{ simulationResult.prazoMeses }} meses</span>
+        </mat-card-content>
+      </mat-card>
     </div>
 
-    <div class="monthly-breakdown">
-      <h3>Evolução Mensal</h3>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Mês</th>
-              <th>Saldo</th>
-              <th>Rendimento</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let month of simulationResult.detalheMensal">
-              <td>{{ month.mes }}</td>
-              <td>{{ month.saldo | currency:'BRL' }}</td>
-              <td class="gain">{{ month.rendimento | currency:'BRL' }}</td>
-            </tr>
-          </tbody>
+    <mat-card class="monthly-breakdown">
+      <mat-card-header>
+        <mat-card-title>Evolução Mensal</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="simulationResult.detalheMensal" class="monthly-table">
+          <ng-container matColumnDef="mes">
+            <th mat-header-cell *matHeaderCellDef>Mês</th>
+            <td mat-cell *matCellDef="let month">{{ month.mes }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="saldo">
+            <th mat-header-cell *matHeaderCellDef>Saldo</th>
+            <td mat-cell *matCellDef="let month">{{ month.saldo | currency:'BRL' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="rendimento">
+            <th mat-header-cell *matHeaderCellDef>Rendimento</th>
+            <td mat-cell *matCellDef="let month" class="gain">{{ month.rendimento | currency:'BRL' }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['mes', 'saldo', 'rendimento']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['mes', 'saldo', 'rendimento']"></tr>
         </table>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
 
     <div class="actions">
-      <button class="btn-new-simulation" (click)="newSimulation()">
-        Nova Simulação
+      <button mat-button (click)="newSimulation()">
+        <mat-icon>refresh</mat-icon> Nova Simulação
       </button>
       <button 
-        class="btn-invest" 
+        mat-raised-button 
+        color="accent"
         (click)="proceedToInvest()"
         [disabled]="isInvesting">
+        <mat-icon>{{ isInvesting ? 'hourglass_empty' : 'trending_up' }}</mat-icon>
         {{ isInvesting ? 'Processando...' : 'Investir Agora' }}
       </button>
     </div>

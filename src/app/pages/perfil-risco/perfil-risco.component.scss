@@ -94,75 +94,49 @@
 }
 
 .pontuacao-card {
-  background: $branco;
-  border-radius: $border-radius-xlarge;
-  padding: $spacing-large $spacing-medium;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
-  border: 1px solid rgba($slate, 0.06);
+  background-color: $branco;
+  ::ng-deep .mat-mdc-card-header {
+    display: flex;
+    justify-content: center;
+    padding: $spacing-smaller $spacing-smaller $spacing-none;
+  }
+  
+  ::ng-deep .mat-mdc-card-content {
+    padding: $spacing-nano $spacing-smaller $spacing-smaller;
+  }
   
   .pontuacao-title {
     @include card-title;
     text-align: center;
-    color: $slate;
-    font-size: $text-large;
+    color: $charcoal;
+    font-size: $text-big;
     font-weight: $font-weight-semibold;
-    margin: 0 0 $spacing-medium 0;
-    letter-spacing: 0.5px;
+   
   }
   
   .pontuacao-score {
     text-align: center;
-    margin-bottom: $spacing-medium;
+    margin-bottom: $spacing-tiny;
     
     .score-number {
       @include part-title;
-      font-size: 5.5rem;
+      font-size: $heading-big;
       font-weight: $font-weight-bold;
       line-height: 1;
       letter-spacing: -3px;
       display: inline-block;
-      animation: countUp 1s ease-out;
     }
   }
   
   .pontuacao-progress {
     margin-bottom: $spacing-medium;
     
-    .progress-bar {
-      width: 100%;
-      height: 12px;
-      background: $cinza-200;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      
-      .progress-fill {
-        height: 100%;
-        border-radius: 10px;
-        transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        background: linear-gradient(90deg, currentColor 0%, color-mix(in srgb, currentColor 70%, white) 100%);
-        box-shadow: 0 0 10px currentColor;
-        position: relative;
-        
-        &::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 100%;
-          background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
-          border-radius: 10px;
-        }
-      }
-    }
-    
-    .progress-labels {
+    .progress-labels-top {
       display: flex;
       justify-content: space-between;
-      margin-top: $spacing-quark;
+      margin-bottom: $spacing-quark;
       padding: 0 $spacing-quark;
       
       .label-min,
@@ -173,18 +147,29 @@
         font-weight: $font-weight-regular;
       }
     }
+    
+    ::ng-deep .mat-mdc-progress-bar {
+      height: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      
+      .mdc-linear-progress__bar-inner {
+        border-radius: 10px;
+      }
+    }
   }
   
   .pontuacao-level {
     text-align: center;
     
-    .level-text {
-      @include card-title;
+    ::ng-deep .mat-mdc-chip {
       font-size: $heading-small;
       font-weight: $font-weight-bold;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      display: inline-block;
+      padding: $spacing-tiny $spacing-medium;
+      height: auto;
+      border-radius: $border-radius-medium;
     }
   }
 }
@@ -198,12 +183,7 @@
 }
 
 .profile-card {
-  @include card-base;
-  padding: $spacing-medium;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  background: $branco;
-  position: relative;
-  border: 1px solid transparent;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -217,8 +197,7 @@
     opacity: 1;
     transform: scale(1);
     filter: grayscale(0);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    border-color: rgba($azul-caixa, 0.2);
+    border: 2px solid $azul-caixa;
     z-index: 2;
   }
 
@@ -226,10 +205,29 @@
     opacity: 1;
     filter: grayscale(0);
     transform: translateY(-5px) scale(0.98);
-    box-shadow: $shadow-elevation-3;
     
     &.current {
       transform: translateY(-5px) scale(1);
+    }
+  }
+  
+  ::ng-deep .mat-mdc-card-header {
+    padding: $spacing-medium $spacing-medium $spacing-tiny;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  ::ng-deep .mat-mdc-card-content {
+    padding: $spacing-tiny $spacing-medium;
+    flex-grow: 1;
+  }
+  
+  ::ng-deep .mat-mdc-card-actions {
+    padding: $spacing-tiny $spacing-medium $spacing-medium;
+    
+    button {
+      width: 100%;
     }
   }
 }
@@ -241,7 +239,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto $spacing-small;
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   transform: rotate(-5deg);
   transition: transform 0.3s ease;
@@ -257,11 +254,8 @@
 }
 
 .card-title {
-  @include card-title;
   text-align: center;
-  color: $preto;
-  margin-bottom: $spacing-tiny;
-  font-size: $heading-small;
+  margin-top: $spacing-tiny;
 }
 
 .card-description {
@@ -270,7 +264,6 @@
   margin-bottom: $spacing-small;
   color: $slate;
   line-height: 1.6;
-  flex-grow: 1;
 }
 
 .card-features {
@@ -291,10 +284,12 @@
       margin-bottom: 0;
     }
 
-    .check {
+    .check-icon {
       color: $success-70;
-      font-weight: $font-weight-bold;
       flex-shrink: 0;
+      font-size: 1.25rem;
+      width: 1.25rem;
+      height: 1.25rem;
     }
   }
 }
@@ -345,21 +340,7 @@
 .profile-card:nth-child(2) .risk-bars .bar.filled { background: #FCBE05; }
 .profile-card:nth-child(3) .risk-bars .bar.filled { background: #D93636; }
 
-.current-badge {
-  @include card-text;
-  color: $branco;
-  background: $azul-caixa;
-  font-weight: $font-weight-bold;
-  text-align: center;
-  padding: $spacing-tiny;
-  border-radius: $border-radius-medium;
-  margin-top: $spacing-small;
-  font-size: $text-small;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 10px rgba($azul-caixa, 0.3);
-  animation: slideUp 0.5s ease-out;
-}
+
 
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(10px); }
