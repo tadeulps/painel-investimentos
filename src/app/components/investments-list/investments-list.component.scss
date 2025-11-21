@@ -78,13 +78,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: $spacing-micro;
     border-radius: $border-radius-large $border-radius-large 0 0;
 
     .product-info {
       flex: 1;
       min-width: 0;
+      text-align: center;
 
       .product-name {
         @include card-title;
@@ -156,6 +157,8 @@
         flex: 1;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        text-align: center;
         gap: $spacing-quark;
 
         &.full-width {
@@ -241,9 +244,34 @@
 }
 
 // Responsive
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+  .investments-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
   .investments-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $spacing-tiny;
+  }
+
+  .investment-card ::ng-deep .card-header {
+    padding: $spacing-tiny;
+    
+    .product-info {
+      .product-name {
+        font-size: $text-standard;
+      }
+      
+      .product-type {
+        font-size: $text-small;
+      }
+    }
+  }
+
+  .investment-card ::ng-deep .card-body {
+    padding: $spacing-small;
   }
 }
 
@@ -253,27 +281,105 @@
     padding-left: $spacing-tiny;
     padding-right: $spacing-tiny;
   }
-
+  mat-chip{
+    margin: 0 auto;
+  }
   .investments-grid {
     grid-template-columns: 1fr;
     gap: $spacing-tiny;
   }
-
   .investment-card {
     ::ng-deep .card-header {
-      flex-direction: column;
-      gap: $spacing-micro;
-
-      .risk-badge {
-        align-self: flex-start;
+      padding: $spacing-tiny;
+      
+      .product-info .product-name {
+        font-size: $text-standard;
+        white-space: normal;
+        word-break: break-word;
       }
     }
 
     ::ng-deep .card-body {
+      padding: $spacing-tiny;
+      
       .info-row {
         flex-direction: column;
         gap: $spacing-micro;
+        margin-bottom: $spacing-tiny;
+
+        .info-item {
+          .info-label {
+            font-size: $text-small;
+          }
+
+          .info-value {
+            font-size: $text-small;
+          }
+        }
       }
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .investments-list-section {
+    border-radius: $border-radius-medium;
+  }
+
+  .investment-card {
+    border-radius: $border-radius-medium;
+
+    ::ng-deep .card-header {
+      border-radius: $border-radius-medium $border-radius-medium 0 0;
+      padding: $spacing-nano;
+      flex-wrap: wrap;
+
+      .product-info {
+        flex: 1 1 100%;
+        margin-bottom: $spacing-quark;
+
+        .product-name {
+          font-size: $text-small;
+        }
+
+        .product-type {
+          font-size: $text-small;
+        }
+      }
+
+      ::ng-deep .mat-mdc-chip {
+        height: 20px;
+        font-size: $text-small;
+        
+        span {
+          font-size: $text-small;
+        }
+      }
+    }
+
+    ::ng-deep .card-body {
+      padding: $spacing-nano;
+
+      .info-row {
+        gap: $spacing-quark;
+        margin-bottom: $spacing-quark;
+
+        .info-item {
+          gap: 2px;
+
+          .info-label {
+            font-size: $text-small;
+          }
+
+          .info-value {
+            font-size: $text-small;
+          }
+        }
+      }
+    }
+  }
+
+  .show-more-container {
+    padding-top: $spacing-tiny;
   }
 }
