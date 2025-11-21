@@ -59,7 +59,6 @@ export class ProdutosComponent implements OnInit {
       return;
     }
 
-    // Load user profile first
     this.authService.getUserProfile(this.clienteId).subscribe({
       next: (userProfile) => {
         this.userRiskProfileId = userProfile.perfilRisco.id;
@@ -67,7 +66,7 @@ export class ProdutosComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erro ao carregar perfil do usuário:', error);
-        this.loadProducts(); // Load products anyway
+        this.loadProducts();
       }
     });
   }
@@ -94,11 +93,10 @@ export class ProdutosComponent implements OnInit {
       return;
     }
 
-    // Filter products based on user's risk profile ID
     this.recommendedProducts = this.allProducts
       .filter(product => product.riskProfileId === this.userRiskProfileId)
       .sort((a, b) => b.taxaAnual - a.taxaAnual)
-      .slice(0, 3); // Show top 3 recommended products
+      .slice(0, 3);
       console.log('Recommended Products:', this.recommendedProducts); 
   }
 
@@ -131,7 +129,6 @@ export class ProdutosComponent implements OnInit {
   }
 
   simulateInvestment(product: Product): void {
-    // Navigate to simulation page with product data
     console.log('Simulating investment for:', product);
     this.router.navigate(['/simulacao'], { 
       queryParams: { 

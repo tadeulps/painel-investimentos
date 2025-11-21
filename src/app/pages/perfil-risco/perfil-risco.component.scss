@@ -1,6 +1,5 @@
 @import "../../../styles/token.scss";
 
-// Screen reader only class
 .sr-only {
   position: absolute;
   width: 1px;
@@ -111,7 +110,6 @@
   }
 }
 
-// Pontuação Section
 .pontuacao-section {
   margin-bottom: $spacing-large;
   display: flex;
@@ -266,7 +264,6 @@
   }
 }
 
-// Profiles Grid
 .profiles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -280,7 +277,6 @@
   flex-direction: column;
   height: 100%;
   background-color: $branco;
-  // Non-active state
   opacity: 0.6;
   transform: scale(0.95);
   filter: grayscale(0.8);
@@ -464,7 +460,7 @@
       }
 
       &.filled {
-        background: currentColor; // Will inherit from parent or set via JS if needed, but here we use gradient logic
+        background: currentColor;
       }
     }
   }

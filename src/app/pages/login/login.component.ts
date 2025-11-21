@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
-        // Handle error
         this.isLoading = false;
         if (error.status === 401) {
           this.errorMessage = 'E-mail ou senha incorretos. Recupere as credenciais e tente novamente.';

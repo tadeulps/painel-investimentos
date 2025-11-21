@@ -34,7 +34,7 @@ interface RiskProfile {
   styleUrls: ['./perfil-risco.component.scss']
 })
 export class PerfilRiscoComponent implements OnInit {
-  currentIndex = 1; // Start with Moderado in center
+  currentIndex = 1; 
   selectedProfile: RiskProfile | null = null;
   userRiskProfileId: number | null = null;
   clienteId: number | null = null;
@@ -109,7 +109,7 @@ export class PerfilRiscoComponent implements OnInit {
   }
 
   animateScore(target: number): void {
-    const duration = 2000; // 2 seconds
+    const duration = 2000; 
     const steps = 60;
     const increment = target / steps;
     let current = 0;
@@ -135,7 +135,6 @@ export class PerfilRiscoComponent implements OnInit {
       this.isLoading = false;
       return;
     }
-    // Load user profile from API
     this.authService.getUserProfile(this.clienteId).subscribe({
       next: (userProfile) => {
         this.userRiskProfileId = userProfile.perfilRisco.id;
@@ -143,16 +142,14 @@ export class PerfilRiscoComponent implements OnInit {
         this.userName = userProfile.nome;
         console.log('User profile loaded:', userProfile);
         
-        // Animate score counter
         this.animateScore(this.userPontuacao);
         
-        // Set current index based on pontuacao
         if (this.userPontuacao <= 33) {
-          this.currentIndex = 0; // Conservador
+          this.currentIndex = 0; 
         } else if (this.userPontuacao <= 66) {
-          this.currentIndex = 1; // Moderado
+          this.currentIndex = 1; 
         } else {
-          this.currentIndex = 2; // Agressivo
+          this.currentIndex = 2; 
         }
         
         this.selectedProfile = this.profiles[this.currentIndex];
@@ -160,7 +157,6 @@ export class PerfilRiscoComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erro ao carregar perfil do usuário:', error);
-        // Fallback to default
         this.userPontuacao = 50;
         this.currentIndex = 1;
         this.selectedProfile = this.profiles[1];
