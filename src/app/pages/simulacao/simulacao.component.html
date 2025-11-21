@@ -105,9 +105,7 @@
   <!-- Step 2: Simulation Form (after product selected) -->
   <div *ngIf="selectedProduct" class="simulation-form-section">
     <mat-card class="selected-product-card">
-      <mat-card-header>
-        <mat-card-title>Produto Selecionado</mat-card-title>
-      </mat-card-header>
+     
       <mat-card-content>
         <div class="product-banner">
           <span class="product-name">{{ selectedProduct.nome }}</span>
@@ -117,9 +115,13 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button (click)="changeProduct()">
+        <app-caixa-button
+          variant="secondary"
+          [fullWidth]="true"
+          (clicked)="changeProduct()"
+        >
           <mat-icon>swap_horiz</mat-icon> Trocar Produto
-        </button>
+        </app-caixa-button>
       </mat-card-actions>
     </mat-card>
 

@@ -1,4 +1,4 @@
-@import '../../../styles/token.scss';
+@import "../../../styles/token.scss";
 
 .simulacao-page {
   max-width: 1200px;
@@ -55,9 +55,9 @@
   color: $azul-caixa;
   border-radius: $border-radius-circle;
   z-index: 2;
-  display: flex ;
+  display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   transition: all 0.3s ease;
   &:hover:not(:disabled) {
     background: $azul-caixa;
@@ -76,7 +76,6 @@
   width: 100%;
   max-width: 400px;
   height: 380px;
-
 }
 
 .product-card-mini {
@@ -232,15 +231,15 @@
   --mdc-chip-container-color: $success-70;
   --mdc-chip-outline-color: transparent;
   --mdc-chip-outline-width: 0;
-  
+
   span {
     font-size: $text-small;
     font-family: "CAIXAStd", sans-serif !important;
     border: none;
-      text-transform:uppercase ;
-      letter-spacing: 0.5px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px !important;
   }
-  
+
   color: $branco !important;
 
   &.risk-baixo {
@@ -250,7 +249,7 @@
 
   &.risk-medio {
     background: $attention-70 !important;
-     color: $branco !important;
+    color: $branco !important;
   }
 
   &.risk-alto {
@@ -351,7 +350,17 @@
 .selected-product-card {
   margin-bottom: $spacing-small;
   background: linear-gradient(135deg, $light-blue-highlight, $light-green);
+  box-shadow: $shadow-container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-tiny;
+  padding: $spacing-quark;
+  border-radius: $border-radius-medium;
 
+  ::ng-deep .mat-mdc-card-title {
+    font-family: "CaixaStd", sans-serif;
+  }
   .product-banner {
     display: flex;
     justify-content: space-between;
@@ -373,7 +382,8 @@
 
 .form-card {
   padding: $spacing-small;
-
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+  background-color: $branco;
   form {
     display: flex;
     flex-direction: column;
@@ -439,7 +449,7 @@
 
   .monthly-table {
     width: 100%;
-    
+
     .gain {
       color: $success-70;
       font-weight: $font-weight-semibold;
