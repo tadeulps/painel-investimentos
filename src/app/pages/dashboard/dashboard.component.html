@@ -34,28 +34,30 @@
     <div class="quick-indicators">
       <mat-card class="indicator-card investments">
         <mat-card-content>
-          <div class="card-icon">
-            <mat-icon>account_balance_wallet</mat-icon>
-          </div>
-          <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>account_balance_wallet</mat-icon>
+            </div>
             <span class="card-label">Valor Total Investido</span>
-            <span class="card-value">{{ summary.valorTotalInvestido | currency:'BRL' }}</span>
           </div>
+          <span class="card-value">{{ summary.valorTotalInvestido | currency:'BRL' }}</span>
         </mat-card-content>
       </mat-card>
 
       <mat-card class="indicator-card return">
         <mat-card-content>
-          <div class="card-icon">
-            <mat-icon>trending_up</mat-icon>
-          </div>
-          <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>trending_up</mat-icon>
+            </div>
             <span class="card-label">Rentabilidade Acumulada</span>
+          </div>
+          <div class="card-values">
             <span class="card-value" [class.positive]="summary.rentabilidadeAcumulada > 0" [class.negative]="summary.rentabilidadeAcumulada < 0">
               {{ summary.rentabilidadeAcumulada | currency:'BRL' }}
             </span>
             <span class="card-percentage" *ngIf="summary.valorTotalInvestido > 0">
-              {{ (summary.rentabilidadeAcumulada / summary.valorTotalInvestido * 100) | number:'1.2-2' }}%
+              {{ (summary.rentabilidadeAcumulada / summary.valorTotalInvestido * 100) | number:'1.2-2' }}% a.a.
             </span>
           </div>
         </mat-card-content>
@@ -63,25 +65,25 @@
 
       <mat-card class="indicator-card total">
         <mat-card-content>
-          <div class="card-icon">
-            <mat-icon>diamond</mat-icon>
-          </div>
-          <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>diamond</mat-icon>
+            </div>
             <span class="card-label">Valor Atual Total</span>
-            <span class="card-value">{{ summary.valorAtualTotal | currency:'BRL' }}</span>
           </div>
+          <span class="card-value">{{ summary.valorAtualTotal | currency:'BRL' }}</span>
         </mat-card-content>
       </mat-card>
 
       <mat-card class="indicator-card count">
         <mat-card-content>
-          <div class="card-icon">
-            <mat-icon>bar_chart</mat-icon>
-          </div>
-          <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>bar_chart</mat-icon>
+            </div>
             <span class="card-label">Investimentos Ativos</span>
-            <span class="card-value">{{ summary.numeroInvestimentos }}</span>
           </div>
+          <span class="card-value">{{ summary.numeroInvestimentos }}</span>
         </mat-card-content>
       </mat-card>
     </div>

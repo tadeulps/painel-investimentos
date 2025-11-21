@@ -1,4 +1,4 @@
-@import '../../../styles/token.scss';
+@import "../../../styles/token.scss";
 
 .dashboard-page {
   max-width: 1200px;
@@ -141,7 +141,9 @@
 .indicator-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   background-color: $branco;
+  border-radius: $border-radius-large;
   box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: $shadow-elevation-4;
@@ -149,53 +151,114 @@
 
   ::ng-deep .mat-mdc-card-content {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: $spacing-micro;
-    padding: $spacing-small;
+    padding: $spacing-tiny;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-nano;
   }
 
   .card-icon {
     flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     mat-icon {
-      font-size: 2.5rem;
-      width: 2.5rem;
-      height: 2.5rem;
-      color: $azul-caixa;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      color: $branco;
     }
   }
 
-  .card-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
   .card-label {
-    @include card-caption;
+    @include card-text;
     color: $slate;
-    margin-bottom: $spacing-quark;
+    font-weight: $font-weight-semibold;
+    font-size: $text-small;
   }
 
   .card-value {
     @include card-title;
-    color: $azul-caixa;
     font-size: $heading-tiny;
-    
-    &.positive {
-      color: $success-70;
-    }
-    
-    &.negative {
-      color: $negative-70;
-    }
+    margin-top: $spacing-quark;
+  }
+
+  .card-values {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-quark;
+    margin-top: $spacing-quark;
   }
 
   .card-percentage {
     @include card-text;
-    color: $success-70;
     font-weight: $font-weight-semibold;
-    margin-top: $spacing-quark;
+    font-size: $text-large;
+  }
+
+  // Investments card - Azul Caixa
+  &.investments {
+    .card-icon {
+      background: $azul-caixa;
+    }
+
+    .card-value {
+      color: $azul-caixa;
+    }
+  }
+
+  // Return card - Verde
+  &.return {
+    .card-icon {
+      background: $success-70;
+    }
+
+    .card-value {
+      color: $success-90;
+
+      &.positive {
+        color: $success-90;
+      }
+
+      &.negative {
+        color: $negative-70;
+      }
+    }
+
+    .card-percentage {
+      color: lighten($success-70, 15%);
+    }
+  }
+
+  // Total card - Turquesa
+  &.total {
+    .card-icon {
+      background: $turquesa-caixa;
+    }
+
+    .card-value {
+      color: $turquesa-caixa;
+    }
+  }
+
+  // Count card - Cinza/azul neutro
+  &.count {
+    .card-icon {
+      background: $slate;
+    }
+
+    .card-value {
+      color: $charcoal;
+    }
   }
 }
 
