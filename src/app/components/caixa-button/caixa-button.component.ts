@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./caixa-button.component.scss']
 })
 export class CaixaButtonComponent {
-  @Input() variant: 'primary' | 'secondary' | 'outlined' = 'primary';
+  @Input() variant: 'primary' | 'secondary' | 'outlined' | 'danger' = 'primary';
   @Input() disabled: boolean = false;
   @Input() fullWidth: boolean = false;
   @Input() icon?: string;

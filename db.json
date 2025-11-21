@@ -314,6 +314,24 @@
       "dataInicio": "2025-11-21",
       "prazoMeses": 22,
       "valorAtual": 232323
+    },
+    {
+      "id": 18,
+      "userId": 1,
+      "productId": 1,
+      "valor": 123123,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 232,
+      "valorAtual": 123123
+    },
+    {
+      "id": 19,
+      "userId": 1,
+      "productId": 1,
+      "valor": 2323,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 23,
+      "valorAtual": 2323
     }
   ]
 }

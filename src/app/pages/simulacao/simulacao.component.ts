@@ -11,8 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { CaixaButtonComponent } from '../../components/caixa-button/caixa-button.component';
+import { ConfirmInvestmentDialogComponent } from './confirm-investment-dialog.component';
 
 interface MonthlyDetail {
   mes: number;
@@ -41,6 +43,7 @@ interface SimulationResult {
     MatIconModule,
     MatChipsModule,
     MatTableModule,
+    MatDialogModule,
     PageHeaderComponent,
     CaixaButtonComponent
   ],
@@ -64,7 +67,8 @@ export class SimulacaoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private investmentService: InvestmentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {
     this.simulationForm = this.fb.group({
       valor: [null, [Validators.required, Validators.min(100)]],
@@ -244,6 +248,32 @@ export class SimulacaoComponent implements OnInit {
       return;
     }
 
+    // Open confirmation dialog
+    const dialogRef = this.dialog.open(ConfirmInvestmentDialogComponent, {
+      width: '500px',
+      maxWidth: '90vw',
+      data: {
+        productName: this.selectedProduct.nome,
+        valorInicial: this.simulationResult.valorInicial,
+        prazoMeses: this.simulationResult.prazoMeses,
+        valorFinal: this.simulationResult.valorFinal
+      },
+      disableClose: false,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.confirmInvestment();
+      }
+    });
+  }
+
+  private confirmInvestment(): void {
+    if (!this.selectedProduct || !this.simulationResult || !this.clienteId) {
+      return;
+    }
+
     this.isInvesting = true;
 
     this.investmentService.createInvestment(
@@ -254,8 +284,7 @@ export class SimulacaoComponent implements OnInit {
     ).subscribe({
       next: (response) => {
         this.isInvesting = false;
-        alert(`Investimento realizado com sucesso!\n\nProduto: ${this.selectedProduct!.nome}\nValor: R$ ${this.simulationResult!.valorInicial.toFixed(2)}\nPrazo: ${this.simulationResult!.prazoMeses} meses`);
-        
+     
         // Navigate to dashboard to see investments
         this.router.navigate(['/dashboard']);
       },

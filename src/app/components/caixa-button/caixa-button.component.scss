@@ -44,7 +44,7 @@
     box-shadow: $shadow-elevation-2;
 
     &:hover:not(:disabled) {
-      background: $oceano-start;
+      background:darken($azul-caixa, 8%);
       box-shadow: $shadow-elevation-3;
     }
 
@@ -64,6 +64,21 @@
 
     &:active:not(:disabled) {
       background: rgba($azul-caixa, 0.1);
+    }
+  }
+
+  &.danger {
+    background: $negative-90;
+    color: $branco;
+    box-shadow: $shadow-elevation-2;
+
+    &:hover:not(:disabled) {
+      background: darken($negative-90, 8%);
+      box-shadow: $shadow-elevation-3;
+    }
+
+    &:active:not(:disabled) {
+      background: darken($negative-90, 12%);
     }
   }
 
