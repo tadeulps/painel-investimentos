@@ -22,28 +22,37 @@
 
     <div class="products-grid">
       <mat-card *ngFor="let product of recommendedProducts" class="product-card recommended">
-        <mat-card-header>
-          <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
-        </mat-card-header>
-
         <mat-card-content>
-          <h3 class="product-name">{{ product.nome }}</h3>
+          <div class="card-header-custom">
+            <h3 class="product-name">{{ product.nome }}</h3>
+            <div class="risk-icon" [class]="'risk-icon-' + getRiskClass(product.risco)">
+              <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+            </div>
+          </div>
+
 
           <div class="product-details">
-            <div class="detail-item">
-              <span class="label">Rentabilidade</span>
-              <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
+              <div class="detail-item">
+              <span class="label">Tipo</span>
+              <span class="value">  {{ product.tipo }}</span>
             </div>
             <div class="detail-item">
-              <span class="label">Tipo</span>
-              <span class="value">{{ product.tipo }}</span>
+              <span class="label">Rentabilidade</span>
+              <span class="value rentabilidade">
+                <mat-icon class="trending-icon">trending_up</mat-icon>
+                {{ (product.taxaAnual * 100).toFixed(2) }}% a.a.
+              </span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Risco</span>
+              <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
             </div>
           </div>
         </mat-card-content>
 
         <mat-card-actions>
           <button mat-raised-button color="primary" (click)="simulateInvestment(product)">
-            <mat-icon>calculate</mat-icon> Simular
+            Simular Investimento
           </button>
         </mat-card-actions>
       </mat-card>
@@ -73,29 +82,34 @@
 
     <div class="products-grid">
       <mat-card *ngFor="let product of filteredProducts" class="product-card">
-        <mat-card-header>
-          <mat-chip [class]="'chip-' + getRiskClass(product.risco)">{{ product.tipo }}</mat-chip>
-          <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
-        </mat-card-header>
-
         <mat-card-content>
-          <h3 class="product-name">{{ product.nome }}</h3>
+          <div class="card-header-custom">
+            <h3 class="product-name">{{ product.nome }}</h3>
+            <div class="risk-icon" [class]="'risk-icon-' + getRiskClass(product.risco)">
+              <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+            </div>
+          </div>
+
+          <div class="product-type">Tipo  {{ product.tipo }}</div>
 
           <div class="product-details">
             <div class="detail-item">
               <span class="label">Rentabilidade</span>
-              <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}% a.a.</span>
+              <span class="value rentabilidade">
+                <mat-icon class="trending-icon">trending_up</mat-icon>
+                {{ (product.taxaAnual * 100).toFixed(2) }}% do CDI
+              </span>
             </div>
             <div class="detail-item">
-              <span class="label">Tipo</span>
-              <span class="value">{{ product.tipo }}</span>
+              <span class="label">Risco</span>
+              <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
             </div>
           </div>
         </mat-card-content>
 
         <mat-card-actions>
           <button mat-raised-button color="primary" (click)="simulateInvestment(product)">
-            <mat-icon>calculate</mat-icon> Simular
+            Simular Investimento
           </button>
         </mat-card-actions>
       </mat-card>

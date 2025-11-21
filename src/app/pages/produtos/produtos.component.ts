@@ -114,6 +114,18 @@ export class ProdutosComponent implements OnInit {
     return risco.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
+  getRiskIcon(risco: string): string {
+    const riskLower = risco.toLowerCase();
+    if (riskLower.includes('baixo')) {
+      return 'shield';
+    } else if (riskLower.includes('medio') || riskLower.includes('médio')) {
+      return 'balance';
+    } else if (riskLower.includes('alto')) {
+      return 'rocket_launch';
+    }
+    return 'show_chart';
+  }
+
   simulateInvestment(product: Product): void {
     // Navigate to simulation page with product data
     console.log('Simulating investment for:', product);
