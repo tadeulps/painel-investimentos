@@ -15,9 +15,26 @@
   padding: $spacing-micro $spacing-tiny;
 }
 
-.logo img {
-  height: 16px;
-  display: block;
+.logo {
+  a {
+    display: flex;
+    align-items: center;
+    gap: $spacing-micro;
+  }
+
+  img {
+    height: 16px;
+    display: block;
+  }
+
+  .app-title {
+    color: $branco;
+    font-family: $font-light;
+    font-weight: $font-weight-light;
+    font-size: $text-large;
+    letter-spacing: 0.3px;
+    font-style: italic;
+  }
 }
 
 .main-nav ul {

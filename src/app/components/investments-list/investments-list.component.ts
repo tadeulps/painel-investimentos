@@ -6,11 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { Investment } from '../../services/investment.service';
+import { CaixaButtonComponent } from '../caixa-button/caixa-button.component';
 
 @Component({
   selector: 'app-investments-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatCardModule, MatButtonModule, MatChipsModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatCardModule, MatButtonModule, MatChipsModule, MatIconModule, CaixaButtonComponent],
   templateUrl: './investments-list.component.html',
   styleUrls: ['./investments-list.component.scss']
 })

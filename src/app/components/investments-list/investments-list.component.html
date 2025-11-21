@@ -72,11 +72,12 @@
 
     <!-- Ver Mais Button -->
     <div *ngIf="hasMore" class="show-more-container">
-      <button mat-stroked-button color="primary" class="btn-show-more" (click)="toggleShowAll()">
-        <span *ngIf="!showAll">Ver Mais ({{ investments.length - displayLimit }} restantes)</span>
-        <span *ngIf="showAll">Ver Menos</span>
-        <mat-icon>{{ showAll ? 'expand_less' : 'expand_more' }}</mat-icon>
-      </button>
+      <app-caixa-button
+        [variant]="showAll ? 'outlined' : 'secondary'"
+        [icon]="showAll ? 'expand_less' : 'expand_more'"
+        (clicked)="toggleShowAll()">
+        {{ showAll ? 'Ver Menos' : 'Ver Mais (' + (investments.length - displayLimit) + ' restantes)' }}
+      </app-caixa-button>
     </div>
   </mat-card-content>
 </mat-card>
