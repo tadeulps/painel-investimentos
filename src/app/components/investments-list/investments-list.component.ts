@@ -44,13 +44,13 @@ export class InvestmentsListComponent {
   getRiskClass(risk: string): string {
     const riskLower = risk.toLowerCase();
     if (riskLower.includes('baixo') || riskLower.includes('conservador')) {
-      return 'low';
+      return 'baixo';
     } else if (riskLower.includes('médio') || riskLower.includes('moderado')) {
-      return 'medium';
+      return 'medio';
     } else if (riskLower.includes('alto') || riskLower.includes('agressivo')) {
-      return 'high';
+      return 'alto';
     }
-    return 'medium';
+    return 'medio';
   }
 
   getRiskIcon(risk: string): string {

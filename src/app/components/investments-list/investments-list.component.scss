@@ -1,8 +1,10 @@
-@import '../../../styles/token.scss';
+@import "../../../styles/token.scss";
 
 .investments-list-section {
   margin-bottom: $spacing-small;
-
+  background-color: $branco;
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+  border-radius: $border-radius-xlarge;
   ::ng-deep .mat-mdc-card-header {
     padding: $spacing-small $spacing-small $spacing-tiny;
   }
@@ -57,8 +59,10 @@
 }
 
 .investment-card {
+  background-color: $branco;
   transition: all 0.3s ease;
-
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+  border-radius: $border-radius-large;
   &:hover {
     box-shadow: $shadow-elevation-3;
     transform: translateY(-2px);
@@ -76,6 +80,7 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: $spacing-micro;
+    border-radius: $border-radius-large $border-radius-large 0 0;
 
     .product-info {
       flex: 1;
@@ -97,33 +102,40 @@
       }
     }
 
-    .risk-badge {
-      flex-shrink: 0;
-
-      .mat-mdc-chip {
-        background: rgba($branco, 0.2);
-        color: $branco;
-        backdrop-filter: blur(10px);
+    ::ng-deep .mat-mdc-chip {
+      font-size: $text-small;
+      font-weight: $font-weight-semibold;
+      height: 24px;
+      padding: 0 $spacing-nano;
+      --mdc-chip-label-text-color: $branco;
+      --mdc-chip-container-color: $success-70;
+      --mdc-chip-outline-color: transparent;
+      --mdc-chip-outline-width: 0;
+      --mdc-chip-font-family: "CAIXAStd", sans-serif !important;
+      text-transform: uppercase;
+      span {
         font-size: $text-small;
-        font-weight: $font-weight-semibold;
-
-        mat-icon {
-          font-size: 1rem;
-          width: 1rem;
-          height: 1rem;
-        }
+        font-family: "CAIXAStd", sans-serif !important;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px !important;
       }
 
-      &.risk-low .mat-mdc-chip {
-        border: 1px solid rgba($success-70, 0.5);
+      color: $branco !important;
+
+      &.risk-baixo {
+        background: $success-70 !important;
+        color: $branco !important;
       }
 
-      &.risk-medium .mat-mdc-chip {
-        border: 1px solid rgba($attention-70, 0.5);
+      &.risk-medio {
+        background: $attention-70 !important;
+        color: $branco !important;
       }
 
-      &.risk-high .mat-mdc-chip {
-        border: 1px solid rgba($negative-70, 0.5);
+      &.risk-alto {
+        background: $negative-70 !important;
+        color: $branco !important;
       }
     }
   }

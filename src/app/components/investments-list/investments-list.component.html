@@ -20,12 +20,10 @@
             <mat-card-title class="product-name">{{ investment.produto?.nome }}</mat-card-title>
             <mat-card-subtitle class="product-type">{{ investment.produto?.tipo }}</mat-card-subtitle>
           </div>
-          <mat-chip-set class="risk-badge" [class]="'risk-' + getRiskClass(investment.produto?.risco || 'Médio')">
-            <mat-chip>
-              <mat-icon>{{ getRiskIcon(investment.produto?.risco || 'Médio') }}</mat-icon>
-              {{ investment.produto?.risco }}
-            </mat-chip>
-          </mat-chip-set>
+           <mat-chip [class]="'risk-' + getRiskClass(investment.produto?.risco || 'Médio')">{{
+                  investment.produto?.risco
+                }}</mat-chip>
+         
         </mat-card-header>
 
         <!-- Card Body -->
@@ -66,20 +64,9 @@
           </div>
         </div>
 
-        <div class="info-row">
-          <div class="info-item full-width">
-            <span class="info-label">Liquidez</span>
-            <span class="info-value">{{ investment.produto?.liquidez }}</span>
-          </div>
-        </div>
         </mat-card-content>
 
-        <!-- Card Footer -->
-        <mat-card-actions class="card-footer">
-          <button mat-raised-button color="primary" class="btn-details" routerLink="/simulacao" [queryParams]="{ productId: investment.produto?.id }">
-            Ver Detalhes
-          </button>
-        </mat-card-actions>
+
       </mat-card>
     </div>
 
