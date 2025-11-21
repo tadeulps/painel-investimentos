@@ -13,12 +13,14 @@
       <mat-card-content>
         <div class="welcome-section">
           <h1 class="greeting">{{ getGreeting() }}, {{ userProfile.nome }}!</h1>
-          <p class="subtitle">Acompanhe seus investimentos em tempo real</p>
+          <p class="subtitle">Simule e invista com segurança, tudo num só lugar.</p>
         </div>
 
         <mat-chip-set class="risk-profile-badge" [class]="'profile-' + getRiskProfileClass()">
           <mat-chip>
-            <mat-icon>{{ getRiskProfileIcon() }}</mat-icon>
+            <div class="card-icon" [class]="'icon-' + getRiskProfileClass()">
+              <mat-icon>{{ getRiskProfileIcon() }}</mat-icon>
+            </div>
             <div class="profile-info">
               <span class="profile-label">Perfil de Risco</span>
               <span class="profile-name">{{ userProfile.perfilRisco.name }}</span>

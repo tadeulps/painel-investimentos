@@ -3,8 +3,9 @@
 .dashboard-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: $spacing-large $spacing-tiny;
+  padding: $spacing-large $spacing-small;
   min-height: calc(100vh - 70px);
+  background-color: $background-default;
 }
 
 .loading-container {
@@ -26,7 +27,8 @@
   margin-bottom: $spacing-small;
   background: linear-gradient(135deg, $azul-caixa, $oceano-end);
   color: $branco;
-
+  box-shadow: $shadow-elevation-soft;
+  border-radius: $border-radius-xlarge;
   ::ng-deep .mat-mdc-card-content {
     display: flex;
     justify-content: space-between;
@@ -67,11 +69,34 @@
       align-items: center;
       gap: $spacing-micro;
     }
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: $shadow-elevation-2;
 
     mat-icon {
-      font-size: 2rem;
-      width: 2rem;
-      height: 2rem;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      color: $branco;
+    }
+
+    &.icon-conservador {
+      background: $green-conservador;
+    }
+
+    &.icon-moderado {
+      background: $yellow-moderado;
+    }
+
+    &.icon-agressivo {
+      background: $red-agressivo;
     }
   }
 
@@ -115,7 +140,8 @@
 
 .indicator-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
+  background-color: $branco;
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
   &:hover {
     transform: translateY(-4px);
     box-shadow: $shadow-elevation-4;

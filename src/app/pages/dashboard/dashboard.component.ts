@@ -133,15 +133,15 @@ export class DashboardComponent implements OnInit {
   }
 
   getRiskProfileIcon(): string {
-    if (!this.userProfile) return '📊';
+    if (!this.userProfile) return 'show_chart';
     
     const profileName = this.userProfile.perfilRisco.name.toLowerCase();
     
-    if (profileName.includes('conservador')) return '🛡️';
-    if (profileName.includes('moderado')) return '⚖️';
-    if (profileName.includes('agressivo')) return '🚀';
+    if (profileName.includes('conservador')) return 'shield';
+    if (profileName.includes('moderado')) return 'balance';
+    if (profileName.includes('agressivo')) return 'rocket_launch';
     
-    return '📊';
+    return 'show_chart';
   }
 
   getGreeting(): string {
