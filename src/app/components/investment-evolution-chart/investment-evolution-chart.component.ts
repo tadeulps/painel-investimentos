@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 import { Investment } from '../../services/investment.service';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
@@ -8,7 +9,7 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-investment-evolution-chart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './investment-evolution-chart.component.html',
   styleUrls: ['./investment-evolution-chart.component.scss']
 })

@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 import { Investment } from '../../services/investment.service';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
@@ -15,7 +16,7 @@ interface ProductTypeData {
 @Component({
   selector: 'app-product-distribution-chart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './product-distribution-chart.component.html',
   styleUrls: ['./product-distribution-chart.component.scss']
 })

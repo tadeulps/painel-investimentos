@@ -5,7 +5,8 @@
   background: $branco;
   border-radius: $border-radius-large;
   padding: $spacing-small;
-  box-shadow: $shadow-elevation-2;
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+
 
   .section-title {
     @include part-title;
