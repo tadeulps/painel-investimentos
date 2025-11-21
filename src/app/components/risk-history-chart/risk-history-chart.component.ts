@@ -107,7 +107,6 @@ export class RiskHistoryChartComponent implements OnInit, OnDestroy {
               label: (context: any) => {
                 const dataPoint = this.historyData[context.dataIndex];
                 return [
-                  `Perfil: ${dataPoint.riskProfileName}`,
                   `Pontuação: ${dataPoint.pontuacao}`
                 ];
               }

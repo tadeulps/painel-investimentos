@@ -5,7 +5,7 @@
       "name": "Tadeu Lopes",
       "email": "tadeu@caixa.com",
       "password": "123456",
-      "riskProfileId": 3
+      "riskProfileId": 2
     },
     {
       "id": 2,
@@ -167,7 +167,7 @@
       "userId": 1,
       "productId": 1,
       "valor": 5000,
-      "dataInicio": "2024-01-15",
+      "dataInicio": "2024-02-15",
       "prazoMeses": 12,
       "valorAtual": 5300
     },
@@ -176,302 +176,160 @@
       "userId": 1,
       "productId": 2,
       "valor": 10000,
-      "dataInicio": "2024-03-01",
+      "dataInicio": "2024-04-10",
       "prazoMeses": 24,
       "valorAtual": 10950
     },
     {
       "id": 3,
       "userId": 1,
-      "productId": 7,
-      "valor": 1223,
-      "dataInicio": "2025-11-17",
-      "prazoMeses": 22,
-      "valorAtual": 1223
+      "productId": 3,
+      "valor": 8000,
+      "dataInicio": "2024-06-05",
+      "prazoMeses": 18,
+      "valorAtual": 8720
     },
     {
       "id": 4,
       "userId": 1,
-      "productId": 3,
-      "valor": 8000,
-      "dataInicio": "2024-05-10",
-      "prazoMeses": 18,
-      "valorAtual": 8600
+      "productId": 4,
+      "valor": 3500,
+      "dataInicio": "2024-08-20",
+      "prazoMeses": 36,
+      "valorAtual": 3680
     },
     {
       "id": 5,
       "userId": 1,
-      "productId": 4,
-      "valor": 3500,
-      "dataInicio": "2024-07-20",
-      "prazoMeses": 36,
-      "valorAtual": 3720
+      "productId": 5,
+      "valor": 7500,
+      "dataInicio": "2024-10-12",
+      "prazoMeses": 24,
+      "valorAtual": 7725
     },
     {
       "id": 6,
       "userId": 1,
-      "productId": 2,
+      "productId": 6,
       "valor": 2000,
-      "dataInicio": "2024-09-01",
+      "dataInicio": "2024-12-01",
       "prazoMeses": 12,
-      "valorAtual": 2100
+      "valorAtual": 2015
     },
     {
       "id": 7,
       "userId": 1,
-      "productId": 5,
-      "valor": 7500,
-      "dataInicio": "2024-10-05",
-      "prazoMeses": 48,
-      "valorAtual": 7900
+      "productId": 7,
+      "valor": 4200,
+      "dataInicio": "2025-02-14",
+      "prazoMeses": 24,
+      "valorAtual": 4580
     },
     {
       "id": 8,
       "userId": 1,
-      "productId": 3,
-      "valor": 4200,
-      "dataInicio": "2025-01-10",
-      "prazoMeses": 24,
-      "valorAtual": 4350
+      "productId": 9,
+      "valor": 15000,
+      "dataInicio": "2025-05-10",
+      "prazoMeses": 36,
+      "valorAtual": 16350
     },
     {
       "id": 9,
       "userId": 1,
-      "productId": 1,
-      "valor": 6200,
-      "dataInicio": "2025-03-01",
-      "prazoMeses": 18,
-      "valorAtual": 6480
+      "productId": 10,
+      "valor": 12000,
+      "dataInicio": "2025-08-22",
+      "prazoMeses": 24,
+      "valorAtual": 12600
     },
     {
       "id": 10,
       "userId": 1,
-      "productId": 2,
-      "valor": 3000,
-      "dataInicio": "2025-05-22",
-      "prazoMeses": 12,
-      "valorAtual": 3100
-    },
-    {
-      "id": 11,
-      "userId": 1,
-      "productId": 4,
-      "valor": 555,
-      "dataInicio": "2025-11-18",
-      "prazoMeses": 222,
-      "valorAtual": 555
-    },
-    {
-      "id": 12,
-      "userId": 1,
-      "productId": 9,
-      "valor": 11123,
-      "dataInicio": "2025-11-18",
-      "prazoMeses": 23,
-      "valorAtual": 11123
-    },
-    {
-      "id": 13,
-      "userId": 1,
       "productId": 11,
-      "valor": 123,
-      "dataInicio": "2025-11-18",
-      "prazoMeses": 22,
-      "valorAtual": 123
-    },
-    {
-      "id": 14,
-      "userId": 1,
-      "productId": 12,
-      "valor": 23232,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 232,
-      "valorAtual": 23232
-    },
-    {
-      "id": 15,
-      "userId": 1,
-      "productId": 1,
-      "valor": 2323233,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 233,
-      "valorAtual": 2323233
-    },
-    {
-      "id": 16,
-      "userId": 1,
-      "productId": 1,
-      "valor": 2323,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 233,
-      "valorAtual": 2323
-    },
-    {
-      "id": 17,
-      "userId": 1,
-      "productId": 8,
-      "valor": 232323,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 22,
-      "valorAtual": 232323
-    },
-    {
-      "id": 18,
-      "userId": 1,
-      "productId": 1,
-      "valor": 123123,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 232,
-      "valorAtual": 123123
-    },
-    {
-      "id": 19,
-      "userId": 1,
-      "productId": 1,
-      "valor": 2323,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 23,
-      "valorAtual": 2323
-    },
-    {
-      "id": 20,
-      "userId": 1,
-      "productId": 9,
-      "valor": 232323,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 22,
-      "valorAtual": 232323
-    },
-    {
-      "id": 21,
-      "userId": 1,
-      "productId": 9,
-      "valor": 23232,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 22,
-      "valorAtual": 23232
-    },
-    {
-      "id": 22,
-      "userId": 1,
-      "productId": 8,
-      "valor": 2323,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 23,
-      "valorAtual": 2323
-    },
-    {
-      "id": 23,
-      "userId": 1,
-      "productId": 1,
-      "valor": 2323,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 22,
-      "valorAtual": 2323
-    },
-    {
-      "id": 24,
-      "userId": 1,
-      "productId": 9,
-      "valor": 23232332,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 232,
-      "valorAtual": 23232332
-    },
-    {
-      "id": 25,
-      "userId": 1,
-      "productId": 1,
-      "valor": 2333,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 22,
-      "valorAtual": 2333
+      "valor": 6500,
+      "dataInicio": "2025-11-05",
+      "prazoMeses": 18,
+      "valorAtual": 6565
     }
   ],
   "pontuacaoHistory": [
     {
       "id": 1,
       "clienteId": 1,
-      "pontuacao": 8,
+      "pontuacao": 25,
       "riskProfileId": 1,
-      "timestamp": "2025-01-15T10:23:45.123Z"
+      "timestamp": "2024-02-15T10:30:00.000Z"
     },
     {
       "id": 2,
       "clienteId": 1,
-      "pontuacao": 10,
+      "pontuacao": 32,
       "riskProfileId": 1,
-      "timestamp": "2025-02-28T14:12:33.456Z"
+      "timestamp": "2024-04-10T14:15:00.000Z"
     },
     {
       "id": 3,
       "clienteId": 1,
-      "pontuacao": 12,
-      "riskProfileId": 1,
-      "timestamp": "2025-04-10T09:45:21.789Z"
+      "pontuacao": 45,
+      "riskProfileId": 2,
+      "timestamp": "2024-06-05T09:45:00.000Z"
     },
     {
       "id": 4,
       "clienteId": 1,
-      "pontuacao": 15,
+      "pontuacao": 52,
       "riskProfileId": 2,
-      "timestamp": "2025-05-22T16:30:15.234Z"
+      "timestamp": "2024-08-20T11:20:00.000Z"
     },
     {
       "id": 5,
       "clienteId": 1,
-      "pontuacao": 18,
+      "pontuacao": 58,
       "riskProfileId": 2,
-      "timestamp": "2025-06-18T11:20:42.567Z"
+      "timestamp": "2024-10-12T16:00:00.000Z"
     },
     {
       "id": 6,
       "clienteId": 1,
-      "pontuacao": 16,
+      "pontuacao": 63,
       "riskProfileId": 2,
-      "timestamp": "2025-07-30T08:15:33.890Z"
+      "timestamp": "2024-12-01T13:30:00.000Z"
     },
     {
       "id": 7,
       "clienteId": 1,
-      "pontuacao": 20,
-      "riskProfileId": 2,
-      "timestamp": "2025-08-25T13:45:12.345Z"
+      "pontuacao": 70,
+      "riskProfileId": 3,
+      "timestamp": "2025-02-14T10:45:00.000Z"
     },
     {
       "id": 8,
       "clienteId": 1,
-      "pontuacao": 22,
+      "pontuacao": 78,
       "riskProfileId": 3,
-      "timestamp": "2025-09-14T10:30:25.678Z"
+      "timestamp": "2025-05-10T15:20:00.000Z"
     },
     {
       "id": 9,
       "clienteId": 1,
-      "pontuacao": 19,
-      "riskProfileId": 2,
-      "timestamp": "2025-10-08T15:22:18.901Z"
+      "pontuacao": 85,
+      "riskProfileId": 3,
+      "timestamp": "2025-08-22T12:10:00.000Z"
     },
     {
       "id": 10,
       "clienteId": 1,
-      "pontuacao": 17,
-      "riskProfileId": 2,
-      "timestamp": "2025-11-05T12:18:45.234Z"
+      "pontuacao": 70,
+      "riskProfileId": 3,
+      "timestamp": "2025-11-05T09:00:00.000Z"
     },
     {
       "id": 11,
       "clienteId": 1,
-      "pontuacao": 14,
-      "riskProfileId": 1,
-      "timestamp": "2025-11-21T06:57:14.875Z"
-    },
-    {
-      "id": 12,
-      "clienteId": 1,
-      "pontuacao": 90,
-      "riskProfileId": 3,
-      "timestamp": "2025-11-21T06:59:59.190Z"
+      "pontuacao": 50,
+      "riskProfileId": 2,
+      "timestamp": "2025-11-21T07:58:16.563Z"
     }
   ]
 }
