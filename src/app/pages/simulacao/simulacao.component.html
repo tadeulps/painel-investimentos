@@ -31,31 +31,41 @@
           [class.next]="i > currentProductIndex"
           (click)="selectProduct(product)">
           
-          <mat-card-header>
-            <mat-chip [class]="'chip-' + getRiskClass(product.risco)">{{ product.tipo }}</mat-chip>
-          </mat-card-header>
-          
           <mat-card-content>
-            <h3>{{ product.nome }}</h3>
-            
-            <div class="product-info">
-              <div class="info-item">
-                <span class="label">Rentabilidade:</span>
-                <span class="value">{{ (product.taxaAnual * 100).toFixed(2) }}%</span>
+            <div class="card-header-custom">
+              <h3 class="product-name">{{ product.nome }}</h3>
+              <div class="risk-icon" [class]="'risk-icon-' + getRiskClass(product.risco)">
+                <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
               </div>
-              <div class="info-item">
-                <span class="label">Risco:</span>
-                <span class="value risk" [class]="'risk-' + getRiskClass(product.risco)">
-                  {{ product.risco }}
+            </div>
+            
+            <div class="product-details">
+              <div class="detail-item">
+                <span class="label">Tipo</span>
+                <span class="value">{{ product.tipo }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Rentabilidade</span>
+                <span class="value rentabilidade">
+                  <mat-icon class="trending-icon">trending_up</mat-icon>
+                  {{ (product.taxaAnual * 100).toFixed(2) }}% a.a.
                 </span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Risco</span>
+                <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
               </div>
             </div>
           </mat-card-content>
 
           <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="selectProduct(product)">
-              <mat-icon>check_circle</mat-icon> Selecionar
-            </button>
+            <app-caixa-button 
+              variant="secondary" 
+              [fullWidth]="true"
+              icon="check_circle"
+              (clicked)="selectProduct(product)">
+              Selecionar
+            </app-caixa-button>
           </mat-card-actions>
         </mat-card>
       </div>
@@ -101,7 +111,7 @@
     <h2 class="section-title">Dados da Simulação</h2>
 
     <mat-card class="form-card">
-      <form [formGroup]="simulationForm" (ngSubmit)="simulate()">
+      <form [formGroup]="simulationForm" (ngSubmit)="$event.preventDefault()">
         <mat-form-field appearance="outline">
           <mat-label>Valor do Investimento (R$)</mat-label>
           <input 
@@ -133,13 +143,14 @@
           </mat-error>
         </mat-form-field>
 
-        <button 
-          mat-raised-button 
-          color="primary"
-          type="submit"
-          [disabled]="simulationForm.invalid">
-          <mat-icon>calculate</mat-icon> Simular Investimento
-        </button>
+        <app-caixa-button 
+          variant="secondary"
+          [fullWidth]="true"
+          icon="calculate"
+          [disabled]="simulationForm.invalid"
+          (clicked)="simulate()">
+          Simular Investimento
+        </app-caixa-button>
       </form>
     </mat-card>
   </div>
@@ -206,14 +217,13 @@
       <button mat-button (click)="newSimulation()">
         <mat-icon>refresh</mat-icon> Nova Simulação
       </button>
-      <button 
-        mat-raised-button 
-        color="accent"
-        (click)="proceedToInvest()"
-        [disabled]="isInvesting">
-        <mat-icon>{{ isInvesting ? 'hourglass_empty' : 'trending_up' }}</mat-icon>
+      <app-caixa-button 
+        variant="primary"
+        [icon]="isInvesting ? 'hourglass_empty' : 'trending_up'"
+        [disabled]="isInvesting"
+        (clicked)="proceedToInvest()">
         {{ isInvesting ? 'Processando...' : 'Investir Agora' }}
-      </button>
+      </app-caixa-button>
     </div>
   </div>
 </section>

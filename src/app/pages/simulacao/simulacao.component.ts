@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { CaixaButtonComponent } from '../../components/caixa-button/caixa-button.component';
 
 interface MonthlyDetail {
   mes: number;
@@ -40,7 +41,8 @@ interface SimulationResult {
     MatIconModule,
     MatChipsModule,
     MatTableModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CaixaButtonComponent
   ],
   templateUrl: './simulacao.component.html',
   styleUrls: ['./simulacao.component.scss']
@@ -125,6 +127,18 @@ export class SimulacaoComponent implements OnInit {
 
   getRiskClass(risco: string): string {
     return risco.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  getRiskIcon(risco: string): string {
+    const riskLower = risco.toLowerCase();
+    if (riskLower.includes('baixo')) {
+      return 'shield';
+    } else if (riskLower.includes('medio') || riskLower.includes('médio')) {
+      return 'balance';
+    } else if (riskLower.includes('alto')) {
+      return 'rocket_launch';
+    }
+    return 'show_chart';
   }
 
   simulate(): void {

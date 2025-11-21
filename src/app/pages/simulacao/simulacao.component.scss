@@ -3,8 +3,9 @@
 .simulacao-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: $spacing-large $spacing-tiny;
+  padding: $spacing-large $spacing-small;
   min-height: calc(100vh - 70px);
+  background-color: $background-default;
 }
 
 .page-header {
@@ -88,6 +89,9 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.5;
   pointer-events: none;
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+  background-color: $branco;
+  border-radius: $border-radius-large;
 
   &.active {
     transform: translateX(-50%) scale(1);
@@ -108,42 +112,142 @@
     z-index: 0;
   }
 
-  ::ng-deep .mat-mdc-card-header {
-    padding: $spacing-tiny;
-  }
-
   ::ng-deep .mat-mdc-card-content {
-    padding: $spacing-quark $spacing-tiny;
+    padding: $spacing-small;
   }
 
   ::ng-deep .mat-mdc-card-actions {
     padding: $spacing-quark $spacing-tiny $spacing-tiny;
 
-    button {
+    button,
+    app-caixa-button {
       width: 100%;
     }
   }
 
-  h3 {
+  .card-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $spacing-quark;
+  }
+
+  .product-name {
     @include card-title;
-    color: $azul-caixa;
-    margin: $spacing-quark 0;
-    text-align: center;
+    color: $charcoal;
+    margin: 0;
+    font-size: $text-big;
+    font-weight: $font-weight-semibold;
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .risk-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: $spacing-micro;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      color: $branco;
+    }
+
+    &.risk-icon-baixo {
+      background: $success-70;
+    }
+
+    &.risk-icon-medio {
+      background: $attention-70;
+    }
+
+    &.risk-icon-alto {
+      background: $negative-70;
+    }
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-micro;
+    margin-bottom: $spacing-tiny;
+  }
+
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .label {
+      @include card-text;
+      color: $slate;
+      font-size: $text-standard;
+    }
+
+    .value {
+      @include card-text;
+      font-weight: $font-weight-semibold;
+      color: $charcoal;
+      font-size: $text-standard;
+      display: flex;
+      align-items: center;
+      gap: $spacing-quark;
+
+      &.rentabilidade {
+        color: $success-70;
+      }
+    }
+
+    .trending-icon {
+      color: $success-70;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+    mat-chip {
+      margin: 0;
+    }
   }
 }
 
 ::ng-deep .mat-mdc-chip {
-  &.chip-baixo {
+  font-size: $text-small;
+  font-weight: $font-weight-semibold;
+  height: 24px;
+  padding: 0 $spacing-micro;
+  --mdc-chip-label-text-color: $branco;
+  --mdc-chip-container-color: $success-70;
+  --mdc-chip-outline-color: transparent;
+  --mdc-chip-outline-width: 0;
+  
+  span {
+    font-size: $text-small;
+    font-family: "CAIXAStd", sans-serif !important;
+    border: none;
+      text-transform:uppercase ;
+      letter-spacing: 0.5px !important;
+  }
+  
+  color: $branco !important;
+
+  &.risk-baixo {
     background: $success-70 !important;
     color: $branco !important;
   }
 
-  &.chip-medio {
+  &.risk-medio {
     background: $attention-70 !important;
     color: $charcoal !important;
   }
 
-  &.chip-alto {
+  &.risk-alto {
     background: $negative-70 !important;
     color: $branco !important;
   }
