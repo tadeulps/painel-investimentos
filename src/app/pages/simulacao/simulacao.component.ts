@@ -55,6 +55,7 @@ export class SimulacaoComponent implements OnInit {
   isLoading = false;
   isInvesting = false;
   clienteId: number | null = null;
+  showAllMonths = false;
 
   availableProducts: Product[] = [];
 
@@ -123,6 +124,7 @@ export class SimulacaoComponent implements OnInit {
     this.selectedProduct = null;
     this.simulationResult = null;
     this.simulationForm.reset();
+    this.showAllMonths = false;
   }
 
   getRiskClass(risco: string): string {
@@ -177,6 +179,8 @@ export class SimulacaoComponent implements OnInit {
       detalheMensal
     };
 
+    this.showAllMonths = false;
+
     // Scroll to results
     setTimeout(() => {
       document.querySelector('.simulation-results-section')?.scrollIntoView({ 
@@ -185,9 +189,52 @@ export class SimulacaoComponent implements OnInit {
     }, 100);
   }
 
+  get displayedMonths(): any[] {
+    if (!this.simulationResult) return [];
+    
+    const months = this.simulationResult.detalheMensal;
+    
+    // If 20 or fewer months, or showAllMonths is true, return all
+    if (months.length <= 20 || this.showAllMonths) {
+      return months;
+    }
+    
+    // Otherwise return first 10, separator, and last 10
+    const first10 = months.slice(0, 10);
+    const last10 = months.slice(-10);
+    const separator = { 
+      mes: -1, 
+      saldo: 0, 
+      rendimento: 0,
+      isSeparator: true,
+      hiddenCount: this.hiddenMonthsCount
+    };
+    return [...first10, separator, ...last10];
+  }
+
+  get shouldShowExpandButton(): boolean {
+    return this.simulationResult !== null && 
+           this.simulationResult.detalheMensal.length > 20 && 
+           !this.showAllMonths;
+  }
+
+  get hiddenMonthsCount(): number {
+    if (!this.simulationResult) return 0;
+    return this.simulationResult.detalheMensal.length - 20;
+  }
+
+  toggleShowAllMonths(): void {
+    this.showAllMonths = !this.showAllMonths;
+  }
+
+  isSeparatorRow(row: any): boolean {
+    return row && row.isSeparator === true;
+  }
+
   newSimulation(): void {
     this.simulationResult = null;
     this.simulationForm.reset();
+    this.showAllMonths = false;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

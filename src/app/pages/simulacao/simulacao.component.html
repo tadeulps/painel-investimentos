@@ -219,25 +219,32 @@
       <mat-card-content>
         <table
           mat-table
-          [dataSource]="simulationResult.detalheMensal"
+          [dataSource]="displayedMonths"
           class="monthly-table"
         >
           <ng-container matColumnDef="mes">
             <th mat-header-cell *matHeaderCellDef>Mês</th>
-            <td mat-cell *matCellDef="let month">{{ month.mes }}</td>
+            <td mat-cell *matCellDef="let month">
+              <span *ngIf="!isSeparatorRow(month)">{{ month.mes }}</span>
+              <span *ngIf="isSeparatorRow(month)" class="separator-dots">...</span>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="saldo">
             <th mat-header-cell *matHeaderCellDef>Saldo</th>
             <td mat-cell *matCellDef="let month">
-              {{ month.saldo | currency : "BRL" }}
+              <span *ngIf="!isSeparatorRow(month)">{{ month.saldo | currency : "BRL" }}</span>
+              <span *ngIf="isSeparatorRow(month)" class="separator-text">
+                {{ month.hiddenCount }} {{ month.hiddenCount === 1 ? 'mês' : 'meses' }}
+              </span>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="rendimento">
             <th mat-header-cell *matHeaderCellDef>Rendimento</th>
-            <td mat-cell *matCellDef="let month" class="gain">
-              {{ month.rendimento | currency : "BRL" }}
+            <td mat-cell *matCellDef="let month" [class.gain]="!isSeparatorRow(month)">
+              <span *ngIf="!isSeparatorRow(month)">{{ month.rendimento | currency : "BRL" }}</span>
+              <span *ngIf="isSeparatorRow(month)" class="separator-dots">...</span>
             </td>
           </ng-container>
 
@@ -248,17 +255,42 @@
           <tr
             mat-row
             *matRowDef="let row; columns: ['mes', 'saldo', 'rendimento']"
+            [class.separator-row]="isSeparatorRow(row)"
           ></tr>
         </table>
+
+        <div *ngIf="shouldShowExpandButton" class="expand-button-container">
+          <app-caixa-button
+            variant="secondary"
+            icon="expand_more"
+            (clicked)="toggleShowAllMonths()"
+          >
+            Exibir todos os meses ({{ hiddenMonthsCount }} ocultos)
+          </app-caixa-button>
+        </div>
+
+        <div *ngIf="showAllMonths && simulationResult && simulationResult.detalheMensal.length > 20" class="collapse-button-container">
+          <app-caixa-button
+            variant="outlined"
+            icon="expand_less"
+            (clicked)="toggleShowAllMonths()"
+          >
+            Recolher
+          </app-caixa-button>
+        </div>
       </mat-card-content>
     </mat-card>
 
     <div class="actions">
-      <button mat-button (click)="newSimulation()">
-        <mat-icon>refresh</mat-icon> Nova Simulação
-      </button>
       <app-caixa-button
         variant="primary"
+        icon="refresh"
+        (clicked)="newSimulation()"
+      >
+        Nova Simulação
+      </app-caixa-button>
+      <app-caixa-button
+        variant="secondary"
         [icon]="isInvesting ? 'hourglass_empty' : 'trending_up'"
         [disabled]="isInvesting"
         (clicked)="proceedToInvest()"

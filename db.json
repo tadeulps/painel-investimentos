@@ -155,7 +155,7 @@
       "nome": "COE CAIXA",
       "tipo": "Estruturados",
       "taxaAnual": 0.14,
-      "risco": "Alto",
+      "risco": "Médio-Alto",
       "aplicacaoMinima": 5000,
       "liquidez": "No vencimento",
       "riskProfileId": 3
@@ -278,6 +278,42 @@
       "dataInicio": "2025-11-18",
       "prazoMeses": 22,
       "valorAtual": 123
+    },
+    {
+      "id": 14,
+      "userId": 1,
+      "productId": 12,
+      "valor": 23232,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 232,
+      "valorAtual": 23232
+    },
+    {
+      "id": 15,
+      "userId": 1,
+      "productId": 1,
+      "valor": 2323233,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 233,
+      "valorAtual": 2323233
+    },
+    {
+      "id": 16,
+      "userId": 1,
+      "productId": 1,
+      "valor": 2323,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 233,
+      "valorAtual": 2323
+    },
+    {
+      "id": 17,
+      "userId": 1,
+      "productId": 8,
+      "valor": 232323,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 22,
+      "valorAtual": 232323
     }
   ]
 }

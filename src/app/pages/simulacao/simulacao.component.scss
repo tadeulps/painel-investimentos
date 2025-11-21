@@ -467,7 +467,7 @@
     border-spacing: 0;
 
     ::ng-deep .mat-mdc-header-row {
-      background: linear-gradient(135deg, $light-blue-highlight, $light-blue-highlight);
+      background-color: $azul-caixa;
       box-shadow: $shadow-elevation-2;
     }
 
@@ -475,7 +475,7 @@
       font-family: $font-semibold;
       font-weight: $font-weight-semibold;
       font-size: $text-standard;
-      color: $charcoal !important;
+      color: $branco !important;
       padding: $spacing-tiny $spacing-tiny;
       text-align: center;
       border: none;
@@ -529,6 +529,84 @@
         font-size: $text-small;
       }
     }
+
+    // Separator row styles
+    ::ng-deep .mat-mdc-row.separator-row {
+      background: linear-gradient(to right, $cinza-100, $light-blue-highlight, $cinza-100);
+      border-top: 2px solid $azul-caixa;
+      border-bottom: 2px solid $azul-caixa;
+      font-family: $font-semibold;
+      font-weight: $font-weight-semibold;
+      cursor: default;
+
+      &:hover {
+        background: linear-gradient(to right, $cinza-100, $light-blue-highlight, $cinza-100);
+        transform: none;
+        box-shadow: none;
+      }
+
+      .mat-mdc-cell {
+        color: $azul-caixa;
+        font-style: italic;
+      }
+
+      .separator-dots {
+        font-size: $text-large;
+        letter-spacing: 4px;
+        color: $slate;
+      }
+
+      .separator-text {
+        font-family: $font-semibold;
+        font-weight: $font-weight-semibold;
+        color: $azul-caixa;
+        text-transform: lowercase;
+      }
+    }
+  }
+
+  // Expand/Collapse button styles
+  .expand-button-container,
+  .collapse-button-container {
+    display: flex;
+    justify-content: center;
+    padding: $spacing-tiny;
+    background: linear-gradient(to bottom, $branco, $cinza-100);
+  }
+
+  .expand-months-btn,
+  .collapse-months-btn {
+    font-family: $font-semibold;
+    font-weight: $font-weight-semibold;
+    color: $azul-caixa;
+    border-color: $azul-caixa;
+    border-width: 2px;
+    padding: $spacing-nano $spacing-small;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: $spacing-quark;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      background-color: $azul-caixa;
+      color: $branco;
+      transform: translateY(-2px);
+      box-shadow: $shadow-elevation-3;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .collapse-months-btn {
+    background-color: $light-blue-highlight;
   }
 }
 
@@ -538,10 +616,7 @@
   justify-content: center;
   flex-wrap: wrap;
 
-  &:hover:not(:disabled) {
-    background: $oceano-start;
-    box-shadow: $shadow-elevation-4;
-  }
+ 
 
   &:disabled {
     opacity: 0.5;
