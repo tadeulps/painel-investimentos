@@ -1,56 +1,73 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Investment } from '../../services/investment.service';
+import { InvestmentService, PontuacaoHistoryEntry } from '../../services/investment.service';
+import { AuthService } from '../../services/auth.service';
 import { Chart, registerables } from 'chart.js';
+import { MatIconModule } from '@angular/material/icon';
 
 Chart.register(...registerables);
-
-interface RiskHistoryPoint {
-  date: string;
-  riskLevel: number;
-  productName: string;
-  riskLabel: string;
-}
 
 @Component({
   selector: 'app-risk-history-chart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './risk-history-chart.component.html',
   styleUrls: ['./risk-history-chart.component.scss']
 })
-export class RiskHistoryChartComponent implements AfterViewInit, OnChanges {
-  @Input() investments: Investment[] = [];
+export class RiskHistoryChartComponent implements OnInit, OnDestroy {
+  historyData: PontuacaoHistoryEntry[] = [];
   @ViewChild('chartCanvas') chartCanvasRef!: ElementRef<HTMLCanvasElement>;
   
   private chart: Chart | null = null;
 
-  ngAfterViewInit(): void {
-    this.createChart();
+  constructor(
+    private investmentService: InvestmentService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadPontuacaoHistory();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['investments'] && !changes['investments'].firstChange) {
-      this.updateChart();
-    }
+  loadPontuacaoHistory(): void {
+    const clientId = this.authService.getStoredClientId();
+    if (!clientId) return;
+
+    this.investmentService.getPontuacaoHistory(clientId).subscribe({
+      next: (response) => {
+        this.historyData = response.history;
+        if (this.chartCanvasRef) {
+          this.createChart();
+        }
+      },
+      error: (error) => {
+        console.error('Error loading pontuacao history:', error);
+      }
+    });
   }
 
   createChart(): void {
-    if (!this.chartCanvasRef || this.investments.length === 0) return;
+    if (!this.chartCanvasRef || this.historyData.length === 0) return;
 
     const ctx = this.chartCanvasRef.nativeElement.getContext('2d');
     if (!ctx) return;
 
-    const historyData = this.generateRiskHistory();
+    const labels = this.historyData.map(d => 
+      new Date(d.timestamp).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'short',
+        year: '2-digit'
+      })
+    );
 
     const config: any = {
       type: 'line',
       data: {
-        labels: historyData.map(d => d.date),
+        labels: labels,
         datasets: [
           {
-            label: 'Nível de Risco',
-            data: historyData.map(d => d.riskLevel),
+            label: 'Pontuação de Risco',
+            data: this.historyData.map(d => d.pontuacao),
             borderColor: '#005CA9',
             backgroundColor: 'rgba(0, 92, 169, 0.1)',
             borderWidth: 3,
@@ -58,7 +75,7 @@ export class RiskHistoryChartComponent implements AfterViewInit, OnChanges {
             tension: 0.4,
             pointRadius: 6,
             pointHoverRadius: 8,
-            pointBackgroundColor: historyData.map(d => this.getRiskColor(d.riskLevel)),
+            pointBackgroundColor: this.historyData.map(d => this.getPontuacaoColor(d.pontuacao)),
             pointBorderColor: '#FFFFFF',
             pointBorderWidth: 2
           }
@@ -76,23 +93,22 @@ export class RiskHistoryChartComponent implements AfterViewInit, OnChanges {
             padding: 15,
             titleFont: {
               size: 14,
-              family: 'Lato',
+              family: 'CAIXAStd',
               weight: 'bold'
             },
             bodyFont: {
               size: 13,
-              family: 'Lato'
+              family: 'CAIXAStd'
             },
             callbacks: {
               title: (context: any) => {
                 return context[0].label;
               },
               label: (context: any) => {
-                const dataPoint = historyData[context.dataIndex];
+                const dataPoint = this.historyData[context.dataIndex];
                 return [
-                  `Produto: ${dataPoint.productName}`,
-                  `Risco: ${dataPoint.riskLabel}`,
-                  `Nível: ${context.parsed.y}%`
+                  `Perfil: ${dataPoint.riskProfileName}`,
+                  `Pontuação: ${dataPoint.pontuacao}`
                 ];
               }
             }
@@ -103,21 +119,29 @@ export class RiskHistoryChartComponent implements AfterViewInit, OnChanges {
             beginAtZero: true,
             max: 100,
             ticks: {
-              callback: (value: any) => `${value}%`,
               font: {
-                family: 'Lato',
+                family: 'CAIXAStd',
                 size: 11
               },
-              stepSize: 25
+              stepSize: 10
             },
             grid: {
               color: 'rgba(0, 0, 0, 0.05)'
+            },
+            title: {
+              display: true,
+              text: 'Pontuação',
+              font: {
+                family: 'CAIXAStd',
+                size: 12,
+                weight: 'bold'
+              }
             }
           },
           x: {
             ticks: {
               font: {
-                family: 'Lato',
+                family: 'CAIXAStd',
                 size: 11
               },
               maxRotation: 45,
@@ -134,62 +158,18 @@ export class RiskHistoryChartComponent implements AfterViewInit, OnChanges {
     this.chart = new Chart(ctx, config);
   }
 
-  updateChart(): void {
-    if (this.chart) {
-      this.chart.destroy();
+  getPontuacaoColor(pontuacao: number): string {
+    // Conservador (0-10): Green
+    if (pontuacao <= 33) {
+      return '#00A86B';
     }
-    this.createChart();
-  }
-
-  generateRiskHistory(): RiskHistoryPoint[] {
-    if (this.investments.length === 0) {
-      return [];
+    // Moderado (11-20): Orange
+    else if (pontuacao <= 66) {
+      return '#FF9500';
     }
-
-    // Sort investments by date
-    const sortedInvestments = [...this.investments].sort(
-      (a, b) => new Date(a.dataInicio).getTime() - new Date(b.dataInicio).getTime()
-    );
-
-    return sortedInvestments.map(inv => {
-      const riskLabel = inv.produto?.risco || 'Médio';
-      const riskLevel = this.getRiskLevel(riskLabel);
-      const date = new Date(inv.dataInicio).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'short',
-        year: '2-digit'
-      });
-
-      return {
-        date,
-        riskLevel,
-        productName: inv.produto?.nome || 'Produto',
-        riskLabel
-      };
-    });
-  }
-
-  getRiskLevel(riskLabel: string): number {
-    const risk = riskLabel.toLowerCase();
-    
-    if (risk.includes('baixo') || risk.includes('conservador')) {
-      return 25;
-    } else if (risk.includes('médio') || risk.includes('moderado')) {
-      return 50;
-    } else if (risk.includes('alto') || risk.includes('agressivo')) {
-      return 75;
-    }
-    
-    return 50; // Default to medium
-  }
-
-  getRiskColor(riskLevel: number): string {
-    if (riskLevel <= 25) {
-      return '#00A86B'; // Green for low risk
-    } else if (riskLevel <= 50) {
-      return '#FF9500'; // Orange for medium risk
-    } else {
-      return '#FF6B6B'; // Red for high risk
+    // Arrojado (21-30): Red
+    else {
+      return '#FF6B6B';
     }
   }
 
