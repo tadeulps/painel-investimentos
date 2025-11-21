@@ -26,17 +26,19 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
   
   private chart: Chart | null = null;
 
-  private colorPalette: { [key: string]: string } = {
-    'Poupança': '#005CA9',
-    'Renda Fixa': '#00A86B',
-    'LCI': '#FF9500',
-    'LCA': '#FF6B6B',
-    'Tesouro Direto': '#4ECDC4',
-    'Fundos': '#95E1D3',
-    'Fundo Multimercado': '#F38181',
-    'Renda Variável': '#AA96DA',
-    'default': '#6C757D'
-  };
+ private colorPalette: { [key: string]: string } = {
+  'Poupança': '#0072CE',
+  'Renda Fixa': '#009788',
+  'LCI': '#FFA94D',
+  'LCA': '#8ED1C7',
+  'Tesouro Direto': '#4DD4C6',
+  'Fundos': '#FF7A7A',
+  'Fundo Multimercado': '#F5A5A5',
+  'Renda Variável': '#B9A2E8',
+  'default': '#7A7A7A'
+};
+
+
 
   ngAfterViewInit(): void {
     this.createChart();
