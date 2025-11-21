@@ -201,7 +201,6 @@ export class InvestmentEvolutionChartComponent
         year: '2-digit',
       });
 
-      // FIX: Compare with end of month instead of start
       const endOfCurrentMonth = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth() + 1,

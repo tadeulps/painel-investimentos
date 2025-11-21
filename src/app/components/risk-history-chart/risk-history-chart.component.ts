@@ -159,15 +159,12 @@ export class RiskHistoryChartComponent implements OnInit, OnDestroy {
   }
 
   getPontuacaoColor(pontuacao: number): string {
-    // Conservador (0-10): Green
     if (pontuacao <= 33) {
       return '#00A86B';
     }
-    // Moderado (11-20): Orange
     else if (pontuacao <= 66) {
       return '#FF9500';
     }
-    // Arrojado (21-30): Red
     else {
       return '#FF6B6B';
     }

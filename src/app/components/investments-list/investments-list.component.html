@@ -14,7 +14,6 @@
 
     <div *ngIf="investments.length > 0" class="investments-grid">
       <mat-card *ngFor="let investment of displayedInvestments" class="investment-card">
-        <!-- Card Header -->
         <mat-card-header class="card-header">
           <div class="product-info">
             <mat-card-title class="product-name">{{ investment.produto?.nome }}</mat-card-title>
@@ -26,7 +25,6 @@
          
         </mat-card-header>
 
-        <!-- Card Body -->
         <mat-card-content class="card-body">
         <div class="info-row">
           <div class="info-item investido">
@@ -69,7 +67,6 @@
       </mat-card>
     </div>
 
-    <!-- Ver Mais Button -->
     <div *ngIf="hasMore" class="show-more-container">
       <app-caixa-button
         [variant]="showAll ? 'outlined' : 'secondary'"

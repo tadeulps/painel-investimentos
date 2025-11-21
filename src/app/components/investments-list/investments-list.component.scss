@@ -189,7 +189,6 @@
           }
         }
 
-        // Color scheme for specific info items
         &.investido .info-value {
           color: $azul-caixa;
         }
@@ -242,7 +241,6 @@
   }
 }
 
-// Responsive
 @media (max-width: 1200px) {
   .investments-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

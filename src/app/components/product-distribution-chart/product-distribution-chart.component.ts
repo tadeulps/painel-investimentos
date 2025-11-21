@@ -26,7 +26,6 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
   
   private chart: Chart | null = null;
 
-  // Color palette for different product types
   private colorPalette: { [key: string]: string } = {
     'Poupança': '#005CA9',
     'Renda Fixa': '#00A86B',
@@ -166,7 +165,6 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
       return [];
     }
 
-    // Group investments by product type
     const typeMap = new Map<string, { value: number; count: number }>();
 
     this.investments.forEach(inv => {
@@ -179,7 +177,6 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
       });
     });
 
-    // Convert to array and add colors
     const distribution: ProductTypeData[] = [];
     typeMap.forEach((data, type) => {
       distribution.push({
@@ -190,7 +187,6 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
       });
     });
 
-    // Sort by value descending
     return distribution.sort((a, b) => b.value - a.value);
   }
 
