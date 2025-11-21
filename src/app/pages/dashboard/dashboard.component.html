@@ -57,7 +57,7 @@
               {{ summary.rentabilidadeAcumulada | currency:'BRL' }}
             </span>
             <span class="card-percentage" *ngIf="summary.valorTotalInvestido > 0">
-              {{ (summary.rentabilidadeAcumulada / summary.valorTotalInvestido * 100) | number:'1.2-2' }}% a.a.
+              {{ (summary.rentabilidadeAcumulada / summary.valorTotalInvestido * 100).toFixed(2) | number:'1.2-2' }}% 
             </span>
           </div>
         </mat-card-content>

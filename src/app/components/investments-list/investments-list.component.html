@@ -44,12 +44,11 @@
             <span class="info-label">Rentabilidade</span>
             <span class="info-value" [class.positive]="calculateReturn(investment) > 0" [class.negative]="calculateReturn(investment) < 0">
               {{ calculateReturn(investment) | currency:'BRL' }}
-              <span class="percentage">({{ calculateReturnPercentage(investment) | number:'1.2-2' }}%)</span>
             </span>
           </div>
           <div class="info-item taxa-anual">
             <span class="info-label">Taxa Anual</span>
-            <span class="info-value">{{ investment.produto?.taxaAnual }}% a.a.</span>
+            <span class="info-value">{{ ((investment?.produto?.taxaAnual || 0) * 100).toFixed(2) }}% a.a.</span>
           </div>
         </div>
 
