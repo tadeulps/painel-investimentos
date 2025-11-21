@@ -377,6 +377,15 @@
       "dataInicio": "2025-11-21",
       "prazoMeses": 232,
       "valorAtual": 23232332
+    },
+    {
+      "id": 25,
+      "userId": 1,
+      "productId": 1,
+      "valor": 2333,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 22,
+      "valorAtual": 2333
     }
   ],
   "pontuacaoHistory": [

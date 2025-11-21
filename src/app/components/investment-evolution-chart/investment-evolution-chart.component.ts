@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Investment } from '../../services/investment.service';
@@ -11,12 +19,14 @@ Chart.register(...registerables);
   standalone: true,
   imports: [CommonModule, MatIconModule],
   templateUrl: './investment-evolution-chart.component.html',
-  styleUrls: ['./investment-evolution-chart.component.scss']
+  styleUrls: ['./investment-evolution-chart.component.scss'],
 })
-export class InvestmentEvolutionChartComponent implements AfterViewInit, OnChanges {
+export class InvestmentEvolutionChartComponent
+  implements AfterViewInit, OnChanges
+{
   @Input() investments: Investment[] = [];
   @ViewChild('chartCanvas') chartCanvasRef!: ElementRef<HTMLCanvasElement>;
-  
+
   private chart: Chart | null = null;
 
   ngAfterViewInit(): void {
@@ -49,7 +59,7 @@ export class InvestmentEvolutionChartComponent implements AfterViewInit, OnChang
             backgroundColor: 'rgba(0, 92, 169, 0.1)',
             borderWidth: 2,
             fill: true,
-            tension: 0.4
+            tension: 0.4,
           },
           {
             label: 'Valor Atual',
@@ -58,9 +68,9 @@ export class InvestmentEvolutionChartComponent implements AfterViewInit, OnChang
             backgroundColor: 'rgba(0, 168, 107, 0.1)',
             borderWidth: 2,
             fill: true,
-            tension: 0.4
-          }
-        ]
+            tension: 0.4,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -72,22 +82,22 @@ export class InvestmentEvolutionChartComponent implements AfterViewInit, OnChang
             labels: {
               font: {
                 family: 'Lato',
-                size: 12
+                size: 12,
               },
               padding: 15,
-              usePointStyle: true
-            }
+              usePointStyle: true,
+            },
           },
           tooltip: {
             backgroundColor: 'rgba(0, 0, 0, 0.8)',
             padding: 12,
             titleFont: {
               size: 14,
-              family: 'Lato'
+              family: 'Lato',
             },
             bodyFont: {
               size: 13,
-              family: 'Lato'
+              family: 'Lato',
             },
             callbacks: {
               label: (context) => {
@@ -98,13 +108,13 @@ export class InvestmentEvolutionChartComponent implements AfterViewInit, OnChang
                 if (context.parsed.y !== null) {
                   label += new Intl.NumberFormat('pt-BR', {
                     style: 'currency',
-                    currency: 'BRL'
+                    currency: 'BRL',
                   }).format(context.parsed.y);
                 }
                 return label;
-              }
-            }
-          }
+              },
+            },
+          },
         },
         scales: {
           y: {
@@ -115,31 +125,31 @@ export class InvestmentEvolutionChartComponent implements AfterViewInit, OnChang
                   style: 'currency',
                   currency: 'BRL',
                   minimumFractionDigits: 0,
-                  maximumFractionDigits: 0
+                  maximumFractionDigits: 0,
                 }).format(value as number);
               },
               font: {
                 family: 'Lato',
-                size: 11
-              }
+                size: 11,
+              },
             },
             grid: {
-              color: 'rgba(0, 0, 0, 0.05)'
-            }
+              color: 'rgba(0, 0, 0, 0.05)',
+            },
           },
           x: {
             ticks: {
               font: {
                 family: 'Lato',
-                size: 11
-              }
+                size: 11,
+              },
             },
             grid: {
-              display: false
-            }
-          }
-        }
-      }
+              display: false,
+            },
+          },
+        },
+      },
     };
 
     this.chart = new Chart(ctx, config);
@@ -152,70 +162,100 @@ export class InvestmentEvolutionChartComponent implements AfterViewInit, OnChang
     this.createChart();
   }
 
- generateEvolutionData(): { labels: string[], valorInvestido: number[], valorAtual: number[] } {
-  if (!this.investments || this.investments.length === 0) {
-    return { labels: [], valorInvestido: [], valorAtual: [] };
-  }
+  generateEvolutionData(): {
+    labels: string[];
+    valorInvestido: number[];
+    valorAtual: number[];
+  } {
+    if (!this.investments || this.investments.length === 0) {
+      return { labels: [], valorInvestido: [], valorAtual: [] };
+    }
 
-  // Ensure products exist in investment data
-  const investments = this.investments.filter(inv => inv.produto);
-
-  // Sort investments by start date
-  const sortedInvestments = [...investments].sort(
-    (a, b) => new Date(a.dataInicio).getTime() - new Date(b.dataInicio).getTime()
-  );
-
-  const labels: string[] = [];
-  const valorInvestido: number[] = [];
-  const valorAtual: number[] = [];
-
-  const firstDate = new Date(sortedInvestments[0].dataInicio);
-  const today = new Date();
-
-  let currentDate = new Date(firstDate.getFullYear(), firstDate.getMonth(), 1);
-  const endDate = new Date(today.getFullYear(), today.getMonth(), 1);
-
-  while (currentDate <= endDate) {
-    const label = currentDate.toLocaleDateString('pt-BR', {
-      month: 'short',
-      year: '2-digit'
-    });
-
-    // Investments already active
-    const activeInvestments = sortedInvestments.filter(inv => 
-      new Date(inv.dataInicio).getTime() <= currentDate.getTime()
+    const investments = this.investments.filter((inv) => inv.produto);
+    const sortedInvestments = [...investments].sort(
+      (a, b) =>
+        new Date(a.dataInicio).getTime() - new Date(b.dataInicio).getTime()
     );
 
-    const totalInvestido = activeInvestments.reduce((sum, inv) => sum + inv.valor, 0);
+    const labels: string[] = [];
+    const valorInvestido: number[] = [];
+    const valorAtual: number[] = [];
 
-    const totalAtual = activeInvestments.reduce((sum, inv) => {
-      const invDate = new Date(inv.dataInicio);
-      const monthsElapsed = this.getMonthsDifference(invDate, currentDate);
+    const firstDate = new Date(sortedInvestments[0].dataInicio);
+    const today = new Date();
+    const currentMonthStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      1
+    );
 
-      const taxaMensal = Math.pow(1 + ((inv.produto?.taxaAnual || 0.08)), 1 / 12) - 1;
+    let currentDate = new Date(
+      firstDate.getFullYear(),
+      firstDate.getMonth(),
+      1
+    );
 
-      const valorAtualizado = inv.valor * Math.pow(1 + taxaMensal, Math.max(monthsElapsed, 0));
-      return sum + valorAtualizado;
-    }, 0);
+    while (currentDate <= today) {
+      const label = currentDate.toLocaleDateString('pt-BR', {
+        month: 'short',
+        year: '2-digit',
+      });
 
-    labels.push(label);
-    valorInvestido.push(Number(totalInvestido.toFixed(2)));
-    valorAtual.push(Number(totalAtual.toFixed(2)));
+      // FIX: Compare with end of month instead of start
+      const endOfCurrentMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        0
+      );
 
-    // Next month
-    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+      const activeInvestments = sortedInvestments.filter(
+        (inv) => new Date(inv.dataInicio) <= endOfCurrentMonth
+      );
+
+      const totalInvestido = activeInvestments.reduce(
+        (sum, inv) => sum + inv.valor,
+        0
+      );
+
+      const isCurrentMonth = currentDate >= currentMonthStart;
+
+      const totalAtual = activeInvestments.reduce((sum, inv) => {
+        if (isCurrentMonth) {
+          return sum + (inv.valorAtual || inv.valor);
+        }
+
+        const monthsElapsed = this.getMonthsDifference(
+          new Date(inv.dataInicio),
+          currentDate
+        );
+        const taxaMensal =
+          Math.pow(1 + (inv.produto?.taxaAnual ?? 0.08), 1 / 12) - 1;
+        return (
+          sum + inv.valor * Math.pow(1 + taxaMensal, Math.max(monthsElapsed, 0))
+        );
+      }, 0);
+
+      labels.push(label);
+      valorInvestido.push(Number(totalInvestido.toFixed(2)));
+      valorAtual.push(Number(totalAtual.toFixed(2)));
+
+      currentDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        1
+      );
+    }
+    return { labels, valorInvestido, valorAtual };
   }
-
-  return { labels, valorInvestido, valorAtual };
-}
-
 
   getMonthsDifference(startDate: Date, endDate: Date): number {
     const start = new Date(startDate);
     const end = new Date(endDate);
-    
-    return (end.getFullYear() - start.getFullYear()) * 12 + 
-           (end.getMonth() - start.getMonth());
+
+    return (
+      (end.getFullYear() - start.getFullYear()) * 12 +
+      (end.getMonth() - start.getMonth())
+    );
   }
 
   ngOnDestroy(): void {
