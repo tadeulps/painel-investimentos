@@ -168,12 +168,10 @@ mat-dialog-actions {
   padding: $spacing-tiny 0 0;
   margin: 0;
 
-  // make all buttons equal width
   app-caixa-button {
     flex: 1;
   }
 
-  // If you also want Material buttons to match:
   button, .mat-mdc-button {
     flex: 1;
   }

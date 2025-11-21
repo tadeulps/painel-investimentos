@@ -100,12 +100,10 @@ describe('InvestmentEvolutionChartComponent', () => {
         ...mockInvestments[0],
         produto: undefined
       };
-      // Mix valid and invalid investments
       component.investments = [investmentWithoutProduct, mockInvestments[0]];
       
       const result = component.generateEvolutionData();
       
-      // Should only process the one with produto
       expect(result.labels.length).toBeGreaterThan(0);
       expect(result.valorInvestido.length).toBeGreaterThan(0);
       expect(result.valorAtual.length).toBeGreaterThan(0);
@@ -174,8 +172,7 @@ describe('InvestmentEvolutionChartComponent', () => {
       const result = component.generateEvolutionData();
       
       expect(result.valorAtual.length).toBeGreaterThan(0);
-      // First value may be 0 if investment started in future month
-      expect(result.valorAtual[result.valorAtual.length - 1]).toBeGreaterThan(0);
+    expect(result.valorAtual[result.valorAtual.length - 1]).toBeGreaterThan(0);
     });
 
     it('should handle investments starting in the same month', () => {
@@ -313,7 +310,6 @@ describe('InvestmentEvolutionChartComponent', () => {
     it('should not create chart when canvas context is not available', () => {
       component.investments = mockInvestments;
       
-      // Need to prevent initial chart creation
       const getContextSpy = spyOn(HTMLCanvasElement.prototype, 'getContext').and.returnValue(null);
       
       fixture.detectChanges();
@@ -610,7 +606,6 @@ describe('InvestmentEvolutionChartComponent', () => {
       const result = component.generateEvolutionData();
       
       const expectedTotal = sameDateInvestments.reduce((sum, inv) => sum + inv.valor, 0);
-      // Find the index where all investments are active
       const firstActiveIndex = result.valorInvestido.findIndex(val => val === expectedTotal);
       expect(firstActiveIndex).toBeGreaterThanOrEqual(0);
     });

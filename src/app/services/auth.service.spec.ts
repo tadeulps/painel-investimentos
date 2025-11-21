@@ -26,7 +26,6 @@ describe('AuthService', () => {
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
 
-    // Clear storage before each test
     localStorage.clear();
     sessionStorage.clear();
   });

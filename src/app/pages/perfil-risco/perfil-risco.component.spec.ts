@@ -264,11 +264,11 @@ describe('PerfilRiscoComponent', () => {
 
       expect(component.displayedScore).toBe(0);
 
-      tick(1000); // Half way through animation
+      tick(1000); 
       expect(component.displayedScore).toBeGreaterThan(0);
       expect(component.displayedScore).toBeLessThan(target);
 
-      tick(1500); // Complete animation
+      tick(1500); 
       expect(component.displayedScore).toBe(target);
     }));
 
@@ -341,14 +341,13 @@ describe('PerfilRiscoComponent', () => {
     });
 
     it('should handle boundary values correctly', () => {
-      // Test 33/34 boundary
+
       component.userPontuacao = 33;
       const cat33 = component.getRiskCategory();
       component.userPontuacao = 34;
       const cat34 = component.getRiskCategory();
       expect(cat33).not.toBe(cat34);
 
-      // Test 66/67 boundary
       component.userPontuacao = 66;
       const cat66 = component.getRiskCategory();
       component.userPontuacao = 67;

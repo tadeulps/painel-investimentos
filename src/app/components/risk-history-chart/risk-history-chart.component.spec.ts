@@ -388,9 +388,9 @@ describe('RiskHistoryChartComponent', () => {
       const dataset = chart?.data.datasets[0] as any;
       const colors = dataset?.pointBackgroundColor;
       
-      expect(colors[0]).toBe('#00A86B'); // 25 - Conservador
-      expect(colors[1]).toBe('#FF9500'); // 50 - Moderado
-      expect(colors[2]).toBe('#FF6B6B'); // 75 - Arrojado
+      expect(colors[0]).toBe('#00A86B');
+      expect(colors[1]).toBe('#FF9500'); 
+      expect(colors[2]).toBe('#FF6B6B');
     });
 
     it('should recreate chart if data changes', () => {
@@ -401,7 +401,6 @@ describe('RiskHistoryChartComponent', () => {
       component.createChart();
       const firstChart = component['chart'];
       
-      // Destroy and recreate
       if (firstChart) {
         firstChart.destroy();
       }

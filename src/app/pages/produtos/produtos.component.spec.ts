@@ -228,7 +228,7 @@ describe('ProdutosComponent', () => {
     });
 
     it('should filter products by user risk profile', () => {
-      component.userRiskProfileId = 1; // Conservador
+      component.userRiskProfileId = 1; 
 
       component.loadRecommendedProducts();
 
@@ -266,7 +266,7 @@ describe('ProdutosComponent', () => {
     });
 
     it('should handle risk profile with less than 3 products', () => {
-      component.allProducts = [mockProducts[2]]; // Only one product with riskProfileId 3
+      component.allProducts = [mockProducts[2]];  
       component.userRiskProfileId = 3;
 
       component.loadRecommendedProducts();

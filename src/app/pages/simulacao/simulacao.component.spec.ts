@@ -423,7 +423,7 @@ describe('SimulacaoComponent', () => {
       };
 
       const displayed = component.displayedMonths;
-      expect(displayed.length).toBe(21); // 10 + separator + 10
+      expect(displayed.length).toBe(21); 
       expect(displayed[10].isSeparator).toBe(true);
     });
 
@@ -630,7 +630,7 @@ describe('SimulacaoComponent', () => {
       component.simulate();
 
       expect(component.simulationResult?.detalheMensal.length).toBe(360);
-      expect(component.displayedMonths.length).toBe(21); // condensed view
+      expect(component.displayedMonths.length).toBe(21); 
     });
 
     it('should handle minimum valid values', () => {
