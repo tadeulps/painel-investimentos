@@ -29,36 +29,36 @@
         <!-- Card Body -->
         <mat-card-content class="card-body">
         <div class="info-row">
-          <div class="info-item">
+          <div class="info-item investido">
             <span class="info-label">Investido</span>
             <span class="info-value">{{ investment.valor | currency:'BRL' }}</span>
           </div>
-          <div class="info-item">
+          <div class="info-item valor-atual">
             <span class="info-label">Valor Atual</span>
-            <span class="info-value highlight">{{ investment.valorAtual | currency:'BRL' }}</span>
+            <span class="info-value">{{ investment.valorAtual | currency:'BRL' }}</span>
           </div>
         </div>
 
         <div class="info-row">
-          <div class="info-item">
+          <div class="info-item rentabilidade">
             <span class="info-label">Rentabilidade</span>
             <span class="info-value" [class.positive]="calculateReturn(investment) > 0" [class.negative]="calculateReturn(investment) < 0">
               {{ calculateReturn(investment) | currency:'BRL' }}
               <span class="percentage">({{ calculateReturnPercentage(investment) | number:'1.2-2' }}%)</span>
             </span>
           </div>
-          <div class="info-item">
+          <div class="info-item taxa-anual">
             <span class="info-label">Taxa Anual</span>
             <span class="info-value">{{ investment.produto?.taxaAnual }}% a.a.</span>
           </div>
         </div>
 
         <div class="info-row">
-          <div class="info-item">
+          <div class="info-item data-inicio">
             <span class="info-label">Data Início</span>
             <span class="info-value">{{ investment.dataInicio | date:'dd/MM/yyyy' }}</span>
           </div>
-          <div class="info-item">
+          <div class="info-item prazo">
             <span class="info-label">Prazo</span>
             <span class="info-value">{{ investment.prazoMeses }} meses ({{ getMonthsRemaining(investment) }} restantes)</span>
           </div>

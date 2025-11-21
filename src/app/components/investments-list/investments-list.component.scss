@@ -141,7 +141,7 @@
   }
 
   ::ng-deep .card-body {
-    padding: $spacing-small $spacing-small 0;
+    padding: $spacing-small ;
 
     .info-row {
       display: flex;
@@ -170,17 +170,11 @@
 
         .info-value {
           @include card-text;
-          color: $charcoal;
           font-size: $text-standard;
           font-weight: $font-weight-semibold;
 
-          &.highlight {
-            color: $azul-caixa;
-            font-weight: $font-weight-bold;
-          }
-
           &.positive {
-            color: $success-70;
+            color: $success-90;
           }
 
           &.negative {
@@ -191,6 +185,29 @@
             font-size: $text-small;
             margin-left: $spacing-quark;
           }
+        }
+
+        // Color scheme for specific info items
+        &.investido .info-value {
+          color: $azul-caixa;
+        }
+
+        &.rentabilidade .info-value {
+          color: $success-90;
+
+          &.negative {
+            color: $negative-70;
+          }
+        }
+
+        &.valor-atual .info-value {
+          color: $turquesa-caixa;
+        }
+
+        &.taxa-anual .info-value,
+        &.data-inicio .info-value,
+        &.prazo .info-value {
+          color: $slate;
         }
       }
     }
