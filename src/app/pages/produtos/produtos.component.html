@@ -1,19 +1,19 @@
-<section class="produtos-page">
+<section class="produtos-page" role="main">
   <app-page-header
     title="Produtos de Investimento"
     subtitle="Conheça os produtos disponíveis e encontre o ideal para você"
   >
   </app-page-header>
 
-  <div *ngIf="isLoading" class="loading-container">
+  <div *ngIf="isLoading" class="loading-container" role="status" aria-live="polite">
     <p>Carregando produtos...</p>
   </div>
 
   <div *ngIf="!isLoading">
     <!-- Produtos Recomendados -->
-    <div class="section-container recommended-section">
+    <section class="section-container recommended-section" role="region" aria-labelledby="recommended-heading">
       <div class="section-header">
-        <h2>Produtos recomendados para você!</h2>
+        <h2 id="recommended-heading">Produtos recomendados para você!</h2>
         <p class="section-description">
           Escolhidos com base no seu perfil de risco
         </p>
@@ -31,7 +31,7 @@
                 class="risk-icon"
                 [class]="'risk-icon-' + getRiskClass(product.risco)"
               >
-                <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+                <mat-icon aria-hidden="true">{{ getRiskIcon(product.risco) }}</mat-icon>
               </div>
             </div>
 
@@ -43,7 +43,7 @@
               <div class="detail-item">
                 <span class="label">Rentabilidade</span>
                 <span class="value rentabilidade">
-                  <mat-icon class="trending-icon">trending_up</mat-icon>
+                  <mat-icon class="trending-icon" aria-hidden="true">trending_up</mat-icon>
                   {{ (product.taxaAnual * 100).toFixed(2) }}% a.a.
                 </span>
               </div>
@@ -67,16 +67,16 @@
           </mat-card-actions>
         </mat-card>
       </div>
-    </div>
+    </section>
 
     <!-- Todos os Produtos -->
-    <div class="section-container all-products-section">
+    <section class="section-container all-products-section" role="region" aria-labelledby="all-products-heading">
       <div class="section-header">
-        <h2>Todos os Produtos</h2>
+        <h2 id="all-products-heading">Todos os Produtos</h2>
         <p class="section-description">Explore todas as opções disponíveis</p>
       </div>
 
-      <div class="filters-bar">
+      <nav class="filters-bar" aria-label="Filtrar produtos por tipo">
         <app-caixa-button
           *ngFor="let type of productTypes"
           [variant]="selectedType === type ? 'secondary' : 'outlined'"
@@ -84,7 +84,7 @@
         >
           {{ type === "Todos" ? "Todos" : type }}
         </app-caixa-button>
-      </div>
+      </nav>
 
       <div class="products-grid">
         <mat-card *ngFor="let product of filteredProducts" class="product-card">
@@ -95,7 +95,7 @@
                 class="risk-icon"
                 [class]="'risk-icon-' + getRiskClass(product.risco)"
               >
-                <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+                <mat-icon aria-hidden="true">{{ getRiskIcon(product.risco) }}</mat-icon>
               </div>
             </div>
 
@@ -107,7 +107,7 @@
               <div class="detail-item">
                 <span class="label">Rentabilidade</span>
                 <span class="value rentabilidade">
-                  <mat-icon class="trending-icon">trending_up</mat-icon>
+                  <mat-icon class="trending-icon" aria-hidden="true">trending_up</mat-icon>
                   {{ (product.taxaAnual * 100).toFixed(2) }}% a.a.
                 </span>
               </div>
@@ -132,9 +132,9 @@
         </mat-card>
       </div>
 
-      <div *ngIf="filteredProducts.length === 0" class="no-results">
+      <div *ngIf="filteredProducts.length === 0" class="no-results" role="status">
         <p>Nenhum produto encontrado para este filtro.</p>
       </div>
-    </div>
+    </section>
   </div>
 </section>

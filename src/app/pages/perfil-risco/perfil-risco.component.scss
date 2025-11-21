@@ -1,5 +1,18 @@
 @import "../../../styles/token.scss";
 
+// Screen reader only class
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .perfil-risco-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -364,6 +377,13 @@
   text-align: center;
   margin-top: $spacing-tiny;
   font-family: "CAIXAStd", sans-serif;
+
+  h3 {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+  }
 }
 
 .card-description {
@@ -380,6 +400,13 @@
   background: $cinza-100;
   border-radius: $border-radius-medium;
   box-shadow: $shadow-elevation-soft;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
   .feature-item {
     display: flex;
     align-items: center;
@@ -508,6 +535,7 @@
   .profiles-grid {
     grid-template-columns: 1fr;
     gap: $spacing-small;
+    padding: 0 $spacing-tiny;
   }
 
   .profile-card {

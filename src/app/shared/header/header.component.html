@@ -1,20 +1,52 @@
 <header class="app-header" role="banner">
   <div class="header-inner">
     <div class="logo">
-      <a routerLink="/dashboard" aria-label="Ir para o Dashboard">
-        <img src="/images/CAIXA_chapada_negativa-cropped.svg" alt="Caixa" />
-        <span class="app-title">Painel de Investimentos </span>
+      <a routerLink="/dashboard">
+        <img src="/images/CAIXA_chapada_negativa-cropped.svg" alt="Logotipo Caixa" />
+        <span class="app-title">Painel de Investimentos</span>
       </a>
     </div>
 
     <nav class="main-nav" role="navigation" aria-label="Menu principal">
       <ul>
-        <li *ngIf="isLoggedIn"><a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
-        <li *ngIf="isLoggedIn"><a routerLink="/perfil-risco" routerLinkActive="active">Perfil de Risco</a></li>
-        <li *ngIf="isLoggedIn"><a routerLink="/produtos" routerLinkActive="active">Produtos</a></li>
-        <li *ngIf="isLoggedIn"><a routerLink="/simulacao" routerLinkActive="active">Simulação</a></li>
-        <li *ngIf="!isLoggedIn"><a routerLink="/login" routerLinkActive="active">Login</a></li>
-        <li *ngIf="isLoggedIn"><a (click)="onLogout()" class="logout-link">Sair</a></li>
+        <li *ngIf="isLoggedIn">
+          <a routerLink="/dashboard" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{ exact: true }">
+            Dashboard
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn">
+          <a routerLink="/perfil-risco" 
+             routerLinkActive="active">
+            Perfil de Risco
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn">
+          <a routerLink="/produtos" 
+             routerLinkActive="active">
+            Produtos
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn">
+          <a routerLink="/simulacao" 
+             routerLinkActive="active">
+            Simulação
+          </a>
+        </li>
+        <li *ngIf="!isLoggedIn">
+          <a routerLink="/login" 
+             routerLinkActive="active">
+            Login
+          </a>
+        </li>
+        <li *ngIf="isLoggedIn">
+          <button type="button" 
+                  (click)="onLogout()" 
+                  class="logout-link">
+            Sair
+          </button>
+        </li>
       </ul>
     </nav>
   </div>

@@ -1,4 +1,4 @@
-<section class="simulacao-page">
+<section class="simulacao-page" role="main">
   <app-page-header
     title="Simulador de Investimentos"
     subtitle="Simule seu investimento e veja o retorno esperado mês a mês"
@@ -6,7 +6,7 @@
   </app-page-header>
 
   <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading-container">
+  <div *ngIf="isLoading" class="loading-container" role="status" aria-live="polite">
     <p>Carregando produtos...</p>
   </div>
 
@@ -43,7 +43,7 @@
                 class="risk-icon"
                 [class]="'risk-icon-' + getRiskClass(product.risco)"
               >
-                <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+                <mat-icon aria-hidden="true">{{ getRiskIcon(product.risco) }}</mat-icon>
               </div>
             </div>
 
@@ -55,7 +55,7 @@
               <div class="detail-item">
                 <span class="label">Rentabilidade</span>
                 <span class="value rentabilidade">
-                  <mat-icon class="trending-icon">trending_up</mat-icon>
+                  <mat-icon class="trending-icon" aria-hidden="true">trending_up</mat-icon>
                   {{ (product.taxaAnual * 100).toFixed(2) }}% a.a.
                 </span>
               </div>
@@ -182,32 +182,32 @@
     <div class="results-summary">
       <mat-card class="summary-card">
         <mat-card-content>
-          <span class="label">Valor Inicial</span>
-          <span class="value">{{
+          <h3 class="label">Valor Inicial</h3>
+          <p class="value">{{
             simulationResult.valorInicial | currency : "BRL"
-          }}</span>
+          }}</p>
         </mat-card-content>
       </mat-card>
       <mat-card class="summary-card highlight">
         <mat-card-content>
-          <span class="label">Valor Final</span>
-          <span class="value">{{
+          <h3 class="label">Valor Final</h3>
+          <p class="value">{{
             simulationResult.valorFinal | currency : "BRL"
-          }}</span>
+          }}</p>
         </mat-card-content>
       </mat-card>
       <mat-card class="summary-card">
         <mat-card-content>
-          <span class="label">Rendimento Total</span>
-          <span class="value gain">{{
+          <h3 class="label">Rendimento Total</h3>
+          <p class="value gain">{{
             simulationResult.rendimentoTotal | currency : "BRL"
-          }}</span>
+          }}</p>
         </mat-card-content>
       </mat-card>
       <mat-card class="summary-card">
         <mat-card-content>
-          <span class="label">Prazo</span>
-          <span class="value">{{ simulationResult.prazoMeses }} meses</span>
+          <h3 class="label">Prazo</h3>
+          <p class="value">{{ simulationResult.prazoMeses }} meses</p>
         </mat-card-content>
       </mat-card>
     </div>
@@ -293,6 +293,7 @@
         variant="secondary"
         [icon]="isInvesting ? 'hourglass_empty' : 'trending_up'"
         [disabled]="isInvesting"
+        [attr.role]="isInvesting ? 'status' : null"
         (clicked)="proceedToInvest()"
       >
         {{ isInvesting ? "Processando..." : "Investir Agora" }}

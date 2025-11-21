@@ -1,89 +1,142 @@
-<section class="perfil-risco-page">
-  <app-page-header 
-    title="Perfil de Risco" 
-    subtitle="Seu perfil é calculado automaticamente com base nos seus investimentos">
+<section class="perfil-risco-page" role="main" aria-label="Perfil de Risco">
+  <app-page-header
+    title="Perfil de Risco"
+    subtitle="Seu perfil é calculado automaticamente com base nos seus investimentos"
+  >
   </app-page-header>
 
-  <div *ngIf="isLoading" class="loading-container">
+  <div
+    *ngIf="isLoading"
+    class="loading-container"
+    role="status"
+    aria-live="polite"
+  >
     <p>Carregando seu perfil...</p>
   </div>
 
   <!-- Pontuação Indicator -->
-  <div *ngIf="!isLoading" class="pontuacao-section">
+  <section
+    *ngIf="!isLoading"
+    class="pontuacao-section"
+    role="region"
+    aria-labelledby="score-heading"
+  >
     <mat-card class="pontuacao-card" elevation="5">
       <mat-card-header>
-        <mat-card-title class="pontuacao-title">Seu nível de risco da carteira</mat-card-title>
+        <mat-card-title id="score-heading" class="pontuacao-title"
+          >Seu nível de risco da carteira</mat-card-title
+        >
       </mat-card-header>
-      
+
       <mat-card-content>
-        <div class="pontuacao-score">
-          <span class="score-number" [style.color]="getRiskColor()">{{ displayedScore }}</span>
-          <span class="score-max">/100</span>
+        <div class="pontuacao-score" role="status" aria-live="polite">
+          <span class="score-number" [style.color]="getRiskColor()">{{
+            displayedScore
+          }}</span>
+          <span class="score-max" aria-hidden="true">/100</span>
         </div>
 
-        <div class="pontuacao-progress">
+        <div
+          class="pontuacao-progress"
+          role="img"
+          [attr.aria-label]="'Nível de risco: ' + userPontuacao + ' por cento'"
+        >
           <div class="progress-bar-container">
             <div class="progress-bar-gradient">
               <div class="progress-fill" [style.width.%]="userPontuacao"></div>
             </div>
           </div>
-          <div class="progress-labels">
+          <div class="progress-labels" aria-hidden="true">
             <span class="label-min">0</span>
             <span class="label-max">100</span>
           </div>
         </div>
 
-        <div class="pontuacao-level">
-          <mat-chip [style.background-color]="getRiskColor()" [style.color]="'white'" >
+        <div class="pontuacao-level" role="status">
+          <mat-chip
+            [style.background-color]="getRiskColor()"
+            [style.color]="'white'"
+          >
             {{ getRiskCategory() }}
           </mat-chip>
         </div>
       </mat-card-content>
     </mat-card>
-  </div>
+  </section>
 
   <!-- Profile Cards (Read-only) -->
-  <div *ngIf="!isLoading" class="profiles-grid">
-    <mat-card 
-      *ngFor="let profile of profiles; let i = index" 
-      class="profile-card"
-      [class.current]="i === currentIndex">
-      
-      <mat-card-header>
-        <div mat-card-avatar class="card-icon" [style.background]="profile.color">
-          <mat-icon class="icon">{{ profile.icon }}</mat-icon>
-        </div>
-        <mat-card-title class="card-title">{{ profile.title }}</mat-card-title>
-      </mat-card-header>
-      
-      <mat-card-content>
-        <div class="card-description">
-          <p>{{ profile.description }}</p>
-        </div>
-        
-        <div class="card-features">
-          <div class="feature-item" *ngFor="let feature of profile.features">
-            <mat-icon class="check-icon">check_circle</mat-icon>
-            <span>{{ feature }}</span>
-          </div>
-        </div>
+  <section
+    *ngIf="!isLoading"
+    class="profiles-grid"
+    role="region"
+    aria-labelledby="profiles-heading"
+  >
+    <h2 id="profiles-heading" class="sr-only">
+      Perfis de Investimento Disponíveis
+    </h2>
 
-        <div class="card-risk-indicator">
-          <span class="label">Nível de Risco:</span>
-          <div class="risk-bars">
-            <div 
-              *ngFor="let bar of [1,2,3,4,5]" 
-              class="bar"
-              [class.filled]="bar <= profile.riskLevel"></div>
+    <article *ngFor="let profile of profiles; let i = index">
+      <mat-card
+        class="profile-card"
+        [class.current]="i === currentIndex"
+        [attr.aria-current]="i === currentIndex ? 'true' : null"
+      >
+        <mat-card-header>
+          <div
+            mat-card-avatar
+            class="card-icon"
+            [style.background]="profile.color"
+            aria-hidden="true"
+          >
+            <mat-icon class="icon">{{ profile.icon }}</mat-icon>
           </div>
-        </div>
-      </mat-card-content>
+          <mat-card-title class="card-title">
+            <h3>{{ profile.title }}</h3>
+          </mat-card-title>
+        </mat-card-header>
 
-      <mat-card-actions *ngIf="i === currentIndex">
-        <mat-chip class="current-profile-chip">
-          <mat-icon>check</mat-icon> Seu perfil atual
-        </mat-chip>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        <mat-card-content>
+          <div class="card-description">
+            <p>{{ profile.description }}</p>
+          </div>
+
+          <div class="card-features">
+            <h4 class="sr-only">Características</h4>
+            <ul>
+              <li class="feature-item" *ngFor="let feature of profile.features">
+                <mat-icon class="check-icon" aria-hidden="true"
+                  >check_circle</mat-icon
+                >
+                <span>{{ feature }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-risk-indicator">
+            <span class="label">Nível de Risco:</span>
+            <div
+              class="risk-bars"
+              role="img"
+              [attr.aria-label]="
+                'Nível de risco ' + profile.riskLevel + ' de 5'
+              "
+            >
+              <div
+                *ngFor="let bar of [1, 2, 3, 4, 5]"
+                class="bar"
+                [class.filled]="bar <= profile.riskLevel"
+                aria-hidden="true"
+              ></div>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions *ngIf="i === currentIndex">
+          <mat-chip class="current-profile-chip" role="status">
+            <mat-icon aria-hidden="true">check</mat-icon> Seu perfil atual
+          </mat-chip>
+        </mat-card-actions>
+      </mat-card>
+    </article>
+  </section>
 </section>

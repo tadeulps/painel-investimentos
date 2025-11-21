@@ -1,7 +1,7 @@
-<section class="login-page">
+<section class="login-page" role="main">
   <mat-card class="login-container">
     <mat-card-header class="login-header">
-      <img src="/images/caixa_elemento_cor_chapado_positivo.png" alt="CAIXA-logo" class="logo" />
+      <img src="/images/caixa_elemento_cor_chapado_positivo.png" alt="Logotipo Caixa" class="logo" />
       <mat-card-title>Acesse sua Conta</mat-card-title>
       <mat-card-subtitle>Digite suas credenciais para continuar</mat-card-subtitle>
     </mat-card-header>
@@ -15,7 +15,7 @@
             type="email" 
             formControlName="email"
             placeholder="seu@email.com">
-          <mat-icon matPrefix>email</mat-icon>
+          <mat-icon matPrefix aria-hidden="true">email</mat-icon>
           <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">
             E-mail é obrigatório
           </mat-error>
@@ -31,7 +31,7 @@
             [type]="showPassword ? 'text' : 'password'" 
             formControlName="senha"
             placeholder="Digite sua senha">
-          <mat-icon matPrefix>lock</mat-icon>
+          <mat-icon matPrefix aria-hidden="true">lock</mat-icon>
           <button 
             mat-icon-button 
             matSuffix 
@@ -49,7 +49,7 @@
         </mat-form-field>
 
         <div class="form-actions">
-          <a href="#" class="forgot-password" (click)="forgotPassword($event)">Recuperar credenciais</a>
+          <button type="button" class="forgot-password" (click)="forgotPassword($event)">Recuperar credenciais</button>
         </div>
 
         <app-caixa-button
@@ -61,9 +61,8 @@
           {{ isLoading ? 'Entrando...' : 'Entrar' }}
         </app-caixa-button>
 
-        <div class="error-message" *ngIf="errorMessage">
-         
-          <span>{{ errorMessage }}</span>
+        <div class="error-message" *ngIf="errorMessage" role="alert">
+          <p>{{ errorMessage }}</p>
         </div>
       </form>
     </mat-card-content>

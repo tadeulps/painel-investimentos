@@ -1,24 +1,24 @@
-<section class="dashboard-page">
+<section class="dashboard-page" role="main" aria-label="Dashboard de Investimentos">
   <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading-container">
-    <mat-spinner diameter="50"></mat-spinner>
+  <div *ngIf="isLoading" class="loading-container" role="status" aria-live="polite">
+    <mat-spinner diameter="50" aria-label="Carregando"></mat-spinner>
     <p>Carregando seu dashboard...</p>
   </div>
 
   <!-- Dashboard Content -->
   <div *ngIf="!isLoading && userProfile" class="dashboard-content">
     
-    <!-- 1️⃣ Resumo do Investidor -->
-    <mat-card class="investor-summary">
+    <!-- Resumo do Investidor -->
+    <mat-card class="investor-summary" role="region" aria-labelledby="welcome-heading">
       <mat-card-content>
         <div class="welcome-section">
-          <h1 class="greeting">{{ getGreeting() }}, {{ userProfile.nome }}!</h1>
+          <h1 id="welcome-heading" class="greeting">{{ getGreeting() }}, {{ userProfile.nome }}!</h1>
           <p class="subtitle">Simule e invista com segurança, tudo num só lugar.</p>
         </div>
 
-        <mat-chip-set class="risk-profile-badge" [class]="'profile-' + getRiskProfileClass()">
+        <mat-chip-set class="risk-profile-badge" [class]="'profile-' + getRiskProfileClass()" role="status">
           <mat-chip>
-            <div class="card-icon" [class]="'icon-' + getRiskProfileClass()">
+            <div class="card-icon" [class]="'icon-' + getRiskProfileClass()" aria-hidden="true">
               <mat-icon>{{ getRiskProfileIcon() }}</mat-icon>
             </div>
             <div class="profile-info">
@@ -30,35 +30,37 @@
       </mat-card-content>
     </mat-card>
 
-    <!-- 📊 Indicadores Rápidos -->
-    <div class="quick-indicators">
+    <!-- Indicadores Rápidos -->
+    <section class="quick-indicators" role="region" aria-labelledby="indicators-heading">
+      <h2 id="indicators-heading" class="sr-only">Indicadores Financeiros</h2>
+      
       <mat-card class="indicator-card investments">
         <mat-card-content>
           <div class="card-header">
-            <div class="card-icon">
+            <div class="card-icon" aria-hidden="true">
               <mat-icon>account_balance_wallet</mat-icon>
             </div>
-            <span class="card-label">Valor Total Investido</span>
+            <h3 class="card-label">Valor Total Investido</h3>
           </div>
-          <span class="card-value">{{ summary.valorTotalInvestido | currency:'BRL' }}</span>
+          <p class="card-value">{{ summary.valorTotalInvestido | currency:'BRL' }}</p>
         </mat-card-content>
       </mat-card>
 
       <mat-card class="indicator-card return">
         <mat-card-content>
           <div class="card-header">
-            <div class="card-icon">
+            <div class="card-icon" aria-hidden="true">
               <mat-icon>trending_up</mat-icon>
             </div>
-            <span class="card-label">Rentabilidade Acumulada</span>
+            <h3 class="card-label">Rentabilidade Acumulada</h3>
           </div>
           <div class="card-values">
-            <span class="card-value" [class.positive]="summary.rentabilidadeAcumulada > 0" [class.negative]="summary.rentabilidadeAcumulada < 0">
+            <p class="card-value" [class.positive]="summary.rentabilidadeAcumulada > 0" [class.negative]="summary.rentabilidadeAcumulada < 0">
               {{ summary.rentabilidadeAcumulada | currency:'BRL' }}
-            </span>
-            <span class="card-percentage" *ngIf="summary.valorTotalInvestido > 0">
+            </p>
+            <p class="card-percentage" *ngIf="summary.valorTotalInvestido > 0">
               {{ (summary.rentabilidadeAcumulada / summary.valorTotalInvestido * 100).toFixed(2) | number:'1.2-2' }}% 
-            </span>
+            </p>
           </div>
         </mat-card-content>
       </mat-card>
@@ -66,61 +68,64 @@
       <mat-card class="indicator-card total">
         <mat-card-content>
           <div class="card-header">
-            <div class="card-icon">
+            <div class="card-icon" aria-hidden="true">
               <mat-icon>diamond</mat-icon>
             </div>
-            <span class="card-label">Valor Atual Total</span>
+            <h3 class="card-label">Valor Atual Total</h3>
           </div>
-          <span class="card-value">{{ summary.valorAtualTotal | currency:'BRL' }}</span>
+          <p class="card-value">{{ summary.valorAtualTotal | currency:'BRL' }}</p>
         </mat-card-content>
       </mat-card>
 
       <mat-card class="indicator-card count">
         <mat-card-content>
           <div class="card-header">
-            <div class="card-icon">
+            <div class="card-icon" aria-hidden="true">
               <mat-icon>bar_chart</mat-icon>
             </div>
-            <span class="card-label">Investimentos Ativos</span>
+            <h3 class="card-label">Investimentos Ativos</h3>
           </div>
-          <span class="card-value">{{ summary.numeroInvestimentos }}</span>
+          <p class="card-value">{{ summary.numeroInvestimentos }}</p>
         </mat-card-content>
       </mat-card>
-    </div>
+    </section>
 
-    <!-- 📈 Evolução dos Investimentos -->
-    <app-investment-evolution-chart 
-      *ngIf="investments.length > 0" 
-      [investments]="investments">
-    </app-investment-evolution-chart>
+    <!-- Evolução dos Investimentos -->
+    <section *ngIf="investments.length > 0" role="region" aria-labelledby="evolution-heading">
+      <h2 id="evolution-heading" class="sr-only">Evolução dos Investimentos</h2>
+      <app-investment-evolution-chart [investments]="investments"></app-investment-evolution-chart>
+    </section>
 
-    <!-- 📊 Distribuição por Tipo de Produto -->
-    <app-product-distribution-chart 
-      *ngIf="investments.length > 0" 
-      [investments]="investments">
-    </app-product-distribution-chart>
+    <!-- Distribuição por Tipo de Produto -->
+    <section *ngIf="investments.length > 0" role="region" aria-labelledby="distribution-heading">
+      <h2 id="distribution-heading" class="sr-only">Distribuição por Tipo de Produto</h2>
+      <app-product-distribution-chart [investments]="investments"></app-product-distribution-chart>
+    </section>
 
-    <!-- 📊 Histórico do Perfil de Risco -->
-    <app-risk-history-chart></app-risk-history-chart>
+    <!-- Histórico do Perfil de Risco -->
+    <section role="region" aria-labelledby="risk-history-heading">
+      <h2 id="risk-history-heading" class="sr-only">Histórico do Perfil de Risco</h2>
+      <app-risk-history-chart></app-risk-history-chart>
+    </section>
 
-    <!-- 💼 Lista de Investimentos -->
-    <app-investments-list 
-      *ngIf="investments.length > 0" 
-      [investments]="investments">
-    </app-investments-list>
+    <!-- Lista de Investimentos -->
+    <section *ngIf="investments.length > 0" role="region" aria-labelledby="investments-list-heading">
+      <h2 id="investments-list-heading" class="sr-only">Lista de Investimentos</h2>
+      <app-investments-list [investments]="investments"></app-investments-list>
+    </section>
 
     <!-- Empty State -->
-    <mat-card *ngIf="investments.length === 0" class="empty-state">
+    <mat-card *ngIf="investments.length === 0" class="empty-state" role="status">
       <mat-card-content>
-        <div class="empty-icon">
+        <div class="empty-icon" aria-hidden="true">
           <mat-icon>work_outline</mat-icon>
         </div>
         <h2>Você ainda não possui investimentos</h2>
         <p>Comece agora explorando nossos produtos e simulando investimentos!</p>
-        <div class="empty-actions">
+        <nav class="empty-actions" aria-label="Ações rápidas">
           <a routerLink="/produtos" mat-raised-button color="primary" class="btn-primary">Ver Produtos</a>
           <a routerLink="/simulacao" mat-stroked-button color="primary" class="btn-secondary">Simular Investimento</a>
-        </div>
+        </nav>
       </mat-card-content>
     </mat-card>
 

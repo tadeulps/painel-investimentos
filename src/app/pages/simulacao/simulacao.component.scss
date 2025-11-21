@@ -1,5 +1,17 @@
 @import "../../../styles/token.scss";
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .simulacao-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -421,17 +433,23 @@
     padding: $spacing-tiny;
   }
 
-  .label {
+  .label,
+  h3.label {
     @include card-caption;
     color: $slate;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
   }
 
-  .value {
+  .value,
+  p.value {
     @include card-title;
     font-size: $heading-small;
     color: $charcoal;
+    margin: 0;
 
     &.gain {
       color: $success-70;
