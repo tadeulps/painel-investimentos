@@ -35,7 +35,6 @@
     &:hover:not(:disabled) {
       background: darken($laranja-caixa, 8%);
       box-shadow: $shadow-elevation-3;
-      transform: translateY(-2px);
     }
 
     &:active:not(:disabled) {
@@ -51,7 +50,6 @@
     &:hover:not(:disabled) {
       background: $oceano-start;
       box-shadow: $shadow-elevation-3;
-      transform: translateY(-2px);
     }
 
     &:active:not(:disabled) {

@@ -81,7 +81,8 @@
   ::ng-deep .mat-mdc-card-actions {
     padding: $spacing-quark $spacing-tiny $spacing-tiny;
 
-    button {
+    button,
+    app-caixa-button {
       width: 100%;
     }
   }

@@ -9,6 +9,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { CaixaButtonComponent } from '../../components/caixa-button/caixa-button.component';
 
 @Component({
   selector: 'app-produtos',
@@ -20,7 +21,8 @@ import { PageHeaderComponent } from '../../components/page-header/page-header.co
     MatChipsModule,
     MatIconModule,
     MatBadgeModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CaixaButtonComponent
   ],
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.scss']

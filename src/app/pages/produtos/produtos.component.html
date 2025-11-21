@@ -1,7 +1,8 @@
 <section class="produtos-page">
-  <app-page-header 
-    title="Produtos de Investimento" 
-    subtitle="Conheça os produtos disponíveis e encontre o ideal para você">
+  <app-page-header
+    title="Produtos de Investimento"
+    subtitle="Conheça os produtos disponíveis e encontre o ideal para você"
+  >
   </app-page-header>
 
   <div *ngIf="isLoading" class="loading-container">
@@ -9,115 +10,132 @@
   </div>
 
   <div *ngIf="!isLoading">
-  <!-- Produtos Recomendados -->
-  <div class="section-container recommended-section">
-    <div class="section-header">
-      <h2>
-        Produtos recomendados para você!
-      </h2>
-      <p class="section-description">
-        Escolhidos com base no seu perfil de risco
-      </p>
-    </div>
+    <!-- Produtos Recomendados -->
+    <div class="section-container recommended-section">
+      <div class="section-header">
+        <h2>Produtos recomendados para você!</h2>
+        <p class="section-description">
+          Escolhidos com base no seu perfil de risco
+        </p>
+      </div>
 
-    <div class="products-grid">
-      <mat-card *ngFor="let product of recommendedProducts" class="product-card recommended">
-        <mat-card-content>
-          <div class="card-header-custom">
-            <h3 class="product-name">{{ product.nome }}</h3>
-            <div class="risk-icon" [class]="'risk-icon-' + getRiskClass(product.risco)">
-              <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+      <div class="products-grid">
+        <mat-card
+          *ngFor="let product of recommendedProducts"
+          class="product-card recommended"
+        >
+          <mat-card-content>
+            <div class="card-header-custom">
+              <h3 class="product-name">{{ product.nome }}</h3>
+              <div
+                class="risk-icon"
+                [class]="'risk-icon-' + getRiskClass(product.risco)"
+              >
+                <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+              </div>
             </div>
-          </div>
 
-
-          <div class="product-details">
+            <div class="product-details">
               <div class="detail-item">
-              <span class="label">Tipo</span>
-              <span class="value">  {{ product.tipo }}</span>
+                <span class="label">Tipo</span>
+                <span class="value"> {{ product.tipo }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Rentabilidade</span>
+                <span class="value rentabilidade">
+                  <mat-icon class="trending-icon">trending_up</mat-icon>
+                  {{ (product.taxaAnual * 100).toFixed(2) }}% a.a.
+                </span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Risco</span>
+                <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{
+                  product.risco
+                }}</mat-chip>
+              </div>
             </div>
-            <div class="detail-item">
-              <span class="label">Rentabilidade</span>
-              <span class="value rentabilidade">
-                <mat-icon class="trending-icon">trending_up</mat-icon>
-                {{ (product.taxaAnual * 100).toFixed(2) }}% a.a.
-              </span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Risco</span>
-              <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
-            </div>
-          </div>
-        </mat-card-content>
+          </mat-card-content>
 
-        <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="simulateInvestment(product)">
-            Simular Investimento
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
-
-  <!-- Todos os Produtos -->
-  <div class="section-container all-products-section">
-    <div class="section-header">
-      <h2>
-        Todos os Produtos
-      </h2>
-      <p class="section-description">
-        Explore todas as opções disponíveis
-      </p>
+          <mat-card-actions>
+            <app-caixa-button
+              variant="secondary"
+              [fullWidth]="true"
+              (clicked)="simulateInvestment(product)"
+            >
+              Simular Investimento
+            </app-caixa-button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
 
-    <div class="filters-bar">
-      <button 
-        *ngFor="let type of productTypes" 
-        mat-stroked-button
-        [color]="selectedType === type ? 'primary' : ''"
-        (click)="filterByType(type)">
-        {{ type === 'Todos' ? 'Todos' : type }}
-      </button>
-    </div>
+    <!-- Todos os Produtos -->
+    <div class="section-container all-products-section">
+      <div class="section-header">
+        <h2>Todos os Produtos</h2>
+        <p class="section-description">Explore todas as opções disponíveis</p>
+      </div>
 
-    <div class="products-grid">
-      <mat-card *ngFor="let product of filteredProducts" class="product-card">
-        <mat-card-content>
-          <div class="card-header-custom">
-            <h3 class="product-name">{{ product.nome }}</h3>
-            <div class="risk-icon" [class]="'risk-icon-' + getRiskClass(product.risco)">
-              <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+      <div class="filters-bar">
+        <button
+          *ngFor="let type of productTypes"
+          mat-stroked-button
+          [color]="selectedType === type ? 'primary' : ''"
+          (click)="filterByType(type)"
+        >
+          {{ type === "Todos" ? "Todos" : type }}
+        </button>
+      </div>
+
+      <div class="products-grid">
+        <mat-card *ngFor="let product of filteredProducts" class="product-card">
+          <mat-card-content>
+            <div class="card-header-custom">
+              <h3 class="product-name">{{ product.nome }}</h3>
+              <div
+                class="risk-icon"
+                [class]="'risk-icon-' + getRiskClass(product.risco)"
+              >
+                <mat-icon>{{ getRiskIcon(product.risco) }}</mat-icon>
+              </div>
             </div>
-          </div>
 
-          <div class="product-type">Tipo  {{ product.tipo }}</div>
-
-          <div class="product-details">
-            <div class="detail-item">
-              <span class="label">Rentabilidade</span>
-              <span class="value rentabilidade">
-                <mat-icon class="trending-icon">trending_up</mat-icon>
-                {{ (product.taxaAnual * 100).toFixed(2) }}% do CDI
-              </span>
+            <div class="product-details">
+               <div class="detail-item">
+                <span class="label">Tipo</span>
+                <span class="value"> {{ product.tipo }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Rentabilidade</span>
+                <span class="value rentabilidade">
+                  <mat-icon class="trending-icon">trending_up</mat-icon>
+                  {{ (product.taxaAnual * 100).toFixed(2) }}% do CDI
+                </span>
+              </div>
+              <div class="detail-item">
+                <span class="label">Risco</span>
+                <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{
+                  product.risco
+                }}</mat-chip>
+              </div>
             </div>
-            <div class="detail-item">
-              <span class="label">Risco</span>
-              <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
-            </div>
-          </div>
-        </mat-card-content>
+          </mat-card-content>
 
-        <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="simulateInvestment(product)">
-            Simular Investimento
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+          <mat-card-actions>
+            <app-caixa-button
+              variant="secondary"
+              [fullWidth]="true"
+              (clicked)="simulateInvestment(product)"
+            >
+              Simular Investimento
+            </app-caixa-button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
 
-    <div *ngIf="filteredProducts.length === 0" class="no-results">
-      <p>Nenhum produto encontrado para este filtro.</p>
+      <div *ngIf="filteredProducts.length === 0" class="no-results">
+        <p>Nenhum produto encontrado para este filtro.</p>
+      </div>
     </div>
-  </div>
   </div>
 </section>
