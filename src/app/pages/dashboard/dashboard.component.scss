@@ -310,13 +310,21 @@
   .investor-summary ::ng-deep .mat-mdc-card-content {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     gap: $spacing-micro;
     padding: $spacing-tiny;
   }
-
+  .greeting,.subtitle{
+    text-align: center;
+  }
+  .mdc-evolution-chip-set__chips{
+    justify-content: center;
+  }
+  .mat-mdc-chip{
+     margin: 0 auto !important;
+  }
   .risk-profile-badge {
     width: 100%;
-
     ::ng-deep .mat-mdc-chip-set {
       justify-content: center;
     }
@@ -329,4 +337,12 @@
   .welcome-section .greeting {
     font-size: $heading-small;
   }
+  .indicator-card {
+    align-items: center;
+  }
+  .card-value,.card-percentage {
+  
+    text-align: center;
+  }
+
 }
