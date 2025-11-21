@@ -1,38 +1,28 @@
-@import '../../../styles/token.scss';
+@import "../../../styles/token.scss";
 
 .produtos-page {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: $spacing-large $spacing-tiny;
+  padding: $spacing-large $spacing-small;
   min-height: calc(100vh - 70px);
-}
-
-.page-header {
-  text-align: center;
-  margin-bottom: $spacing-xlarge;
-
-  h1 {
-    @include part-title;
-    color: $azul-caixa;
-    margin-bottom: $spacing-nano;
-  }
-
-  .subtitle {
-    @include card-subtitle;
-    color: $slate;
-  }
+  background-color: $background-default;
 }
 
 .section-container {
   margin-bottom: $spacing-xlarge;
 }
 
+.recommended-section {
+  background: $branco;
+  padding: $spacing-small;
+  border-radius: $border-radius-xlarge;
+  box-shadow: $shadow-container;
+}
 .section-header {
   margin-bottom: $spacing-small;
 
   h2 {
     @include card-title;
-    font-size: $heading-small;
     color: $charcoal;
     display: flex;
     align-items: center;
@@ -45,19 +35,10 @@
   }
 
   .section-description {
-    @include card-text;
+    @include card-subtitle;
     color: $slate;
-    margin-left: 2rem;
   }
 }
-
-.recommended-section {
-  background: linear-gradient(135deg, $light-blue-highlight 0%, $light-green 100%);
-  padding: $spacing-small;
-  border-radius: $border-radius-large;
-  box-shadow: $shadow-elevation-2;
-}
-
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -66,13 +47,15 @@
 
 .product-card {
   transition: all 0.3s ease;
-
+  box-shadow: $shadow-elevation-dscard, $shadow-elevation-dscard2;
+  background-color: $branco;
+  border-radius: $border-radius-large;
   &.recommended {
-    border: 2px solid $laranja-caixa;
+    border: 3px solid $laranja-caixa;
     position: relative;
 
     &::before {
-      content: '⭐ Recomendado';
+      content: "⭐ Recomendado";
       position: absolute;
       top: -12px;
       left: $spacing-tiny;
@@ -81,7 +64,9 @@
       padding: $spacing-quark $spacing-nano;
       border-radius: $border-radius-small;
       font-size: $text-caption;
-      font-weight: $font-weight-bold;
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
   }
 
@@ -112,7 +97,19 @@
 ::ng-deep .mat-mdc-chip {
   font-size: $text-small;
   font-weight: $font-weight-semibold;
-
+  --mdc-chip-label-text-color: $branco;
+--mdc-chip-container-color: $success-70;
+--mdc-chip-outline-color: transparent;
+--mdc-chip-outline-width: 0;
+--mdc-chip-font-family: "CAIXAStd", sans-serif !important;
+  span {
+    font-size: $text-standard;
+    letter-spacing: 1px;
+    font-family: "CAIXAStd", sans-serif !important;
+    border: none;
+    text-transform: uppercase;
+  }
+  color: $branco !important;
   &.chip-baixo {
     background: $light-green !important;
     color: $success-90 !important;

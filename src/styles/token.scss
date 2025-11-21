@@ -90,6 +90,7 @@ $shadow-elevation-5: 0 6px 12px rgba(0, 0, 0, 0.18);
 $shadow-elevation-dscard: 0px 4px 12px rgba(0, 0, 0, 0.06);
 $shadow-elevation-dscard2: 0px 1px 3px rgba(0, 0, 0, 0.04);
 $shadow-elevation-soft:  0px 2px 4px rgba(0, 0, 0, 0.08);
+$shadow-container: 0px 8px 24px rgba(0, 0, 0, 0.03);
 
 // ========================================
 // Typography - Headings
@@ -194,7 +195,7 @@ $border-radius-circle: 50%;
 }
 
 @mixin card-title {
-  font-size: $text-big;
+  font-size: $heading-small;
   font-family: $font-semibold;
   font-weight: $font-weight-semibold;
   color: $charcoal;

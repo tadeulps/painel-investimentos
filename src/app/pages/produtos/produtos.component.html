@@ -13,18 +13,16 @@
   <div class="section-container recommended-section">
     <div class="section-header">
       <h2>
-        <span class="icon">⭐</span>
-        Produtos Recomendados para Você
+        Produtos recomendados para você!
       </h2>
       <p class="section-description">
-        Baseado no seu perfil de investimento
+        Escolhidos com base no seu perfil de risco
       </p>
     </div>
 
     <div class="products-grid">
       <mat-card *ngFor="let product of recommendedProducts" class="product-card recommended">
         <mat-card-header>
-          <mat-chip [class]="'chip-' + getRiskClass(product.risco)">{{ product.tipo }}</mat-chip>
           <mat-chip [class]="'risk-' + getRiskClass(product.risco)">{{ product.risco }}</mat-chip>
         </mat-card-header>
 
@@ -56,7 +54,6 @@
   <div class="section-container all-products-section">
     <div class="section-header">
       <h2>
-        <span class="icon">📊</span>
         Todos os Produtos
       </h2>
       <p class="section-description">
