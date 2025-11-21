@@ -469,15 +469,13 @@
     }
   }
 }
-
-// Dynamic colors for risk bars based on profile type
-.profile-card:nth-child(1) .risk-bars .bar.filled {
+article:nth-child(2) .risk-bars .bar.filled {
   background: $green-conservador;
 }
-.profile-card:nth-child(2) .risk-bars .bar.filled {
+article:nth-child(3) .risk-bars .bar.filled {
   background: $yellow-moderado;
 }
-.profile-card:nth-child(3) .risk-bars .bar.filled {
+article:nth-child(4) .risk-bars .bar.filled {
   background: $red-agressivo;
 }
 
