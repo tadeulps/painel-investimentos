@@ -441,18 +441,93 @@
 
 .monthly-breakdown {
   margin-bottom: $spacing-small;
-
+  border-radius: $border-radius-large;
+  overflow: hidden;
+  
+ ::ng-deep .mat-mdc-card-title {
+    @include part-title;
+   
+    color: $azul-caixa;
+    font-family: $font-semibold;
+    font-weight: $font-weight-semibold;
+    padding: $spacing-tiny $spacing-tiny $spacing-nano;
+  }
+ ::ng-deep .mat-mdc-card-header {
+   margin: 0 auto $spacing-nano;
+  }
   ::ng-deep .mat-mdc-card-content {
-    padding: $spacing-tiny;
-    overflow-x: auto;
+    padding: 0;
   }
 
   .monthly-table {
     width: 100%;
+    background-color: $branco;
+    font-family: $font-regular;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    ::ng-deep .mat-mdc-header-row {
+      background: linear-gradient(135deg, $light-blue-highlight, $light-blue-highlight);
+      box-shadow: $shadow-elevation-2;
+    }
+
+    ::ng-deep .mat-mdc-header-cell {
+      font-family: $font-semibold;
+      font-weight: $font-weight-semibold;
+      font-size: $text-standard;
+      color: $charcoal !important;
+      padding: $spacing-tiny $spacing-tiny;
+      text-align: center;
+      border: none;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    // Row styles
+    ::ng-deep .mat-mdc-row {
+      transition: all 0.2s ease;
+      border-bottom: 1px solid $cinza-200;
+      color: $charcoal;
+      &:hover {
+        background-color: $light-blue-highlight;
+        transform: scale(1.005);
+        box-shadow: $shadow-elevation-1;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    ::ng-deep .mat-mdc-cell {
+      font-family: $font-regular;
+      font-weight: $font-weight-regular;
+      font-size: $text-standard;
+      color: $charcoal;
+      padding: $spacing-tiny $spacing-tiny;
+      text-align: center;
+      border: none;
+
+      &:first-child {
+        font-family: $font-semibold;
+        font-weight: $font-weight-semibold;
+        color: $azul-caixa;
+      }
+    }
 
     .gain {
       color: $success-70;
+      font-family: $font-semibold;
       font-weight: $font-weight-semibold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-quark;
+
+      &::before {
+        content: '+';
+        font-size: $text-small;
+      }
     }
   }
 }
@@ -646,6 +721,19 @@ table {
 
     button {
       width: 100%;
+    }
+  }
+
+  // Mobile table improvements
+  .monthly-breakdown {
+    ::ng-deep .mat-mdc-header-cell,
+    ::ng-deep .mat-mdc-cell {
+      padding: $spacing-nano $spacing-quark;
+      font-size: $text-small;
+    }
+
+    ::ng-deep .mat-mdc-header-cell {
+      font-size: $text-caption;
     }
   }
 }
