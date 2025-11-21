@@ -85,7 +85,7 @@
     .product-info {
       flex: 1;
       min-width: 0;
-      text-align: center;
+      
 
       .product-name {
         @include card-title;
@@ -157,8 +157,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+     
         gap: $spacing-quark;
 
         &.full-width {
@@ -291,7 +290,9 @@
   .investment-card {
     ::ng-deep .card-header {
       padding: $spacing-tiny;
-      
+      .product-info {
+        text-align: center;
+      }
       .product-info .product-name {
         font-size: $text-standard;
         white-space: normal;
@@ -308,6 +309,8 @@
         margin-bottom: $spacing-tiny;
 
         .info-item {
+             align-items: center;
+        text-align: center;
           .info-label {
             font-size: $text-small;
           }
