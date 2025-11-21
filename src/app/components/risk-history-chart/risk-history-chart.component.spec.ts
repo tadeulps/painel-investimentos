@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RiskHistoryChartComponent } from './risk-history-chart.component';
-import { InvestmentService } from '../../services/investment.service';
-import { AuthService } from '../../services/auth.service';
-import { PontuacaoHistoryEntry } from '../../models/investment.models';
+import { InvestmentService } from '../../core/services/investment.service';
+import { AuthService } from '../../core/services/auth.service';
+import { PontuacaoHistoryEntry } from '../../core/models/investment.models';
 import { of, throwError } from 'rxjs';
 
 describe('RiskHistoryChartComponent', () => {

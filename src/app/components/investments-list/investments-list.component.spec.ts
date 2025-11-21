@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InvestmentsListComponent } from './investments-list.component';
-import { Investment } from '../../models/investment.models';
+import { Investment } from '../../core/models/investment.models';
 import { provideRouter } from '@angular/router';
 
 describe('InvestmentsListComponent', () => {

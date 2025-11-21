@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvestmentService } from '../../services/investment.service';
-import { PontuacaoHistoryEntry } from '../../models/investment.models';
-import { AuthService } from '../../services/auth.service';
+import { InvestmentService } from '../../core/services/investment.service';
+import { PontuacaoHistoryEntry } from '../../core/models/investment.models';
+import { AuthService } from '../../core/services/auth.service';
 import { Chart, registerables } from 'chart.js';
 import { MatIconModule } from '@angular/material/icon';
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { InvestmentService } from '../../services/investment.service';
-import { Product } from '../../models/investment.models';
+import { AuthService } from '../../core/services/auth.service';
+import { InvestmentService } from '../../core/services/investment.service';
+import { Product } from '../../core/models/investment.models';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';

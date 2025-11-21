@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductDistributionChartComponent } from './product-distribution-chart.component';
-import { Investment, Product } from '../../models/investment.models';
+import { Investment, Product } from '../../core/models/investment.models';
 import { SimpleChange } from '@angular/core';
 import { Chart } from 'chart.js';
 
