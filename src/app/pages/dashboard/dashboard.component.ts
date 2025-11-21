@@ -78,7 +78,6 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    // Load user profile
     this.authService.getUserProfile(this.clienteId).subscribe({
       next: (profile) => {
         this.userProfile = profile;

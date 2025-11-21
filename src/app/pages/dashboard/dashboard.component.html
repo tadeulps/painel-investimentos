@@ -1,14 +1,10 @@
 <section class="dashboard-page" role="main" aria-label="Dashboard de Investimentos">
-  <!-- Loading State -->
   <div *ngIf="isLoading" class="loading-container" role="status" aria-live="polite">
     <mat-spinner diameter="50" aria-label="Carregando"></mat-spinner>
     <p>Carregando seu dashboard...</p>
   </div>
 
-  <!-- Dashboard Content -->
   <div *ngIf="!isLoading && userProfile" class="dashboard-content">
-    
-    <!-- Resumo do Investidor -->
     <mat-card class="investor-summary" role="region" aria-labelledby="welcome-heading">
       <mat-card-content>
         <div class="welcome-section">
@@ -30,7 +26,6 @@
       </mat-card-content>
     </mat-card>
 
-    <!-- Indicadores Rápidos -->
     <section class="quick-indicators" role="region" aria-labelledby="indicators-heading">
       <h2 id="indicators-heading" class="sr-only">Indicadores Financeiros</h2>
       
@@ -90,31 +85,26 @@
       </mat-card>
     </section>
 
-    <!-- Evolução dos Investimentos -->
     <section *ngIf="investments.length > 0" role="region" aria-labelledby="evolution-heading">
       <h2 id="evolution-heading" class="sr-only">Evolução dos Investimentos</h2>
       <app-investment-evolution-chart [investments]="investments"></app-investment-evolution-chart>
     </section>
 
-    <!-- Distribuição por Tipo de Produto -->
     <section *ngIf="investments.length > 0" role="region" aria-labelledby="distribution-heading">
       <h2 id="distribution-heading" class="sr-only">Distribuição por Tipo de Produto</h2>
       <app-product-distribution-chart [investments]="investments"></app-product-distribution-chart>
     </section>
 
-    <!-- Histórico do Perfil de Risco -->
     <section role="region" aria-labelledby="risk-history-heading">
       <h2 id="risk-history-heading" class="sr-only">Histórico do Perfil de Risco</h2>
       <app-risk-history-chart></app-risk-history-chart>
     </section>
 
-    <!-- Lista de Investimentos -->
     <section *ngIf="investments.length > 0" role="region" aria-labelledby="investments-list-heading">
       <h2 id="investments-list-heading" class="sr-only">Lista de Investimentos</h2>
       <app-investments-list [investments]="investments"></app-investments-list>
     </section>
 
-    <!-- Empty State -->
     <mat-card *ngIf="investments.length === 0" class="empty-state" role="status">
       <mat-card-content>
         <div class="empty-icon" aria-hidden="true">

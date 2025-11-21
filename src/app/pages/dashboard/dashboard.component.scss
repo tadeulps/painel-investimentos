@@ -1,6 +1,5 @@
 @import "../../../styles/token.scss";
 
-// Screen reader only class
 .sr-only {
   position: absolute;
   width: 1px;
@@ -35,7 +34,6 @@
   }
 }
 
-// 1️⃣ Resumo do Investidor
 .investor-summary {
   margin-bottom: $spacing-small;
   background: linear-gradient(135deg, $azul-caixa, $oceano-end);
@@ -69,7 +67,7 @@
 
 .risk-profile-badge {
   ::ng-deep .mat-mdc-chip {
-    background: rgba($branco, 0.2);
+    background-color: rgba($branco, 0.15);
     color: $branco;
     border: 2px solid rgba($branco, 0.3);
     padding: $spacing-micro $spacing-small;
@@ -122,12 +120,14 @@
     font-size: $text-small;
     opacity: 0.9;
     font-family: $font-regular;
+    color: $branco;
   }
 
   .profile-name {
     font-size: $text-large;
     font-weight: $font-weight-bold;
     font-family: $font-bold;
+    color: $branco;
   }
 
   &.profile-conservador ::ng-deep .mat-mdc-chip {
@@ -143,7 +143,6 @@
   }
 }
 
-// 📊 Indicadores Rápidos
 .quick-indicators {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -218,7 +217,6 @@
     font-size: $text-large;
   }
 
-  // Investments card - Azul Caixa
   &.investments {
     .card-icon {
       background: $azul-caixa;
@@ -229,7 +227,6 @@
     }
   }
 
-  // Return card - Verde
   &.return {
     .card-icon {
       background: $success-70;
@@ -252,7 +249,6 @@
     }
   }
 
-  // Total card - Turquesa
   &.total {
     .card-icon {
       background: $turquesa-caixa;
@@ -263,7 +259,6 @@
     }
   }
 
-  // Count card - Cinza/azul neutro
   &.count {
     .card-icon {
       background: $slate;
@@ -275,7 +270,6 @@
   }
 }
 
-// Empty State
 .empty-state {
   ::ng-deep .mat-mdc-card-content {
     text-align: center;
@@ -314,7 +308,6 @@
   }
 }
 
-// Responsive
 @media (max-width: 768px) {
   .dashboard-page {
     padding: $spacing-tiny $spacing-micro;
