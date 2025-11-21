@@ -1,0 +1,11 @@
+<button 
+  class="caixa-button"
+  [class.primary]="variant === 'primary'"
+  [class.secondary]="variant === 'secondary'"
+  [class.outlined]="variant === 'outlined'"
+  [class.full-width]="fullWidth"
+  [disabled]="disabled"
+  (click)="onClick()">
+  <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+  <ng-content></ng-content>
+</button>

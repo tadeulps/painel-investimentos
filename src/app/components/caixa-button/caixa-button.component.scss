@@ -1,0 +1,83 @@
+@import '../../../styles/token.scss';
+
+.caixa-button {
+  @include button-base;
+  padding: $spacing-micro $spacing-small;
+  font-size: $text-standard;
+  font-weight: $font-weight-semibold;
+  border-radius: $border-radius-medium;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-quark;
+  min-height: 40px;
+  font-family: $font-semibold;
+  letter-spacing: 0.5px;
+
+  mat-icon {
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+
+  &.primary {
+    background: $laranja-caixa;
+    color: $branco;
+    box-shadow: $shadow-elevation-2;
+
+    &:hover:not(:disabled) {
+      background: darken($laranja-caixa, 8%);
+      box-shadow: $shadow-elevation-3;
+      transform: translateY(-2px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &.secondary {
+    background: $azul-caixa;
+    color: $branco;
+    box-shadow: $shadow-elevation-2;
+
+    &:hover:not(:disabled) {
+      background: $oceano-start;
+      box-shadow: $shadow-elevation-3;
+      transform: translateY(-2px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &.outlined {
+    background: $branco;
+    color: $azul-caixa;
+    border: 2px solid $azul-caixa;
+
+    &:hover:not(:disabled) {
+      background: rgba($azul-caixa, 0.05);
+      border-color: $oceano-start;
+      color: $oceano-start;
+    }
+
+    &:active:not(:disabled) {
+      background: rgba($azul-caixa, 0.1);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
