@@ -77,14 +77,13 @@
       </div>
 
       <div class="filters-bar">
-        <button
+        <app-caixa-button
           *ngFor="let type of productTypes"
-          mat-stroked-button
-          [color]="selectedType === type ? 'primary' : ''"
-          (click)="filterByType(type)"
+          [variant]="selectedType === type ? 'secondary' : 'outlined'"
+          (clicked)="filterByType(type)"
         >
           {{ type === "Todos" ? "Todos" : type }}
-        </button>
+        </app-caixa-button>
       </div>
 
       <div class="products-grid">

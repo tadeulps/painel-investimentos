@@ -253,10 +253,9 @@
 
 .filters-bar {
   display: flex;
-  gap: $spacing-quark;
+  gap: $spacing-nano;
   margin-bottom: $spacing-small;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .no-results {

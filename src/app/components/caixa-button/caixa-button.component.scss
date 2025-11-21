@@ -8,7 +8,6 @@
   border-radius: $border-radius-medium;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +15,7 @@
   min-height: 40px;
   font-family: $font-semibold;
   letter-spacing: 0.5px;
-
+  height: 50px;
   mat-icon {
     font-size: 1.25rem;
     width: 1.25rem;
@@ -37,9 +36,6 @@
       box-shadow: $shadow-elevation-3;
     }
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
   }
 
   &.secondary {
@@ -52,15 +48,13 @@
       box-shadow: $shadow-elevation-3;
     }
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
   }
 
   &.outlined {
     background: $branco;
     color: $azul-caixa;
-    border: 2px solid $azul-caixa;
+     outline: 2px solid $azul-caixa;
+  outline-offset: -2px;
 
     &:hover:not(:disabled) {
       background: rgba($azul-caixa, 0.05);
