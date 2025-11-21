@@ -251,60 +251,6 @@
       "dataInicio": "2025-11-05",
       "prazoMeses": 18,
       "valorAtual": 6565
-    },
-    {
-      "id": 11,
-      "userId": 1,
-      "productId": 4,
-      "valor": 15000,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 20,
-      "valorAtual": 15000
-    },
-    {
-      "id": 12,
-      "userId": 1,
-      "productId": 1,
-      "valor": 23232,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 22,
-      "valorAtual": 23232
-    },
-    {
-      "id": 13,
-      "userId": 1,
-      "productId": 8,
-      "valor": 2223,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 22,
-      "valorAtual": 2223
-    },
-    {
-      "id": 14,
-      "userId": 1,
-      "productId": 12,
-      "valor": 6666,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 66,
-      "valorAtual": 6666
-    },
-    {
-      "id": 15,
-      "userId": 1,
-      "productId": 9,
-      "valor": 25000,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 23,
-      "valorAtual": 25000
-    },
-    {
-      "id": 16,
-      "userId": 1,
-      "productId": 1,
-      "valor": 2222,
-      "dataInicio": "2025-11-21",
-      "prazoMeses": 111,
-      "valorAtual": 2222
     }
   ],
   "pontuacaoHistory": [
@@ -419,6 +365,13 @@
       "pontuacao": 45,
       "riskProfileId": 2,
       "timestamp": "2025-11-21T15:51:03.029Z"
+    },
+    {
+      "id": 17,
+      "clienteId": 1,
+      "pontuacao": 50,
+      "riskProfileId": 2,
+      "timestamp": "2025-11-21T16:22:56.861Z"
     }
   ]
 }
