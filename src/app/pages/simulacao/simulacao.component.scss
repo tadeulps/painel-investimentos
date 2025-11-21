@@ -44,7 +44,6 @@
   margin-bottom: $spacing-small;
 }
 
-// Product Selection Carousel
 .product-selection-section {
   margin-bottom: $spacing-xlarge;
 }
@@ -353,7 +352,6 @@
   }
 }
 
-// Simulation Form
 .simulation-form-section {
   max-width: 600px;
   margin: 0 auto $spacing-xlarge;
@@ -501,7 +499,6 @@
       text-transform: uppercase;
     }
 
-    // Row styles
     ::ng-deep .mat-mdc-row {
       transition: all 0.2s ease;
       border-bottom: 1px solid $cinza-200;
@@ -548,7 +545,6 @@
       }
     }
 
-    // Separator row styles
     ::ng-deep .mat-mdc-row.separator-row {
       background: linear-gradient(to right, $cinza-100, $light-blue-highlight, $cinza-100);
       border-top: 2px solid $azul-caixa;
@@ -583,7 +579,6 @@
     }
   }
 
-  // Expand/Collapse button styles
   .expand-button-container,
   .collapse-button-container {
     display: flex;
@@ -642,7 +637,6 @@
   }
 }
 
-// Results
 .simulation-results-section {
   margin-top: $spacing-xlarge;
 }
@@ -817,7 +811,6 @@ table {
     }
   }
 
-  // Mobile table improvements
   .monthly-breakdown {
     ::ng-deep .mat-mdc-header-cell,
     ::ng-deep .mat-mdc-cell {

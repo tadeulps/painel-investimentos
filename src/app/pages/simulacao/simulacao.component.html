@@ -5,12 +5,10 @@
   >
   </app-page-header>
 
-  <!-- Loading State -->
   <div *ngIf="isLoading" class="loading-container" role="status" aria-live="polite">
     <p>Carregando produtos...</p>
   </div>
 
-  <!-- Step 1: Product Selection (if no productId) -->
   <div *ngIf="!selectedProduct && !isLoading" class="product-selection-section">
     <h2 class="section-title">Selecione um Produto</h2>
 
@@ -102,7 +100,6 @@
     </div>
   </div>
 
-  <!-- Step 2: Simulation Form (after product selected) -->
   <div *ngIf="selectedProduct" class="simulation-form-section">
     <mat-card class="selected-product-card">
      
@@ -175,7 +172,6 @@
     </mat-card>
   </div>
 
-  <!-- Step 3: Simulation Results -->
   <div *ngIf="simulationResult" class="simulation-results-section">
     <h2 class="section-title">Resultado da Simulação</h2>
 

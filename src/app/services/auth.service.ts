@@ -16,7 +16,6 @@ export class AuthService {
     private http: HttpClient,
     private router: Router
   ) {
-    // Initialize with stored clientId if exists
     const clientId = this.getStoredClientId();
     if (clientId) {
       this.currentUserSubject.next(clientId);
@@ -27,7 +26,6 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.apiUrl}/autenticacao/login`, { email, senha })
       .pipe(
         tap(response => {
-          // Store authentication data
           if (rememberMe) {
             localStorage.setItem('authToken', response.token);
             localStorage.setItem('clientId', response.clienteId.toString());
@@ -36,23 +34,19 @@ export class AuthService {
             sessionStorage.setItem('clientId', response.clienteId.toString());
           }
           
-          // Update current user
           this.currentUserSubject.next(response.clienteId);
         })
       );
   }
 
   logout(): void {
-    // Clear all stored authentication data
     localStorage.removeItem('authToken');
     localStorage.removeItem('clientId');
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('clientId');
     
-    // Reset current user
     this.currentUserSubject.next(null);
     
-    // Navigate to login
     this.router.navigate(['/login']);
   }
 

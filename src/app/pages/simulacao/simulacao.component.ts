@@ -81,13 +81,11 @@ export class SimulacaoComponent implements OnInit {
     this.isLoading = true;
     this.clienteId = this.authService.getStoredClientId();
 
-    // Load products from API
     this.investmentService.getProducts().subscribe({
       next: (products) => {
         this.availableProducts = products;
         this.isLoading = false;
 
-        // Check for productId in query params after loading products
         this.route.queryParams.subscribe(params => {
           const productId = params['productId'];
           if (productId) {
@@ -158,7 +156,6 @@ export class SimulacaoComponent implements OnInit {
     const taxaAnual = this.selectedProduct.taxaAnual;
     const taxaMensal = Math.pow(1 + taxaAnual, 1/12) - 1;
 
-    // Calculate monthly breakdown
     const detalheMensal: MonthlyDetail[] = [];
     let saldoAtual = valor;
 
@@ -186,7 +183,6 @@ export class SimulacaoComponent implements OnInit {
 
     this.showAllMonths = false;
 
-    // Scroll to results
     setTimeout(() => {
       document.querySelector('.simulation-results-section')?.scrollIntoView({ 
         behavior: 'smooth' 
@@ -199,12 +195,10 @@ export class SimulacaoComponent implements OnInit {
     
     const months = this.simulationResult.detalheMensal;
     
-    // If 20 or fewer months, or showAllMonths is true, return all
     if (months.length <= 20 || this.showAllMonths) {
       return months;
     }
     
-    // Otherwise return first 10, separator, and last 10
     const first10 = months.slice(0, 10);
     const last10 = months.slice(-10);
     const separator = { 
@@ -249,7 +243,6 @@ export class SimulacaoComponent implements OnInit {
       return;
     }
 
-    // Open confirmation dialog
     const dialogRef = this.dialog.open(ConfirmInvestmentDialogComponent, {
       width: '500px',
       maxWidth: '90vw',
@@ -286,7 +279,6 @@ export class SimulacaoComponent implements OnInit {
       next: (response) => {
         this.isInvesting = false;
      
-        // Navigate to dashboard to see investments
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
