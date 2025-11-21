@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CaixaButtonComponent } from '../../components/caixa-button/caixa-button.component';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    CaixaButtonComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -41,8 +43,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['tadeu@caixa.com', [Validators.required, Validators.email]],
+      senha: ['123456', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
   }
@@ -76,7 +78,7 @@ export class LoginComponent implements OnInit {
         // Handle error
         this.isLoading = false;
         if (error.status === 401) {
-          this.errorMessage = 'E-mail ou senha incorretos. Tente novamente.';
+          this.errorMessage = 'E-mail ou senha incorretos. Recupere as credenciais e tente novamente.';
         } else if (error.status === 400) {
           this.errorMessage = 'Por favor, preencha todos os campos.';
         } else {
@@ -88,7 +90,7 @@ export class LoginComponent implements OnInit {
 
   forgotPassword(event: Event): void {
     event.preventDefault();
-    alert('Funcionalidade de recuperação de senha será implementada em breve.\n\nPor enquanto, use:\nE-mail: tadeu@caixa.com\nSenha: 123456');
+    alert('Utilizar as seguintes credenciais:\nE-mail: tadeu@caixa.com\nSenha: 123456');
   }
 
   register(event: Event): void {

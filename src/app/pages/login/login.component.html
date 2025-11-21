@@ -1,7 +1,7 @@
 <section class="login-page">
   <mat-card class="login-container">
     <mat-card-header class="login-header">
-      <img src="/images/CAIXA_PB_negativa.svg" alt="CAIXA" class="logo" />
+      <img src="/images/caixa_elemento_cor_chapado_positivo.png" alt="CAIXA-logo" class="logo" />
       <mat-card-title>Acesse sua Conta</mat-card-title>
       <mat-card-subtitle>Digite suas credenciais para continuar</mat-card-subtitle>
     </mat-card-header>
@@ -49,30 +49,25 @@
         </mat-form-field>
 
         <div class="form-actions">
-          <mat-checkbox formControlName="rememberMe">Lembrar-me</mat-checkbox>
-          <a href="#" class="forgot-password" (click)="forgotPassword($event)">Esqueci minha senha</a>
+          <a href="#" class="forgot-password" (click)="forgotPassword($event)">Recuperar credenciais</a>
         </div>
 
-        <button 
-          mat-raised-button 
-          color="primary"
-          type="submit"
-          class="btn-login"
-          [disabled]="loginForm.invalid || isLoading">
-          <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
-          <span *ngIf="!isLoading">Entrar</span>
-          <span *ngIf="isLoading">Entrando...</span>
-        </button>
+        <app-caixa-button
+          variant="secondary"
+          [fullWidth]="true"
+          [icon]="isLoading ? 'hourglass_empty' : 'login'"
+          [disabled]="loginForm.invalid || isLoading"
+          (clicked)="onSubmit()">
+          {{ isLoading ? 'Entrando...' : 'Entrar' }}
+        </app-caixa-button>
 
         <div class="error-message" *ngIf="errorMessage">
-          <mat-icon>error</mat-icon>
+         
           <span>{{ errorMessage }}</span>
         </div>
       </form>
     </mat-card-content>
 
-    <mat-card-footer class="login-footer">
-      <p>Não tem uma conta? <a href="#" (click)="register($event)">Cadastre-se</a></p>
-    </mat-card-footer>
+
   </mat-card>
 </section>
