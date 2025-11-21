@@ -47,6 +47,10 @@
 }
 
 @media (max-width: 576px) {
+
+  .chart-info {
+    margin-bottom: 0 !important;
+  }
   .chart-section {
     .chart-container {
       height: 400px;

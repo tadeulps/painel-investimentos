@@ -81,7 +81,7 @@ export class InvestmentEvolutionChartComponent
             position: 'top',
             labels: {
               font: {
-                family: 'Lato',
+                family: 'CaixaStd',
                 size: 12,
               },
               padding: 15,
@@ -93,11 +93,11 @@ export class InvestmentEvolutionChartComponent
             padding: 12,
             titleFont: {
               size: 14,
-              family: 'Lato',
+              family: 'CaixaStd',
             },
             bodyFont: {
               size: 13,
-              family: 'Lato',
+              family: 'CaixaStd',
             },
             callbacks: {
               label: (context) => {
@@ -129,7 +129,7 @@ export class InvestmentEvolutionChartComponent
                 }).format(value as number);
               },
               font: {
-                family: 'Lato',
+                family: 'CaixaStd',
                 size: 11,
               },
             },
@@ -140,7 +140,7 @@ export class InvestmentEvolutionChartComponent
           x: {
             ticks: {
               font: {
-                family: 'Lato',
+                family: 'CaixaStd',
                 size: 11,
               },
             },

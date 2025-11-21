@@ -82,8 +82,8 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
             position: 'right',
             labels: {
               font: {
-                family: 'Lato',
-                size: 12
+                family: 'CaixaStd', 
+                size: 13
               },
               padding: 15,
               usePointStyle: true,
@@ -115,12 +115,12 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
             padding: 15,
             titleFont: {
               size: 14,
-              family: 'Lato',
+              family: 'CaixaStd',
               weight: 'bold'
             },
             bodyFont: {
               size: 13,
-              family: 'Lato'
+              family: 'CaixaStd'
             },
             callbacks: {
               label: (context: any) => {
