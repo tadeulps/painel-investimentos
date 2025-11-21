@@ -5,7 +5,7 @@
       "name": "Tadeu Lopes",
       "email": "tadeu@caixa.com",
       "password": "123456",
-      "riskProfileId": 1
+      "riskProfileId": 3
     },
     {
       "id": 2,
@@ -332,6 +332,137 @@
       "dataInicio": "2025-11-21",
       "prazoMeses": 23,
       "valorAtual": 2323
+    },
+    {
+      "id": 20,
+      "userId": 1,
+      "productId": 9,
+      "valor": 232323,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 22,
+      "valorAtual": 232323
+    },
+    {
+      "id": 21,
+      "userId": 1,
+      "productId": 9,
+      "valor": 23232,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 22,
+      "valorAtual": 23232
+    },
+    {
+      "id": 22,
+      "userId": 1,
+      "productId": 8,
+      "valor": 2323,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 23,
+      "valorAtual": 2323
+    },
+    {
+      "id": 23,
+      "userId": 1,
+      "productId": 1,
+      "valor": 2323,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 22,
+      "valorAtual": 2323
+    },
+    {
+      "id": 24,
+      "userId": 1,
+      "productId": 9,
+      "valor": 23232332,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 232,
+      "valorAtual": 23232332
+    }
+  ],
+  "pontuacaoHistory": [
+    {
+      "id": 1,
+      "clienteId": 1,
+      "pontuacao": 8,
+      "riskProfileId": 1,
+      "timestamp": "2025-01-15T10:23:45.123Z"
+    },
+    {
+      "id": 2,
+      "clienteId": 1,
+      "pontuacao": 10,
+      "riskProfileId": 1,
+      "timestamp": "2025-02-28T14:12:33.456Z"
+    },
+    {
+      "id": 3,
+      "clienteId": 1,
+      "pontuacao": 12,
+      "riskProfileId": 1,
+      "timestamp": "2025-04-10T09:45:21.789Z"
+    },
+    {
+      "id": 4,
+      "clienteId": 1,
+      "pontuacao": 15,
+      "riskProfileId": 2,
+      "timestamp": "2025-05-22T16:30:15.234Z"
+    },
+    {
+      "id": 5,
+      "clienteId": 1,
+      "pontuacao": 18,
+      "riskProfileId": 2,
+      "timestamp": "2025-06-18T11:20:42.567Z"
+    },
+    {
+      "id": 6,
+      "clienteId": 1,
+      "pontuacao": 16,
+      "riskProfileId": 2,
+      "timestamp": "2025-07-30T08:15:33.890Z"
+    },
+    {
+      "id": 7,
+      "clienteId": 1,
+      "pontuacao": 20,
+      "riskProfileId": 2,
+      "timestamp": "2025-08-25T13:45:12.345Z"
+    },
+    {
+      "id": 8,
+      "clienteId": 1,
+      "pontuacao": 22,
+      "riskProfileId": 3,
+      "timestamp": "2025-09-14T10:30:25.678Z"
+    },
+    {
+      "id": 9,
+      "clienteId": 1,
+      "pontuacao": 19,
+      "riskProfileId": 2,
+      "timestamp": "2025-10-08T15:22:18.901Z"
+    },
+    {
+      "id": 10,
+      "clienteId": 1,
+      "pontuacao": 17,
+      "riskProfileId": 2,
+      "timestamp": "2025-11-05T12:18:45.234Z"
+    },
+    {
+      "id": 11,
+      "clienteId": 1,
+      "pontuacao": 14,
+      "riskProfileId": 1,
+      "timestamp": "2025-11-21T06:57:14.875Z"
+    },
+    {
+      "id": 12,
+      "clienteId": 1,
+      "pontuacao": 90,
+      "riskProfileId": 3,
+      "timestamp": "2025-11-21T06:59:59.190Z"
     }
   ]
 }

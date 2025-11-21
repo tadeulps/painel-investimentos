@@ -43,6 +43,21 @@ export interface SimulationResponse {
   }[];
 }
 
+export interface PontuacaoHistoryEntry {
+  id: number;
+  clienteId: number;
+  pontuacao: number;
+  riskProfileId: number;
+  riskProfileName: string;
+  timestamp: string;
+}
+
+export interface PontuacaoHistoryResponse {
+  clienteId: number;
+  totalEntries: number;
+  history: PontuacaoHistoryEntry[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -84,5 +99,10 @@ export class InvestmentService {
       valor,
       prazoMeses
     });
+  }
+
+  // Get pontuacao history
+  getPontuacaoHistory(clienteId: number): Observable<PontuacaoHistoryResponse> {
+    return this.http.get<PontuacaoHistoryResponse>(`${this.apiUrl}/pontuacao-history/${clienteId}`);
   }
 }

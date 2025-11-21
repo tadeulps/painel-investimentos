@@ -110,6 +110,35 @@ server.get("/perfil-risco/:clienteId", (req, res) => {
     newRiskProfileId = 3; // Agressivo
   }
 
+  // Check if pontuacao changed and save to history
+  const lastHistory = db
+    .get("pontuacaoHistory")
+    .filter({ clienteId })
+    .sortBy("timestamp")
+    .reverse()
+    .first()
+    .value();
+
+  const pontuacaoChanged = !lastHistory || lastHistory.pontuacao !== pontuacao;
+
+  if (pontuacaoChanged) {
+    const historyEntries = db.get("pontuacaoHistory").value();
+    const newHistoryId =
+      historyEntries.length > 0
+        ? Math.max(...historyEntries.map((h) => h.id)) + 1
+        : 1;
+
+    db.get("pontuacaoHistory")
+      .push({
+        id: newHistoryId,
+        clienteId,
+        pontuacao,
+        riskProfileId: newRiskProfileId,
+        timestamp: new Date().toISOString(),
+      })
+      .write();
+  }
+
   // Update user's risk profile if it changed
   if (user.riskProfileId !== newRiskProfileId) {
     db.get("users")
@@ -130,6 +159,42 @@ server.get("/perfil-risco/:clienteId", (req, res) => {
     email: user.email,
     perfilRisco: updatedRiskProfile,
     pontuacao,
+  });
+});
+
+// Custom route to get pontuacao history for a client
+server.get("/pontuacao-history/:clienteId", (req, res) => {
+  const clienteId = parseInt(req.params.clienteId);
+
+  const db = router.db;
+  const user = db.get("users").find({ id: clienteId }).value();
+
+  if (!user) {
+    return res.status(404).json({ error: "Cliente não encontrado" });
+  }
+
+  const history = db
+    .get("pontuacaoHistory")
+    .filter({ clienteId })
+    .sortBy("timestamp")
+    .value();
+
+  // Enrich history with risk profile names
+  const historyWithProfiles = history.map((entry) => {
+    const riskProfile = db
+      .get("riskProfiles")
+      .find({ id: entry.riskProfileId })
+      .value();
+    return {
+      ...entry,
+      perfilRisco: riskProfile?.name || "Desconhecido",
+    };
+  });
+
+  res.json({
+    clienteId,
+    totalEntries: historyWithProfiles.length,
+    history: historyWithProfiles,
   });
 });
 
@@ -328,6 +393,7 @@ server.listen(PORT, () => {
   console.log("Endpoints disponíveis:");
   console.log(`POST   http://localhost:${PORT}/autenticacao/login`);
   console.log(`GET    http://localhost:${PORT}/perfil-risco/:clienteId`);
+  console.log(`GET    http://localhost:${PORT}/pontuacao-history/:clienteId`);
   console.log(`POST   http://localhost:${PORT}/perfil-risco`);
   console.log(`GET    http://localhost:${PORT}/produtos-recomendados/:perfil`);
   console.log(`POST   http://localhost:${PORT}/simular-investimento`);
