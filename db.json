@@ -155,7 +155,7 @@
       "nome": "COE CAIXA",
       "tipo": "Estruturados",
       "taxaAnual": 0.14,
-      "risco": "Médio-Alto",
+      "risco": "Alto",
       "aplicacaoMinima": 5000,
       "liquidez": "No vencimento",
       "riskProfileId": 3

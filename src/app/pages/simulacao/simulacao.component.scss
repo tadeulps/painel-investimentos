@@ -48,17 +48,17 @@
 }
 
 .carousel-btn {
-  @include button-base;
   width: 48px;
   height: 48px;
   background: $branco;
   border: 2px solid $border;
   color: $azul-caixa;
-  font-size: $text-huge;
   border-radius: $border-radius-circle;
-  transition: all 0.3s ease;
   z-index: 2;
-
+  display: flex ;
+  align-items: center;
+  justify-content: center;  
+  transition: all 0.3s ease;
   &:hover:not(:disabled) {
     background: $azul-caixa;
     color: $branco;
@@ -76,6 +76,7 @@
   width: 100%;
   max-width: 400px;
   height: 380px;
+
 }
 
 .product-card-mini {
@@ -111,7 +112,12 @@
     opacity: 0.3;
     z-index: 0;
   }
-
+  &.hidden {
+    opacity: 0;
+    transform: translateX(60%) scale(0.7);
+    z-index: -1;
+    pointer-events: none;
+  }
   ::ng-deep .mat-mdc-card-content {
     padding: $spacing-small;
   }
@@ -244,7 +250,7 @@
 
   &.risk-medio {
     background: $attention-70 !important;
-    color: $charcoal !important;
+     color: $branco !important;
   }
 
   &.risk-alto {
