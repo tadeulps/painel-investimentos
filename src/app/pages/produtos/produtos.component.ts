@@ -29,7 +29,7 @@ import { CaixaButtonComponent } from '../../components/caixa-button/caixa-button
 })
 export class ProdutosComponent implements OnInit {
   selectedType = 'Todos';
-  productTypes = ['Todos','Poupança', 'Renda Variável', 'Renda Fixa', 'Tesouro Direto', 'Fundos', 'LCA'];
+  productTypes = ['Todos','Poupança', 'Renda Variável', 'Renda Fixa', 'Tesouro Direto', 'Fundos', 'LCI'];
 
   userRiskProfileId: number | null = null;
   clienteId: number | null = null;

@@ -152,9 +152,9 @@
     },
     {
       "id": 12,
-      "nome": "LCA CAIXA",
-      "tipo": "LCA",
-      "taxaAnual": 0.14,
+      "nome": "Fundo Multimercado Equilíbrio CAIXA",
+      "tipo": "Fundos",
+      "taxaAnual": 0.11,
       "risco": "Médio",
       "aplicacaoMinima": 5000,
       "liquidez": "No vencimento",
@@ -251,6 +251,24 @@
       "dataInicio": "2025-11-05",
       "prazoMeses": 18,
       "valorAtual": 6565
+    },
+    {
+      "id": 11,
+      "userId": 1,
+      "productId": 4,
+      "valor": 15000,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 20,
+      "valorAtual": 15000
+    },
+    {
+      "id": 12,
+      "userId": 1,
+      "productId": 1,
+      "valor": 23232,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 22,
+      "valorAtual": 23232
     }
   ],
   "pontuacaoHistory": [
@@ -330,6 +348,20 @@
       "pontuacao": 50,
       "riskProfileId": 2,
       "timestamp": "2025-11-21T07:58:16.563Z"
+    },
+    {
+      "id": 12,
+      "clienteId": 1,
+      "pontuacao": 42,
+      "riskProfileId": 2,
+      "timestamp": "2025-11-21T08:19:24.545Z"
+    },
+    {
+      "id": 13,
+      "clienteId": 1,
+      "pontuacao": 34,
+      "riskProfileId": 2,
+      "timestamp": "2025-11-21T08:24:41.291Z"
     }
   ]
 }
