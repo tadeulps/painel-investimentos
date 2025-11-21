@@ -29,7 +29,7 @@ import { CaixaButtonComponent } from '../../components/caixa-button/caixa-button
 })
 export class ProdutosComponent implements OnInit {
   selectedType = 'Todos';
-  productTypes = ['Todos', 'Renda Fixa', 'Tesouro Direto', 'Fundos', 'Renda Variável', 'Estruturados'];
+  productTypes = ['Todos','Poupança', 'Renda Variável', 'Renda Fixa', 'Tesouro Direto', 'Fundos', 'LCA'];
 
   userRiskProfileId: number | null = null;
   clienteId: number | null = null;
@@ -98,6 +98,7 @@ export class ProdutosComponent implements OnInit {
       .filter(product => product.riskProfileId === this.userRiskProfileId)
       .sort((a, b) => b.taxaAnual - a.taxaAnual)
       .slice(0, 3); // Show top 3 recommended products
+      console.log('Recommended Products:', this.recommendedProducts); 
   }
 
   filterByType(type: string): void {

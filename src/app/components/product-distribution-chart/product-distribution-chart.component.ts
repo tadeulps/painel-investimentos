@@ -35,7 +35,7 @@ export class ProductDistributionChartComponent implements AfterViewInit, OnChang
     'Tesouro Direto': '#4ECDC4',
     'Fundos': '#95E1D3',
     'Fundo Multimercado': '#F38181',
-    'Ações': '#AA96DA',
+    'Renda Variável': '#AA96DA',
     'default': '#6C757D'
   };
 

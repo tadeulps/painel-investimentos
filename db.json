@@ -43,7 +43,7 @@
     {
       "id": 1,
       "nome": "Poupança CAIXA",
-      "tipo": "Renda Fixa",
+      "tipo": "Poupança",
       "taxaAnual": 0.06,
       "risco": "Baixo",
       "aplicacaoMinima": 10,
@@ -63,7 +63,7 @@
     {
       "id": 3,
       "nome": "LCI CAIXA",
-      "tipo": "Renda Fixa",
+      "tipo": "LCI",
       "taxaAnual": 0.08,
       "risco": "Baixo",
       "aplicacaoMinima": 5000,
@@ -82,7 +82,7 @@
     },
     {
       "id": 5,
-      "nome": "Fundo Multimercado CAIXA",
+      "nome": "Fundo Nacional CAIXA",
       "tipo": "Fundos",
       "taxaAnual": 0.12,
       "risco": "Médio",
@@ -108,7 +108,7 @@
       "risco": "Baixo",
       "aplicacaoMinima": 30,
       "liquidez": "Diária",
-      "riskProfileId": 2
+      "riskProfileId": 1
     },
     {
       "id": 8,
@@ -152,13 +152,13 @@
     },
     {
       "id": 12,
-      "nome": "COE CAIXA",
-      "tipo": "Estruturados",
+      "nome": "LCA CAIXA",
+      "tipo": "LCA",
       "taxaAnual": 0.14,
-      "risco": "Médio-Alto",
+      "risco": "Médio",
       "aplicacaoMinima": 5000,
       "liquidez": "No vencimento",
-      "riskProfileId": 3
+      "riskProfileId": 2
     }
   ],
   "investments": [
