@@ -2,28 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { Router } from '@angular/router';
-
-interface LoginRequest {
-  email: string;
-  senha: string;
-}
-
-interface LoginResponse {
-  token: string;
-  clienteId: number;
-}
-
-interface UserProfile {
-  clienteId: number;
-  nome: string;
-  email: string;
-  pontuacao:number;
-  perfilRisco: {
-    id: number;
-    name: string;
-    description: string;
-  };
-}
+import { LoginRequest, LoginResponse, UserProfile } from '../models/auth.models';
 
 @Injectable({
   providedIn: 'root'

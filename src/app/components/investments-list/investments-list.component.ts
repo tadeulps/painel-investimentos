@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { Investment } from '../../services/investment.service';
+import { Investment } from '../../models/investment.models';
 import { CaixaButtonComponent } from '../caixa-button/caixa-button.component';
 
 @Component({
