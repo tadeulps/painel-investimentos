@@ -1,0 +1,90 @@
+@import "../../../styles/token.scss";
+
+.dialog-container {
+  font-family: $font-regular;
+}
+
+::ng-deep .mat-mdc-dialog-surface {
+  padding: $spacing-small !important;
+}
+
+::ng-deep .mat-mdc-dialog-content {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+mat-dialog-content {
+  min-width: 400px;
+  
+  @media (max-width: 768px) {
+    min-width: 280px;
+  }
+}
+
+.investment-summary {
+  background: linear-gradient(135deg, $light-blue-highlight, $light-green);
+  border-radius: $border-radius-large;
+  padding: $spacing-small;
+  margin-bottom: $spacing-tiny;
+  box-shadow: $shadow-elevation-2;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-nano 0;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.final {
+    margin-top: $spacing-nano;
+    padding-top: $spacing-tiny;
+  }
+
+  .label {
+    font-family: $font-regular;
+    font-weight: $font-weight-regular;
+    font-size: $text-standard;
+    color: $charcoal;
+  }
+
+  .value {
+    font-family: $font-semibold;
+    font-weight: $font-weight-semibold;
+    font-size: $text-large;
+    color: $charcoal;
+
+    &.highlight {
+      color: $azul-caixa;
+    }
+
+    &.success {
+      color: $success-70;
+      font-size: $heading-tiny;
+    }
+  }
+}
+
+.confirmation-text {
+  text-align: center;
+  font-family: $font-regular;
+  font-size: $text-large;
+  color: $slate;
+  margin: $spacing-tiny 0 0;
+}
+
+mat-dialog-actions {
+  display: flex;
+  gap: $spacing-tiny;
+  padding: $spacing-tiny 0 0;
+  margin: 0;
+
+  app-caixa-button {
+    flex: 1;
+  }
+}

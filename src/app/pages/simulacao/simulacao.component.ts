@@ -15,7 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { CaixaButtonComponent } from '../../components/caixa-button/caixa-button.component';
-import { ConfirmInvestmentDialogComponent } from './confirm-investment-dialog.component';
+import { ConfirmInvestmentDialogComponent } from '../../components/confirm-investment-dialog/confirm-investment-dialog.component';
 
 interface MonthlyDetail {
   mes: number;

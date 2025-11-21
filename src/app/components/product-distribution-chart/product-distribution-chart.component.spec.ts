@@ -108,7 +108,7 @@ describe('ProductDistributionChartComponent', () => {
 
     it('should have color palette defined', () => {
       expect(component['colorPalette']).toBeDefined();
-      expect(component['colorPalette']['Poupança']).toBe('#005CA9');
+      expect(component['colorPalette']['Poupança']).toBe('#0072CE');
     });
   });
 
@@ -155,9 +155,9 @@ describe('ProductDistributionChartComponent', () => {
       const lci = result.find(r => r.type === 'LCI');
       const tesouro = result.find(r => r.type === 'Tesouro Direto');
       
-      expect(poupanca?.color).toBe('#005CA9');
-      expect(lci?.color).toBe('#FF9500');
-      expect(tesouro?.color).toBe('#4ECDC4');
+      expect(poupanca?.color).toBe('#0072CE');
+      expect(lci?.color).toBe('#FFA94D');
+      expect(tesouro?.color).toBe('#4DD4C6');
     });
 
     it('should use default color for unknown product type', () => {
@@ -168,7 +168,7 @@ describe('ProductDistributionChartComponent', () => {
       component.investments = [unknownInvestment];
       const result = component.calculateDistribution();
       
-      expect(result[0].color).toBe('#6C757D');
+      expect(result[0].color).toBe('#7A7A7A');
     });
 
     it('should sort distribution by value descending', () => {
@@ -352,15 +352,15 @@ describe('ProductDistributionChartComponent', () => {
     it('should have all expected product types with colors', () => {
       const palette = component['colorPalette'];
       
-      expect(palette['Poupança']).toBe('#005CA9');
-      expect(palette['Renda Fixa']).toBe('#00A86B');
-      expect(palette['LCI']).toBe('#FF9500');
-      expect(palette['LCA']).toBe('#FF6B6B');
-      expect(palette['Tesouro Direto']).toBe('#4ECDC4');
-      expect(palette['Fundos']).toBe('#95E1D3');
-      expect(palette['Fundo Multimercado']).toBe('#F38181');
-      expect(palette['Renda Variável']).toBe('#AA96DA');
-      expect(palette['default']).toBe('#6C757D');
+      expect(palette['Poupança']).toBe('#0072CE');
+      expect(palette['Renda Fixa']).toBe('#009788');
+      expect(palette['LCI']).toBe('#FFA94D');
+      expect(palette['LCA']).toBe('#8ED1C7');
+      expect(palette['Tesouro Direto']).toBe('#4DD4C6');
+      expect(palette['Fundos']).toBe('#FF7A7A');
+      expect(palette['Fundo Multimercado']).toBe('#F5A5A5');
+      expect(palette['Renda Variável']).toBe('#B9A2E8');
+      expect(palette['default']).toBe('#7A7A7A');
     });
   });
 

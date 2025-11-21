@@ -296,6 +296,15 @@
       "dataInicio": "2025-11-21",
       "prazoMeses": 23,
       "valorAtual": 25000
+    },
+    {
+      "id": 16,
+      "userId": 1,
+      "productId": 1,
+      "valor": 2222,
+      "dataInicio": "2025-11-21",
+      "prazoMeses": 111,
+      "valorAtual": 2222
     }
   ],
   "pontuacaoHistory": [
@@ -403,6 +412,13 @@
       "pontuacao": 46,
       "riskProfileId": 2,
       "timestamp": "2025-11-21T15:37:28.000Z"
+    },
+    {
+      "id": 16,
+      "clienteId": 1,
+      "pontuacao": 45,
+      "riskProfileId": 2,
+      "timestamp": "2025-11-21T15:51:03.029Z"
     }
   ]
 }

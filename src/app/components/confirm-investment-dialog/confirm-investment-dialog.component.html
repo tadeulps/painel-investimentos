@@ -1,0 +1,49 @@
+<div class="dialog-container">
+  <mat-dialog-content>
+    <div class="investment-summary">
+      <div class="summary-item">
+        <span class="label">Produto:</span>
+        <span class="value">{{ data.productName }}</span>
+      </div>
+      
+      <div class="summary-item">
+        <span class="label">Valor a Investir:</span>
+        <span class="value highlight">{{ data.valorInicial | currency: 'BRL' }}</span>
+      </div>
+      
+      <div class="summary-item">
+        <span class="label">Prazo:</span>
+        <span class="value">{{ data.prazoMeses }} {{ data.prazoMeses === 1 ? 'mês' : 'meses' }}</span>
+      </div>
+      
+      <div class="summary-item final">
+        <span class="label">Valor Final Estimado:</span>
+        <span class="value success">{{ data.valorFinal | currency: 'BRL' }}</span>
+      </div>
+    </div>
+    
+    <p class="confirmation-text">
+      Deseja confirmar este investimento?
+    </p>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+    <app-caixa-button
+      variant="danger"
+      icon="close"
+      (clicked)="onCancel()"
+      [fullWidth]="true"
+    >
+      Cancelar
+    </app-caixa-button>
+    
+    <app-caixa-button
+      variant="secondary"
+      icon="check_circle"
+      (clicked)="onConfirm()"
+      [fullWidth]="true"
+    >
+      Confirmar 
+    </app-caixa-button>
+  </mat-dialog-actions>
+</div>
